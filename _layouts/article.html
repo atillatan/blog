@@ -7,23 +7,29 @@
     </header>
         <section class="container">
             <div class="row">
+                <div class="col-md-3">
+                   {% include panel-profil.html %}
+                     {% include nav-left.html %}
 
+                </div>
                 <div class="col-md-9 content">
-                   <article>
-                    {% include jumbotron.html %}
+                   <article class="markdown-body">
+                     <div class="alert alert-danger">
+                      <strong>Not!</strong> Blogtaki tüm makaleler taslaktır, imla hataların ve yazım yanlışları için kusura bakmayın,
+                           en yakın zamanda üzerinden geçip düzeltmeler yapacağım.
+                    </div>
+
                     {{content}}
-                    {% include panel.html %}
+
 
                   </article>
                 </div>
                 <aside>
-                <div class="col-md-3">
-                    {% include profile.html %}
-                </div>
+
               </aside>
             </div>
         </section>
-        <br>
+            <br>
         <footer class="container">
             {% include footer.html %}
         </footer>
