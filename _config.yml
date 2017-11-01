@@ -12,6 +12,7 @@ markdown: kramdown
 highlighter: rouge
 img: /assets/img
 theme: minima
+disqus.shortname: atillatan
 #google_analytics: UA-2498474-2
 
 # Build settings

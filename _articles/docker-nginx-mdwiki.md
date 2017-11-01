@@ -3,6 +3,7 @@ layout: article
 title: Docker Nginx mdwiki
 description: Docker Nginx mdwiki
 tags: css java daha
+comments: true
 ---
 # Docker, Nginx, mdwiki
 Docker uzerinde nginx server da statik bir websitesi yayinlamak

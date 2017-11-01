@@ -17,12 +17,11 @@
                 <div class="col-md-9 content">
                    <article class="markdown-body">
                     {% include notice.html %}
-{{page.content}}
-
-
-
-
+                    {{content}}
                   </article>
+                  {% if site.disqus.shortname %}
+  {% include disqus-comments.html %}
+{% endif %}
                 </div>
                 <aside>
 

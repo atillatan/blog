@@ -257,7 +257,7 @@
  en yakın zamanda üzerinden geçip düzeltmeler yapacağım. Hoşgörünüz için şimdiden teşekkür ediyorum.
 </div>
 
-<h1 id="sql-server-icin-maliyetli-sorgularin-tespit-edilmesi">Sql server icin maliyetli sorgularin tespit edilmesi</h1>
+                    <h1 id="sql-server-icin-maliyetli-sorgularin-tespit-edilmesi">Sql server icin maliyetli sorgularin tespit edilmesi</h1>
 
 <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">TOP</span> <span class="mi">10</span> <span class="k">SUBSTRING</span><span class="p">(</span><span class="n">qt</span><span class="p">.</span><span class="n">TEXT</span><span class="p">,</span> <span class="p">(</span><span class="n">qs</span><span class="p">.</span><span class="n">statement_start_offset</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span>
 <span class="p">((</span><span class="k">CASE</span> <span class="n">qs</span><span class="p">.</span><span class="n">statement_end_offset</span>
@@ -281,11 +281,8 @@
 <span class="c1">-- ORDER BY qs.total_worker_time DESC -- CPU time</span>
 </code></pre></div></div>
 
-
-
-
-
                   </article>
+                  
                 </div>
                 <aside>
 
@@ -301,7 +298,7 @@
       <ul>
 
         <li><a href="/about/">Hakkimda</a></li>
-
+   <li><p class="rss-subscribe"> <a href="/feed.xml">RSS</a></p></li>
       </ul>
     </div>
     <div cclass="col-md-3">
