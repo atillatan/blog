@@ -2,6 +2,7 @@
 layout: article
 title: Redis Kurulumu ve ayarlari
 description: Redis Kurulumu ve ayarlari
+comments: true
 ---
 
 # Redis Kurulumu ve ayarlari

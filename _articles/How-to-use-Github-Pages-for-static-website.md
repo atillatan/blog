@@ -2,6 +2,7 @@
 layout: article
 title: How to use Github Pages for static website
 description: How to use Github Pages for static website
+comments: true
 ---
 
 # How to use Github Pages for static website

@@ -2,6 +2,7 @@
 layout: article
 title: IdentityServer Nedir
 description: IdentityServer Nedir
+comments: true
 ---
 
 # IdentityServer Hakkinda

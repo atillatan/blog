@@ -2,6 +2,7 @@
 layout: article
 title: SQL table data compare, and prepare insert satements
 description: SQL table data compare, and prepare insert satements
+comments: true
 ---
 
 # DATA Compare

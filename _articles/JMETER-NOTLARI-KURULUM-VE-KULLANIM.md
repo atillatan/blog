@@ -2,6 +2,7 @@
 layout: article
 title: JMater notlari, kurulum ve kullanim
 description: JMETER NOTLARI, KURULUM VE KULLANIM
+comments: true
 ---
 
 <!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->

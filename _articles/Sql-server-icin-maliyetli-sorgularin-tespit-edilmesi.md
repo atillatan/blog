@@ -2,6 +2,7 @@
 layout: article
 title: Sql server icin maliyetli sorgularin tespit edilmesi
 description: Sql server icin maliyetli sorgularin tespit edilmesi
+comments: true
 ---
 
 

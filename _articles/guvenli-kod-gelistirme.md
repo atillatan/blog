@@ -2,6 +2,7 @@
 layout: article
 title: Guvenlik Kod Gelistirme
 description: Guvenlik Kod Gelistirme
+comments: true
 ---
 # Guvenlik Kod Gelistirme
 

@@ -2,6 +2,7 @@
 layout: article
 title: Docker Cok kullanilan komutlar
 description: Docker Cok kullanilan komutlar
+comments: true
 ---
 # DOCKER
 

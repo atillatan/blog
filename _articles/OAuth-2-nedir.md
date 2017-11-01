@@ -2,6 +2,7 @@
 layout: article
 title: OAuth 2.0  Nedir  (RFC6749)
 description: OAuth 2.0  Nedir  (RFC6749)
+comments: true
 ---
 
 # OAuth 2.0  Nedir  (RFC6749)
