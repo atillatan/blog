@@ -3,18 +3,21 @@
         <h2 class="panel-title">Bazı Makaleler</h2>
     </div>
 
-    <div class="panel-body">
-        This article describes the art of creating the responsive design
-        layout which can render well on different device sizes.
+    <div class="panel-body" style="padding:0px;">
+      {% for article in site.articles %}
+
+      <a class="list-group-item" href="{{site.baseurl}}{{article.url}}">{{article.title}}</a>
+
+      {% endfor %}
     </div>
 
     <div class="panel-footer">
         <div class="row">
             <div class="col-xs-9">
-                <p>Put tags and view count</p>
+                <p></p>
             </div>
             <div class="col-xs-3">
-                <a href="#">Read More..</a>
+                <a href="#"></a>
             </div>
         </div>
     </div>
