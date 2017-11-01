@@ -19,9 +19,9 @@
                     {% include notice.html %}
                     {{content}}
                   </article>
-
-  {% include disqus-comments.html %}
-
+                  {% if site.disqus.shortname %}
+                    {% include disqus-comments.html %}
+                  {% endif %}
                 </div>
                 <aside>
 
