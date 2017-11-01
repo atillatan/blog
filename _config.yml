@@ -8,12 +8,14 @@ github_username:  atillatan
 author: Atilla Tanrikulu
 environment: production
 permalink: pretty
+markdown: kramdown
 highlighter: rouge
 img: /assets/img
+theme: minima
 #google_analytics: UA-2498474-2
 
 # Build settings
-markdown: kramdown
+
 plugins:
   - jekyll-feed
 

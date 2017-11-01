@@ -2,6 +2,7 @@
 layout: article
 title: Docker Nginx mdwiki
 description: Docker Nginx mdwiki
+tags: css java daha
 ---
 # Docker, Nginx, mdwiki
 Docker uzerinde nginx server da statik bir websitesi yayinlamak
@@ -24,3 +25,10 @@ bende calismamisti, browser dan console a baktigimda bazi sayfalarin eksik oldug
 http://dynalon.github.io/mdwiki adresinden eksik sayfalari indirdim
    - http://dynalon.github.io/mdwiki/navigation.md tarayicidan farkli kaydet secip website klasorune kaydedebilirsiniz.
    - http://dynalon.github.io/mdwiki/config.json arayicidan farkli kaydet secip website klasorune kaydedebilirsiniz.
+
+   <div class="mermaid">
+   graph LR
+       A --- B
+       B-->C[fa:fa-ban forbidden]
+       B-->D(fa:fa-spinner);
+   </div>

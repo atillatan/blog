@@ -1,7 +1,7 @@
 /* #region BASE STYLES */
 
 body {
-       padding-top: 53px;
+       padding-top: 53px !important;
 }
 
 .markdown-body {

@@ -9,17 +9,15 @@
             <div class="row">
                 <div class="col-md-3">
                    {% include panel-profil.html %}
-                     {% include nav-left.html %}
+                   {% include nav-left.html %}
 
                 </div>
                 <div class="col-md-9 content">
                    <article class="markdown-body">
-                     <div class="alert alert-danger">
-                      <strong>Not!</strong> Blogtaki tüm makaleler taslaktır, imla hataların ve yazım yanlışları için kusura bakmayın,
-                           en yakın zamanda üzerinden geçip düzeltmeler yapacağım.
-                    </div>
+                    {% include notice.html %}
+{{page.content}}
 
-                    {{content}}
+
 
 
                   </article>
