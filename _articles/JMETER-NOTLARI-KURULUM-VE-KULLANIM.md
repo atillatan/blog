@@ -100,7 +100,9 @@ http://mwebhack.blogspot.com.tr/
 * Bana gore test yapabilmek icin bilinmesi gereken minimum bilgiyi icermektedir.
 
 ## 5. Bilinmesi Geken Bazi Kavramlar
+
 ![1.png]({{site.img}}/jmeter.md.images/1.png)
+
 * Jmeter ilk acildiginda, ekranin 2 bolmeden olustugunu gorursunuz.
   * **Sol Panel:** Test planindaki tum elementleri/objelerin listesini hiyerarsik bir bicimde duzenli olarak gosterir
   * **Orta Panel:** Sol panelden secilen objelerin ayarlari orta kisimda acilir.
@@ -172,7 +174,7 @@ bununla beraber recoding yapilarak, recod sonucu olusan script ten faydalanmak v
  burdaki 8888 portuna herhangi bir browser proxy tanimlamasi yapar ise, tum requestler jmeter tarafindan kaydedilr.
 
 * Test script recorder icinde "url pattern to exclude" ayari vardir burdan bazi dosya uzantilari exclude edilebilir.
-![4.png]({{site.img}}/jmeter.md.images/4.png)
+![4.png]({{site.img}}/jmeter.md.images/4.png = 250x)
 
 * Record yaptiktan sonra Thread Group altindaki, Recording Controller altina
 her bir sayfa requesti icin bir group olusturur, yani ayni sayfadaki tum requestleri group yapar.
