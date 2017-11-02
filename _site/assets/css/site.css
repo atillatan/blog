@@ -4,10 +4,6 @@ body {
        padding-top: 53px !important;
 }
 
-.markdown-body {
-    font-size: 14px;
-}
-
 H1:before, H2:before, H3:before {
     content:"";
     display:block;

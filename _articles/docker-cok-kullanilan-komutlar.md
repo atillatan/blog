@@ -9,8 +9,10 @@ comments: true
 
 
 ## Cok kullanilan komutlar
+
 - Docker bilesenleri versionlarini gondermek
-```beanshell
+
+```bash
 $ docker --version
 Docker version 1.12.3, build 6b644ec
 
@@ -19,7 +21,9 @@ docker-compose version 1.8.1, build 878cff1
 
 $ docker-machine --version
 docker-machine version 0.8.2, build e18a919
+
 ```
+
 - `docker images` image listelemek, hub.docker.com dan indirilen images lardir.
 image i silmek baska bir sey, container i silmek baska birseydir.
 container lari local de biz olusturruz sileriz
@@ -74,7 +78,7 @@ sonundaki . nokta bulundugu klasoru ifade eder
 - `docker run --name containername -P -d imagename`  bir image dan container olusturup calistirmak.
 - `docker run -i -t --volumes-from containername --name imagename debian /bin/bash` dockerfile da VOLUME maping var ise volume lara ulasmak icin
 
-```beanshell
+```bash
 docker build -t nginximage1 .
 docket images
 docker run --name nginxcontainer1 -P -d nginximage1
@@ -83,21 +87,21 @@ docker run -it --volumes-from nginxcontainer1 --name nginxvolumecontainer1 debia
 ```
 
 - Mounting files
-```beanshell
+```bash
 docker run --name nginx-container \
   -v /path/to/static/files/on/host:/usr/share/nginx/html:ro \
   -v /path/to/conf/on/host:/etc/nginx/nginx.conf:ro \
   -P -d nginx
 ```
 yada
-```beanshell
+```bash
 docker run --name nginx-container \
   -v $(pwd)/html:/usr/share/nginx/html:ro \
   -v $(pwd)/nginx.conf:/etc/nginx/nginx.conf:ro \
   -P -d nginx
 ```
 - interaktif olarak loglari gondermek `-it`
-```beanshell
+```bash
 docker run -it --name nginx-container \
   -v $(pwd)/html:/usr/share/nginx/html:ro \
   -v $(pwd)/nginx.conf:/etc/nginx/nginx.conf:ro \
@@ -106,7 +110,7 @@ docker run -it --name nginx-container \
 
 ### Ozet olarak 4 adimda nginx kurulumu yapilabilir
 1. Dockerfile olusturulur, icinde FROM ifadesinde docker hub taki hangi image kullanilacagi bildirlirlir.
-```beanshell
+```bash
 FROM nginx
 RUN echo "runing command"
 VOLUME /usr/share/nginx/html
@@ -118,7 +122,7 @@ VOLUME /etc/nginx
 veya
 `docker run -it --name wiki1 -p 8181:80 -v /Users/atilla/WP/usiswiki/src/:/usr/share/nginx/html/ -v /Users/atilla/WP/usiswiki/nginx/nginx.conf:/etc/nginx/nginx.conf:ro -P -d usiswikiimage`
 4. sonraki calistirma ve kapatma islemleri su sekulde yapilir.
-```beanshell
+```bash
 docker start usiswikicontainer
 docker stop usiswikicontainer
 ```
