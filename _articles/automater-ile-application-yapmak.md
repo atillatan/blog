@@ -3,6 +3,7 @@ layout: article
 title: Automater ile application yapmak
 description: Automater ile application yapmak
 comments: true
+sortorder: 100
 ---
 
 # Automater

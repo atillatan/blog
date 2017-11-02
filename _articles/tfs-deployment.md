@@ -2,6 +2,7 @@
 layout: article
 title: TFS ile Otomatik deployment yapmak
 description: TFS ile Otomatik deployment yapmak
+sortorder: 100
 ---
 
 # TFS ile Otomatik deployment yapmak

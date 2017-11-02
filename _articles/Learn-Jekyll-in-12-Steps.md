@@ -3,6 +3,7 @@ layout: article
 title: Learn Jekyll in 12 Steps
 description: Learn Jekyll in 12 Steps
 comments: true
+sortorder: 100
 ---
 {% raw %}
 # Learn Jekyll in 12 Steps

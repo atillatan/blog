@@ -3,6 +3,7 @@ layout: article
 title: IdentityServer Nedir
 description: IdentityServer Nedir
 comments: true
+sortorder: 100
 ---
 
 # IdentityServer Hakkinda

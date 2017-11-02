@@ -3,6 +3,7 @@ layout: article
 title: Redis Kurulumu ve ayarlari
 description: Redis Kurulumu ve ayarlari
 comments: true
+sortorder: 100
 ---
 
 # Redis Kurulumu ve ayarlari

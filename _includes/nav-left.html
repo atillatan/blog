@@ -6,10 +6,10 @@
 
 </div>
 <div class="list-group">
-{% for article in site.articles %}
+{% assign articleList = site.articles | sort: 'sortorder'  %}
 
-<a class="list-group-item {% if page.url == article.url %}active{% endif %}" href="{{site.baseurl}}{{article.url}}">{{article.title}}</a>
-
+{% for article in articleList %}
+  <a class="list-group-item {% if page.url == article.url %}active{% endif %}" href="{{site.baseurl}}{{article.url}}" alt="{{article.title}}">{{article.title}}</a>
 {% endfor %}
 </div>
 

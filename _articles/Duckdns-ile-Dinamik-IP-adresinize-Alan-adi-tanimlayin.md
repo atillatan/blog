@@ -2,6 +2,7 @@
 layout: article
 title: Duckdns ile Dinamik IP adresinize Alan adi tanimlayin.
 description: Duckdns ile Dinamik IP adresinize Alan adi tanimlayin.
+sortorder: 100
 ---
 
 

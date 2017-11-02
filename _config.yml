@@ -1,11 +1,13 @@
 title: Atilla Tanrikulu
-description: >- # this means to ignore newlines until "baseurl:"
-  atilla.tanrikulu.biz | Bir çok kategoride güzel ve özgün makaleler okuyabileceğiniz güncel bir blog.
 baseurl: "/" # the subpath of your site, e.g. /blog
 domain-name: atilla.tanrikulu.biz
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: atillatanrikulu
 github_username:  atillatan
+keywords: >- # this means to ignore newlines until "description:"
+  java, c#, csharp, code, coding, sql, redis, cache, script, javascript
+description: >- # this means to ignore newlines until "author:"
+  atilla.tanrikulu.biz | Bir çok kategoride güzel ve özgün makaleler okuyabileceğiniz güncel bir blog
 author: Atilla Tanrikulu
 environment: production
 permalink: pretty
