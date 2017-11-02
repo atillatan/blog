@@ -263,7 +263,7 @@
   <li>OpenSSL deki zafiyet</li>
 </ul>
 
-<p><code>heartbeat</code> zafiyetine <code>heardbleed</code> demisler, burada <code>hearthbeat(string char[], int length)</code> gibi bir methodun icinde memoryden alacagi rasgele string degeri verilmis bundan faydalanan hacker lar, memoryi ele gecirebilmisler.</p>
+<p><code class="highlighter-rouge">heartbeat</code> zafiyetine <code class="highlighter-rouge">heardbleed</code> demisler, burada <code class="highlighter-rouge">hearthbeat(string char[], int length)</code> gibi bir methodun icinde memoryden alacagi rasgele string degeri verilmis bundan faydalanan hacker lar, memoryi ele gecirebilmisler.</p>
 
 <ul>
   <li>
@@ -328,9 +328,9 @@
   <li>Javascript Encoding</li>
 </ul>
 
-<pre><code>"   --&gt; \x22
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"   --&gt; \x22
 &gt;  --&gt;  \x3c
-</code></pre>
+</code></pre></div></div>
 
 <p><strong>AntiXSS</strong> : microsoftun bir kutuphanesidir, yazilimda kullanilabilir encoding ve decoding yaparken bu library kullanmak faydali olabilir.</p>
 
@@ -340,7 +340,7 @@
 
 <h3 id="1--blacklisting">1- Blacklisting</h3>
 
-<p>Bilinen kotu karakter veya karakter kumelerinin reddedilmesidir. Cok kullanilan ama guvensiz bir girdi denetimidir. ornegin <code>&lt;script&gt;</code> gecen girdilerin reddedilmesi. <code>or 1=1</code> gecen girdilerin reddedilmesi.</p>
+<p>Bilinen kotu karakter veya karakter kumelerinin reddedilmesidir. Cok kullanilan ama guvensiz bir girdi denetimidir. ornegin <code class="highlighter-rouge">&lt;script&gt;</code> gecen girdilerin reddedilmesi. <code class="highlighter-rouge">or 1=1</code> gecen girdilerin reddedilmesi.</p>
 
 <p>blacklisting kotudur, bir onlem degildir.</p>
 
@@ -354,7 +354,7 @@
 
 <h3 id="4--sanitize---temizleme-islemi">4- Sanitize - Temizleme islemi</h3>
 
-<p>Girdinin kabul edilebilir bir formata donusturulmesidir. ornegin girdi icindeki tek tirnak karakterlerinin temizlenmesi <code>&lt;script&gt;</code> ifadelerinin temizlenmesi.</p>
+<p>Girdinin kabul edilebilir bir formata donusturulmesidir. ornegin girdi icindeki tek tirnak karakterlerinin temizlenmesi <code class="highlighter-rouge">&lt;script&gt;</code> ifadelerinin temizlenmesi.</p>
 
 <h3 id="5--encoding">5- Encoding</h3>
 
@@ -370,57 +370,57 @@
 
 <p>XML dokumanlari okur iken DTD bilgisinin okunmasina izin verir isek buradan host dosyasi bile okunabilmektedir.</p>
 
-<pre><code class="language-csharp"> static void Main(string[] args)
-        {
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="k">static</span> <span class="k">void</span> <span class="nf">Main</span><span class="p">(</span><span class="kt">string</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span>
+        <span class="p">{</span>
 
-            //guvensiz: XmlReaderSettings setting=new XmlRaderSettings(){DtdProcessing=parse}
-            //parse yetkisi verilir ise guvenlik acigi oluyor.
-            //guvenli: XmlReaderSettings setting=new XmlRaderSettings(){DtdProcessing=Ignore}
+            <span class="c1">//guvensiz: XmlReaderSettings setting=new XmlRaderSettings(){DtdProcessing=parse}</span>
+            <span class="c1">//parse yetkisi verilir ise guvenlik acigi oluyor.</span>
+            <span class="c1">//guvenli: XmlReaderSettings setting=new XmlRaderSettings(){DtdProcessing=Ignore}</span>
 
-            XmlReader xmlReader = XmlReader.Create(args[0], settings);
+            <span class="n">XmlReader</span> <span class="n">xmlReader</span> <span class="p">=</span> <span class="n">XmlReader</span><span class="p">.</span><span class="nf">Create</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="m">0</span><span class="p">],</span> <span class="n">settings</span><span class="p">);</span>
 
-            var root = XDocument.Load(xmlReader, LoadOptions.PreserveWhitespace);
+            <span class="kt">var</span> <span class="n">root</span> <span class="p">=</span> <span class="n">XDocument</span><span class="p">.</span><span class="nf">Load</span><span class="p">(</span><span class="n">xmlReader</span><span class="p">,</span> <span class="n">LoadOptions</span><span class="p">.</span><span class="n">PreserveWhitespace</span><span class="p">);</span>
 
-            foreach (var reportItemElement in root.Root.Elements("issue"))
-            {
-                string vuln = (string)reportItemElement.Element("name");
-                string host = (string)reportItemElement.Element("host");
-                string severity = (string)reportItemElement.Element("severity");
+            <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">reportItemElement</span> <span class="k">in</span> <span class="n">root</span><span class="p">.</span><span class="n">Root</span><span class="p">.</span><span class="nf">Elements</span><span class="p">(</span><span class="s">"issue"</span><span class="p">))</span>
+            <span class="p">{</span>
+                <span class="kt">string</span> <span class="n">vuln</span> <span class="p">=</span> <span class="p">(</span><span class="kt">string</span><span class="p">)</span><span class="n">reportItemElement</span><span class="p">.</span><span class="nf">Element</span><span class="p">(</span><span class="s">"name"</span><span class="p">);</span>
+                <span class="kt">string</span> <span class="n">host</span> <span class="p">=</span> <span class="p">(</span><span class="kt">string</span><span class="p">)</span><span class="n">reportItemElement</span><span class="p">.</span><span class="nf">Element</span><span class="p">(</span><span class="s">"host"</span><span class="p">);</span>
+                <span class="kt">string</span> <span class="n">severity</span> <span class="p">=</span> <span class="p">(</span><span class="kt">string</span><span class="p">)</span><span class="n">reportItemElement</span><span class="p">.</span><span class="nf">Element</span><span class="p">(</span><span class="s">"severity"</span><span class="p">);</span>
 
-                Console.WriteLine("Host: " + host);
-                Console.WriteLine("Vulnerability: " + vuln);
-                Console.WriteLine("Severity: " + severity);
-            }
-        }
-</code></pre>
+                <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">"Host: "</span> <span class="p">+</span> <span class="n">host</span><span class="p">);</span>
+                <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">"Vulnerability: "</span> <span class="p">+</span> <span class="n">vuln</span><span class="p">);</span>
+                <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">"Severity: "</span> <span class="p">+</span> <span class="n">severity</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+</code></pre></div></div>
 
 <p>Host dosyasini okkuyabilen bir XML ornegi</p>
 
-<pre><code class="language-xml">&lt;?xml version="1.0"?&gt;
-&lt;!DOCTYPE issues [
-  &lt;!ENTITY % a "&lt;!ENTITY foo SYSTEM 'file:///C:/Windows/System32/drivers/etc/hosts'&gt;"&gt;  %a;
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0"?&gt;</span>
+<span class="cp">&lt;!DOCTYPE issues [
+  &lt;!ENTITY % a "&lt;!ENTITY foo SYSTEM 'file:///C:/Windows/System32/drivers/etc/hosts'&gt;</span>"&gt;  %a;
 ]&gt;
-&lt;issues burpVersion="1.6.01" exportTime="Thu Aug 14 03:38:12 VET 2014"&gt;
-  &lt;issue&gt;
-    &lt;serialNumber&gt;5626899943859184640&lt;/serialNumber&gt;
-    &lt;type&gt;1049088&lt;/type&gt;
-    &lt;name&gt;Fake Vulnerability&lt;/name&gt;
-    &lt;host ip="176.28.50.165"&gt;http://testphp.vulnweb.com&lt;/host&gt;
-    &lt;path&gt;&lt;![CDATA[/search.php]]&gt;&lt;/path&gt;
-    &lt;location&gt;&lt;![CDATA[/search.php [manual insertion point 1]]]&gt;&lt;/location&gt;
-    &lt;severity&gt;&amp;foo;&lt;/severity&gt;
-    &lt;confidence&gt;Tentative&lt;/confidence&gt;
-    &lt;issueBackground&gt;&lt;![CDATA[SQL injection vulnerabilities arise ]]&gt;&lt;/issueBackground&gt;
-    &lt;remediationBackground&gt;&lt;![CDATA[The most effective way to prevent SQL injection .&lt;/li&gt;&lt;/ul&gt;]]&gt;&lt;/remediationBackground&gt;
-    &lt;issueDetail&gt;&lt;![CDATA[The manual insertion point 1 appears to be vulnerable to SQL injection attacks. The payload &lt;b&gt;' and benchmark(20000000,sha1(1))-- &lt;/b&gt; was submitted in the manual insertion point 1\. The application took &lt;b&gt;8591&lt;/b&gt; milliseconds to respond to the request, compared with &lt;b&gt;50&lt;/b&gt; milliseconds for the original request, indicating that the injected SQL command caused a time delay.&lt;br&gt;&lt;br&gt;The database appears to be MySQL.]]&gt;&lt;/issueDetail&gt;
-    &lt;requestresponse&gt;
-      &lt;request method="POST" base64="true"&gt;&lt;![CDATA[UE9TVCAvc2VhcmNo]]&gt;&lt;/request&gt;
-      &lt;response base64="true"&gt;&lt;![CDATA[SFRUUC8xLjEgMjAwIE9LDQpTZXJ2ZXI6IG5naW54L]]&gt;&lt;/response&gt;
-      &lt;responseRedirected&gt;false&lt;/responseRedirected&gt;
-    &lt;/requestresponse&gt;
-  &lt;/issue&gt;
-&lt;/issues&gt;
-</code></pre>
+<span class="nt">&lt;issues</span> <span class="na">burpVersion=</span><span class="s">"1.6.01"</span> <span class="na">exportTime=</span><span class="s">"Thu Aug 14 03:38:12 VET 2014"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;issue&gt;</span>
+    <span class="nt">&lt;serialNumber&gt;</span>5626899943859184640<span class="nt">&lt;/serialNumber&gt;</span>
+    <span class="nt">&lt;type&gt;</span>1049088<span class="nt">&lt;/type&gt;</span>
+    <span class="nt">&lt;name&gt;</span>Fake Vulnerability<span class="nt">&lt;/name&gt;</span>
+    <span class="nt">&lt;host</span> <span class="na">ip=</span><span class="s">"176.28.50.165"</span><span class="nt">&gt;</span>http://testphp.vulnweb.com<span class="nt">&lt;/host&gt;</span>
+    <span class="nt">&lt;path&gt;</span><span class="cp">&lt;![CDATA[/search.php]]&gt;</span><span class="nt">&lt;/path&gt;</span>
+    <span class="nt">&lt;location&gt;</span><span class="cp">&lt;![CDATA[/search.php [manual insertion point 1]]]&gt;</span><span class="nt">&lt;/location&gt;</span>
+    <span class="nt">&lt;severity&gt;</span><span class="ni">&amp;foo;</span><span class="nt">&lt;/severity&gt;</span>
+    <span class="nt">&lt;confidence&gt;</span>Tentative<span class="nt">&lt;/confidence&gt;</span>
+    <span class="nt">&lt;issueBackground&gt;</span><span class="cp">&lt;![CDATA[SQL injection vulnerabilities arise ]]&gt;</span><span class="nt">&lt;/issueBackground&gt;</span>
+    <span class="nt">&lt;remediationBackground&gt;</span><span class="cp">&lt;![CDATA[The most effective way to prevent SQL injection .&lt;/li&gt;&lt;/ul&gt;]]&gt;</span><span class="nt">&lt;/remediationBackground&gt;</span>
+    <span class="nt">&lt;issueDetail&gt;</span><span class="cp">&lt;![CDATA[The manual insertion point 1 appears to be vulnerable to SQL injection attacks. The payload &lt;b&gt;' and benchmark(20000000,sha1(1))-- &lt;/b&gt; was submitted in the manual insertion point 1\. The application took &lt;b&gt;8591&lt;/b&gt; milliseconds to respond to the request, compared with &lt;b&gt;50&lt;/b&gt; milliseconds for the original request, indicating that the injected SQL command caused a time delay.&lt;br&gt;&lt;br&gt;The database appears to be MySQL.]]&gt;</span><span class="nt">&lt;/issueDetail&gt;</span>
+    <span class="nt">&lt;requestresponse&gt;</span>
+      <span class="nt">&lt;request</span> <span class="na">method=</span><span class="s">"POST"</span> <span class="na">base64=</span><span class="s">"true"</span><span class="nt">&gt;</span><span class="cp">&lt;![CDATA[UE9TVCAvc2VhcmNo]]&gt;</span><span class="nt">&lt;/request&gt;</span>
+      <span class="nt">&lt;response</span> <span class="na">base64=</span><span class="s">"true"</span><span class="nt">&gt;</span><span class="cp">&lt;![CDATA[SFRUUC8xLjEgMjAwIE9LDQpTZXJ2ZXI6IG5naW54L]]&gt;</span><span class="nt">&lt;/response&gt;</span>
+      <span class="nt">&lt;responseRedirected&gt;</span>false<span class="nt">&lt;/responseRedirected&gt;</span>
+    <span class="nt">&lt;/requestresponse&gt;</span>
+  <span class="nt">&lt;/issue&gt;</span>
+<span class="nt">&lt;/issues&gt;</span>
+</code></pre></div></div>
 
 <ul>
   <li>
@@ -443,67 +443,67 @@
 
 <p>– normalizer kullanmak XSS sorununu cozer</p>
 
-<pre><code class="language-csharp">[nomalizer kodu]
-public class Normalizer
-    {
-        public static string URL(string input)
-        {
-            bool stillEncoded = true;
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">[nomalizer kodu]</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">Normalizer</span>
+    <span class="p">{</span>
+        <span class="k">public</span> <span class="k">static</span> <span class="kt">string</span> <span class="nf">URL</span><span class="p">(</span><span class="kt">string</span> <span class="n">input</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="kt">bool</span> <span class="n">stillEncoded</span> <span class="p">=</span> <span class="k">true</span><span class="p">;</span>
 
-            while (stillEncoded)
-            {
-                String decodedInput = HttpUtility.UrlDecode(input);
-                if (decodedInput == input)
-                {
-                    stillEncoded = false;
-                }
-                input = decodedInput;
-            }
+            <span class="k">while</span> <span class="p">(</span><span class="n">stillEncoded</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">String</span> <span class="n">decodedInput</span> <span class="p">=</span> <span class="n">HttpUtility</span><span class="p">.</span><span class="nf">UrlDecode</span><span class="p">(</span><span class="n">input</span><span class="p">);</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">decodedInput</span> <span class="p">==</span> <span class="n">input</span><span class="p">)</span>
+                <span class="p">{</span>
+                    <span class="n">stillEncoded</span> <span class="p">=</span> <span class="k">false</span><span class="p">;</span>
+                <span class="p">}</span>
+                <span class="n">input</span> <span class="p">=</span> <span class="n">decodedInput</span><span class="p">;</span>
+            <span class="p">}</span>
 
-            return input;
-        }
+            <span class="k">return</span> <span class="n">input</span><span class="p">;</span>
+        <span class="p">}</span>
 
-        public static string HTMLV1(string input)
-        {
-            bool stillEncoded = true;
+        <span class="k">public</span> <span class="k">static</span> <span class="kt">string</span> <span class="nf">HTMLV1</span><span class="p">(</span><span class="kt">string</span> <span class="n">input</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="kt">bool</span> <span class="n">stillEncoded</span> <span class="p">=</span> <span class="k">true</span><span class="p">;</span>
 
-            while (stillEncoded)
-            {
-                String decodedInput = HttpUtility.HtmlDecode(input);
-                if (decodedInput == input)
-                {
-                    stillEncoded = false;
-                }
-                input = decodedInput;
-            }
+            <span class="k">while</span> <span class="p">(</span><span class="n">stillEncoded</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">String</span> <span class="n">decodedInput</span> <span class="p">=</span> <span class="n">HttpUtility</span><span class="p">.</span><span class="nf">HtmlDecode</span><span class="p">(</span><span class="n">input</span><span class="p">);</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">decodedInput</span> <span class="p">==</span> <span class="n">input</span><span class="p">)</span>
+                <span class="p">{</span>
+                    <span class="n">stillEncoded</span> <span class="p">=</span> <span class="k">false</span><span class="p">;</span>
+                <span class="p">}</span>
+                <span class="n">input</span> <span class="p">=</span> <span class="n">decodedInput</span><span class="p">;</span>
+            <span class="p">}</span>
 
-            return input;
-        }
+            <span class="k">return</span> <span class="n">input</span><span class="p">;</span>
+        <span class="p">}</span>
 
-        public static string HTML(string input)
-        {
-            bool stillEncoded = true;
-            int i = 0;
-            while (stillEncoded)
-            {
-                String decodedInput = HttpUtility.HtmlDecode(input);
-                if (decodedInput == input)
-                {
-                    stillEncoded = false;
-                }
-                input = decodedInput;
-                i++;
-            }
+        <span class="k">public</span> <span class="k">static</span> <span class="kt">string</span> <span class="nf">HTML</span><span class="p">(</span><span class="kt">string</span> <span class="n">input</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="kt">bool</span> <span class="n">stillEncoded</span> <span class="p">=</span> <span class="k">true</span><span class="p">;</span>
+            <span class="kt">int</span> <span class="n">i</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span>
+            <span class="k">while</span> <span class="p">(</span><span class="n">stillEncoded</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">String</span> <span class="n">decodedInput</span> <span class="p">=</span> <span class="n">HttpUtility</span><span class="p">.</span><span class="nf">HtmlDecode</span><span class="p">(</span><span class="n">input</span><span class="p">);</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">decodedInput</span> <span class="p">==</span> <span class="n">input</span><span class="p">)</span>
+                <span class="p">{</span>
+                    <span class="n">stillEncoded</span> <span class="p">=</span> <span class="k">false</span><span class="p">;</span>
+                <span class="p">}</span>
+                <span class="n">input</span> <span class="p">=</span> <span class="n">decodedInput</span><span class="p">;</span>
+                <span class="n">i</span><span class="p">++;</span>
+            <span class="p">}</span>
 
-            if (i&gt;0)
-            {
-                // kotu niyet yakalandi.
-            }
+            <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="p">&gt;</span><span class="m">0</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="c1">// kotu niyet yakalandi.</span>
+            <span class="p">}</span>
 
-            return input;
-        }
-    }
-</code></pre>
+            <span class="k">return</span> <span class="n">input</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+</code></pre></div></div>
 
 <p>[egitim]</p>
 
@@ -551,15 +551,15 @@ public class Normalizer
 
 <h2 id="xss-onleme-kurallari">XSS onleme kurallari</h2>
 
-<pre><code class="language-csharp">&lt;svg onload="alert(1)"&gt;  esittir &lt;script&gt;alert(1)&lt;/script&gt;
-</code></pre>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">&lt;</span><span class="n">svg</span> <span class="n">onload</span><span class="p">=</span><span class="s">"alert(1)"</span><span class="p">&gt;</span>  <span class="n">esittir</span> <span class="p">&lt;</span><span class="n">script</span><span class="p">&gt;</span><span class="nf">alert</span><span class="p">(</span><span class="m">1</span><span class="p">)&lt;/</span><span class="n">script</span><span class="p">&gt;</span>
+</code></pre></div></div>
 
 <h2 id="1-kullanicidan-alinan-veriyi-htmlencode-ederek-sayfaya-basmak">1. Kullanicidan alinan veriyi HtmlEncode ederek sayfaya basmak</h2>
 
 <p>System.Web.Security.AntiXss.AntiXssEncder, sistem icinekonulan antixss bunun haricinde bir de nuget tan indirmek daha iyi.</p>
 
-<pre><code class="language-csharp">&lt;%=Microsoft.Security.Application.Encoder.HtmlEncode("")&gt;
-</code></pre>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">&lt;%=</span><span class="n">Microsoft</span><span class="p">.</span><span class="n">Security</span><span class="p">.</span><span class="n">Application</span><span class="p">.</span><span class="n">Encoder</span><span class="p">.</span><span class="nf">HtmlEncode</span><span class="p">(</span><span class="s">""</span><span class="p">)&gt;</span>
+</code></pre></div></div>
 
 <h2 id="2">2.</h2>
 
@@ -684,7 +684,7 @@ public class Normalizer
 
 <p>file download larda kullanicidan gelen dosya isimlerinin normalize edilmesi ve whitelist kullanilabilir.</p>
 
-<p>onlem <code>charp string gelenFileName=".../.../"; File f=new File(gelenFileName); if(f.Name!= gelenFileName){ //yakalandi }</code></p>
+<p>onlem <code class="highlighter-rouge">charp string gelenFileName=".../.../"; File f=new File(gelenFileName); if(f.Name!= gelenFileName){ //yakalandi }</code></p>
 
 <h1 id="mass-assigment">Mass Assigment</h1>
 
@@ -710,11 +710,11 @@ public class Normalizer
   </li>
 </ul>
 
-<pre><code class="language-javascript">if(windows.top!=docuemnt.location){
-  //icerdeki sayfa disariyi eziyor ve tum sayfayi kendisi degistiriyor.
-  window.location="http://www.abc.com"
-}
-</code></pre>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span><span class="p">(</span><span class="nx">windows</span><span class="p">.</span><span class="nx">top</span><span class="o">!=</span><span class="nx">docuemnt</span><span class="p">.</span><span class="nx">location</span><span class="p">){</span>
+  <span class="c1">//icerdeki sayfa disariyi eziyor ve tum sayfayi kendisi degistiriyor.</span>
+  <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="o">=</span><span class="s2">"http://www.abc.com"</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <ul>
   <li>

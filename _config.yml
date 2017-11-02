@@ -10,7 +10,7 @@ author: Atilla Tanrikulu
 environment: production
 permalink: pretty
 markdown: kramdown
-highlighter: none
+ 
 img: /assets/img
 theme: minima
 disqus:

@@ -264,27 +264,27 @@
 
 <h2 id="step-1-create-your-local-git-repository">Step-1: Create your local git repository</h2>
 
-<pre><code class="language-bash"># Create folder
-$ mkdir blog
-$ cd blog
-# git initiation and commit index.html
-$ git init
-$ touch index.html
-# you can write some html into index.html
-$ git add .
-$ git commit -m 'init'
-$ git status
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Create folder</span>
+<span class="nv">$ </span>mkdir blog
+<span class="nv">$ </span><span class="nb">cd </span>blog
+<span class="c"># git initiation and commit index.html</span>
+<span class="nv">$ </span>git init
+<span class="nv">$ </span>touch index.html
+<span class="c"># you can write some html into index.html</span>
+<span class="nv">$ </span>git add <span class="nb">.</span>
+<span class="nv">$ </span>git commit <span class="nt">-m</span> <span class="s1">'init'</span>
+<span class="nv">$ </span>git status
 
 
-</code></pre>
+</code></pre></div></div>
 
 <h2 id="step-2-create-your-remote-github-repository-and-push-your-local-repository-into-github-repository">Step-2: Create your remote Github repository and push your local repository into Github repository.</h2>
 <ul>
   <li>Open www.github.com and click “+” button in the Github page then type your “new repository” name like “blog”, after that click “Create Repository” button.</li>
   <li>Open terminal and push an existing repository to Github
-    <pre><code class="language-bash">$ git remote add origin git@github.com:atillatan/blog.git
-$ git push -u origin master
-</code></pre>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git remote add origin git@github.com:atillatan/blog.git
+<span class="nv">$ </span>git push <span class="nt">-u</span> origin master
+</code></pre></div>    </div>
   </li>
 </ul>
 
@@ -294,10 +294,10 @@ $ git push -u origin master
   <li>“gh-pages” is a special name for github, this branch is hosted up at github.</li>
 </ul>
 
-<pre><code class="language-bash"># Create branch
-$ git branch gh-pages
-$ git push origin gh-pages
-</code></pre>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Create branch</span>
+<span class="nv">$ </span>git branch gh-pages
+<span class="nv">$ </span>git push origin gh-pages
+</code></pre></div></div>
 
 <p>That’s it, you can navigate your gitgub page <a href="https://atillatan.github.io/blog">https://your_github_username.github.io/blog</a></p>
 
@@ -306,26 +306,26 @@ $ git push origin gh-pages
   <li>How do we do this?</li>
 </ul>
 
-<pre><code class="language-bash"># create CNAME file for custom domain name
-$ touch CNAME
-# open CNAME file with nano editor
-$ nano CNAME
-# in the nano editor type your custom domain name (tanrikulu.biz) and save the CNAME file
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># create CNAME file for custom domain name</span>
+<span class="nv">$ </span>touch CNAME
+<span class="c"># open CNAME file with nano editor</span>
+<span class="nv">$ </span>nano CNAME
+<span class="c"># in the nano editor type your custom domain name (tanrikulu.biz) and save the CNAME file</span>
 
-$ git add .
-# commit CNAME file to the master branch
-$ git commit -m 'cname'
-# switch gh-pages branche
-$ git checkout gh-pages
-$ git merge master
-$ git push
+<span class="nv">$ </span>git add <span class="nb">.</span>
+<span class="c"># commit CNAME file to the master branch</span>
+<span class="nv">$ </span>git commit <span class="nt">-m</span> <span class="s1">'cname'</span>
+<span class="c"># switch gh-pages branche</span>
+<span class="nv">$ </span>git checkout gh-pages
+<span class="nv">$ </span>git merge master
+<span class="nv">$ </span>git push
 
-</code></pre>
+</code></pre></div></div>
 <p>after that you can change  your DNS settings.
 in the DNS settings replace your A record IP address with github pages IP address</p>
-<pre><code>192.30.252.153
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>192.30.252.153
 192.30.252.154
-</code></pre>
+</code></pre></div></div>
 
 <p>you can navigate your custom domain name with your browser.</p>
 

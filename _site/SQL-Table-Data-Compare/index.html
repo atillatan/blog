@@ -256,42 +256,42 @@
 </div>
 
                     <h1 id="data-compare">DATA Compare</h1>
-<pre><code class="language-sql">
---Compare result1,
-select * from
-( SELECT  * FROM [80.123.40.123].[CIMS.Settings].[dbo].[Resource] ) a
-right join (SELECT  * FROM  [CIMS.Settings].[dbo].[Resource] ) b
-on a.Code=b.Code and a.Culture = b.Culture
-where a.No is null
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c1">--Compare result1,</span>
+<span class="k">select</span> <span class="o">*</span> <span class="k">from</span>
+<span class="p">(</span> <span class="k">SELECT</span>  <span class="o">*</span> <span class="k">FROM</span> <span class="p">[</span><span class="mi">80</span><span class="p">.</span><span class="mi">123</span><span class="p">.</span><span class="mi">40</span><span class="p">.</span><span class="mi">123</span><span class="p">].[</span><span class="n">CIMS</span><span class="p">.</span><span class="n">Settings</span><span class="p">].[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">Resource</span><span class="p">]</span> <span class="p">)</span> <span class="n">a</span>
+<span class="k">right</span> <span class="k">join</span> <span class="p">(</span><span class="k">SELECT</span>  <span class="o">*</span> <span class="k">FROM</span>  <span class="p">[</span><span class="n">CIMS</span><span class="p">.</span><span class="n">Settings</span><span class="p">].[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">Resource</span><span class="p">]</span> <span class="p">)</span> <span class="n">b</span>
+<span class="k">on</span> <span class="n">a</span><span class="p">.</span><span class="n">Code</span><span class="o">=</span><span class="n">b</span><span class="p">.</span><span class="n">Code</span> <span class="k">and</span> <span class="n">a</span><span class="p">.</span><span class="n">Culture</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">Culture</span>
+<span class="k">where</span> <span class="n">a</span><span class="p">.</span><span class="k">No</span> <span class="k">is</span> <span class="k">null</span>
 
 
---Compare result2,
-select * from
-( SELECT  * FROM [80.123.40.123].[CIMS.Settings].[dbo].[Resource] ) a
-left join (SELECT  * FROM  [CIMS.Settings].[dbo].[Resource] ) b
-on a.Code=b.Code and a.Culture = b.Culture
-where b.No is null
+<span class="c1">--Compare result2,</span>
+<span class="k">select</span> <span class="o">*</span> <span class="k">from</span>
+<span class="p">(</span> <span class="k">SELECT</span>  <span class="o">*</span> <span class="k">FROM</span> <span class="p">[</span><span class="mi">80</span><span class="p">.</span><span class="mi">123</span><span class="p">.</span><span class="mi">40</span><span class="p">.</span><span class="mi">123</span><span class="p">].[</span><span class="n">CIMS</span><span class="p">.</span><span class="n">Settings</span><span class="p">].[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">Resource</span><span class="p">]</span> <span class="p">)</span> <span class="n">a</span>
+<span class="k">left</span> <span class="k">join</span> <span class="p">(</span><span class="k">SELECT</span>  <span class="o">*</span> <span class="k">FROM</span>  <span class="p">[</span><span class="n">CIMS</span><span class="p">.</span><span class="n">Settings</span><span class="p">].[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">Resource</span><span class="p">]</span> <span class="p">)</span> <span class="n">b</span>
+<span class="k">on</span> <span class="n">a</span><span class="p">.</span><span class="n">Code</span><span class="o">=</span><span class="n">b</span><span class="p">.</span><span class="n">Code</span> <span class="k">and</span> <span class="n">a</span><span class="p">.</span><span class="n">Culture</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">Culture</span>
+<span class="k">where</span> <span class="n">b</span><span class="p">.</span><span class="k">No</span> <span class="k">is</span> <span class="k">null</span>
 
 
 
---Prepare INsert SQL
+<span class="c1">--Prepare INsert SQL</span>
 
 
-select 'INSERT INTO [dbo].[Resource]([Culture], [Code], [Value], [IsEditable])   VALUES('''+b.Culture+''' ,'''+b.Code+''' ,'''+b.[Value]+''' ,0)'  from
-( SELECT  * FROM [80.123.40.123].[CIMS.Settings].[dbo].[Resource] ) a
-right join (SELECT  * FROM  [CIMS.Settings].[dbo].[Resource] ) b
-on a.Code=b.Code and a.Culture = b.Culture
-where a.No is null
+<span class="k">select</span> <span class="s1">'INSERT INTO [dbo].[Resource]([Culture], [Code], [Value], [IsEditable])   VALUES(</span><span class="se">''</span><span class="s1">'</span><span class="o">+</span><span class="n">b</span><span class="p">.</span><span class="n">Culture</span><span class="o">+</span><span class="s1">'</span><span class="se">''</span><span class="s1"> ,</span><span class="se">''</span><span class="s1">'</span><span class="o">+</span><span class="n">b</span><span class="p">.</span><span class="n">Code</span><span class="o">+</span><span class="s1">'</span><span class="se">''</span><span class="s1"> ,</span><span class="se">''</span><span class="s1">'</span><span class="o">+</span><span class="n">b</span><span class="p">.[</span><span class="n">Value</span><span class="p">]</span><span class="o">+</span><span class="s1">'</span><span class="se">''</span><span class="s1"> ,0)'</span>  <span class="k">from</span>
+<span class="p">(</span> <span class="k">SELECT</span>  <span class="o">*</span> <span class="k">FROM</span> <span class="p">[</span><span class="mi">80</span><span class="p">.</span><span class="mi">123</span><span class="p">.</span><span class="mi">40</span><span class="p">.</span><span class="mi">123</span><span class="p">].[</span><span class="n">CIMS</span><span class="p">.</span><span class="n">Settings</span><span class="p">].[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">Resource</span><span class="p">]</span> <span class="p">)</span> <span class="n">a</span>
+<span class="k">right</span> <span class="k">join</span> <span class="p">(</span><span class="k">SELECT</span>  <span class="o">*</span> <span class="k">FROM</span>  <span class="p">[</span><span class="n">CIMS</span><span class="p">.</span><span class="n">Settings</span><span class="p">].[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">Resource</span><span class="p">]</span> <span class="p">)</span> <span class="n">b</span>
+<span class="k">on</span> <span class="n">a</span><span class="p">.</span><span class="n">Code</span><span class="o">=</span><span class="n">b</span><span class="p">.</span><span class="n">Code</span> <span class="k">and</span> <span class="n">a</span><span class="p">.</span><span class="n">Culture</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">Culture</span>
+<span class="k">where</span> <span class="n">a</span><span class="p">.</span><span class="k">No</span> <span class="k">is</span> <span class="k">null</span>
 
 
-select 'INSERT INTO [dbo].[Resource]([Culture], [Code], [Value], [IsEditable])   VALUES('''+a.Culture+''' ,'''+a.Code+''' ,'''+a.[Value]+''' ,0)'  from
-( SELECT  * FROM [80.123.40.123].[CIMS.Settings].[dbo].[Resource] ) a
-left join (SELECT  * FROM  [CIMS.Settings].[dbo].[Resource] ) b
-on a.Code=b.Code and a.Culture = b.Culture
-where b.No is null
+<span class="k">select</span> <span class="s1">'INSERT INTO [dbo].[Resource]([Culture], [Code], [Value], [IsEditable])   VALUES(</span><span class="se">''</span><span class="s1">'</span><span class="o">+</span><span class="n">a</span><span class="p">.</span><span class="n">Culture</span><span class="o">+</span><span class="s1">'</span><span class="se">''</span><span class="s1"> ,</span><span class="se">''</span><span class="s1">'</span><span class="o">+</span><span class="n">a</span><span class="p">.</span><span class="n">Code</span><span class="o">+</span><span class="s1">'</span><span class="se">''</span><span class="s1"> ,</span><span class="se">''</span><span class="s1">'</span><span class="o">+</span><span class="n">a</span><span class="p">.[</span><span class="n">Value</span><span class="p">]</span><span class="o">+</span><span class="s1">'</span><span class="se">''</span><span class="s1"> ,0)'</span>  <span class="k">from</span>
+<span class="p">(</span> <span class="k">SELECT</span>  <span class="o">*</span> <span class="k">FROM</span> <span class="p">[</span><span class="mi">80</span><span class="p">.</span><span class="mi">123</span><span class="p">.</span><span class="mi">40</span><span class="p">.</span><span class="mi">123</span><span class="p">].[</span><span class="n">CIMS</span><span class="p">.</span><span class="n">Settings</span><span class="p">].[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">Resource</span><span class="p">]</span> <span class="p">)</span> <span class="n">a</span>
+<span class="k">left</span> <span class="k">join</span> <span class="p">(</span><span class="k">SELECT</span>  <span class="o">*</span> <span class="k">FROM</span>  <span class="p">[</span><span class="n">CIMS</span><span class="p">.</span><span class="n">Settings</span><span class="p">].[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">Resource</span><span class="p">]</span> <span class="p">)</span> <span class="n">b</span>
+<span class="k">on</span> <span class="n">a</span><span class="p">.</span><span class="n">Code</span><span class="o">=</span><span class="n">b</span><span class="p">.</span><span class="n">Code</span> <span class="k">and</span> <span class="n">a</span><span class="p">.</span><span class="n">Culture</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">Culture</span>
+<span class="k">where</span> <span class="n">b</span><span class="p">.</span><span class="k">No</span> <span class="k">is</span> <span class="k">null</span>
 
 
-</code></pre>
+</code></pre></div></div>
 
                   </article>
                   

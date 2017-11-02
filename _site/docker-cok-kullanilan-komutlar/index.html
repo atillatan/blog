@@ -263,142 +263,142 @@
   <li>Docker bilesenleri versionlarini gondermek</li>
 </ul>
 
-<pre><code class="language-bash">$ docker --version
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker <span class="nt">--version</span>
 Docker version 1.12.3, build 6b644ec
 
-$ docker-compose --version
+<span class="nv">$ </span>docker-compose <span class="nt">--version</span>
 docker-compose version 1.8.1, build 878cff1
 
-$ docker-machine --version
+<span class="nv">$ </span>docker-machine <span class="nt">--version</span>
 docker-machine version 0.8.2, build e18a919
 
-</code></pre>
+</code></pre></div></div>
 
 <ul>
-  <li><code>docker images</code> image listelemek, hub.docker.com dan indirilen images lardir.
+  <li><code class="highlighter-rouge">docker images</code> image listelemek, hub.docker.com dan indirilen images lardir.
 image i silmek baska bir sey, container i silmek baska birseydir.
 container lari local de biz olusturruz sileriz</li>
-  <li><code>docker rmi &lt;imageid&gt;</code> image silmek</li>
-  <li><code>docker ps</code> Calisan Container lari gosterir</li>
-  <li><code>docker stop &lt;containerid&gt;</code> Calisan Cotainer lari durdurmak</li>
-  <li><code>docker run -d -p 80:80 --name webserver nginx</code>  Start service, create container image</li>
-  <li><code>docker stop webserver</code> stop container</li>
-  <li><code>docker start webserver</code>  : starting service</li>
-  <li><code>docker ps -a</code> :  stop olmus container lari da gosterir.</li>
-  <li><code>docker stop $(docker ps -a -q)</code>  tum container lari stop eder</li>
-  <li><code>docker rm $(docker ps -a -q) </code>  Delete all containers</li>
-  <li><code>docker rmi $(docker images -q)</code> Delete all images</li>
-  <li><code>docker-machine ls</code> calisan docker engine bilgisini gosterir.</li>
-  <li><code>docker-machine start default</code> default olan docker machine start edilir</li>
-  <li><code>docker-machine start default</code> default olan docker machine stop edilir</li>
-  <li><code>docker-machine env</code> docker-machine ortam bilgilerini gosterir.</li>
+  <li><code class="highlighter-rouge">docker rmi &lt;imageid&gt;</code> image silmek</li>
+  <li><code class="highlighter-rouge">docker ps</code> Calisan Container lari gosterir</li>
+  <li><code class="highlighter-rouge">docker stop &lt;containerid&gt;</code> Calisan Cotainer lari durdurmak</li>
+  <li><code class="highlighter-rouge">docker run -d -p 80:80 --name webserver nginx</code>  Start service, create container image</li>
+  <li><code class="highlighter-rouge">docker stop webserver</code> stop container</li>
+  <li><code class="highlighter-rouge">docker start webserver</code>  : starting service</li>
+  <li><code class="highlighter-rouge">docker ps -a</code> :  stop olmus container lari da gosterir.</li>
+  <li><code class="highlighter-rouge">docker stop $(docker ps -a -q)</code>  tum container lari stop eder</li>
+  <li><code class="highlighter-rouge">docker rm $(docker ps -a -q) </code>  Delete all containers</li>
+  <li><code class="highlighter-rouge">docker rmi $(docker images -q)</code> Delete all images</li>
+  <li><code class="highlighter-rouge">docker-machine ls</code> calisan docker engine bilgisini gosterir.</li>
+  <li><code class="highlighter-rouge">docker-machine start default</code> default olan docker machine start edilir</li>
+  <li><code class="highlighter-rouge">docker-machine start default</code> default olan docker machine stop edilir</li>
+  <li><code class="highlighter-rouge">docker-machine env</code> docker-machine ortam bilgilerini gosterir.</li>
   <li>docker-machine i manuel baslatmak icin
-<code>docker-machine start</code>
-<code>docker-machine env</code>
-<code>eval $(docker-machine env)</code>
+<code class="highlighter-rouge">docker-machine start</code>
+<code class="highlighter-rouge">docker-machine env</code>
+<code class="highlighter-rouge">eval $(docker-machine env)</code>
 komutlari calistiriliri.</li>
   <li>docker-machine e baglanmanin 2 yolu vardir.
     <ol>
-      <li><code>docker-machine ssh default</code> seklinde docket-machine e ait olan cli komutu ile.</li>
-      <li><code>ssh docket@192.168.99.100</code> pass:tcuser</li>
+      <li><code class="highlighter-rouge">docker-machine ssh default</code> seklinde docket-machine e ait olan cli komutu ile.</li>
+      <li><code class="highlighter-rouge">ssh docket@192.168.99.100</code> pass:tcuser</li>
     </ol>
   </li>
-  <li><code>docker-machine config</code></li>
-  <li><code>docker-machine env</code></li>
-  <li><code>docker-machine inspect</code></li>
-  <li><code>docker-machine ip</code></li>
-  <li><code>docker-machine kill</code></li>
-  <li><code>docker-machine provision</code></li>
-  <li><code>docker-machine regenerate-certs</code></li>
-  <li><code>docker-machine restart</code></li>
-  <li><code>docker-machine ssh</code></li>
-  <li><code>docker-machine status</code></li>
-  <li><code>docker-machine upgrade</code></li>
-  <li><code>docker-machine url</code></li>
-  <li><code>docker run -it ubuntu bash</code> ubuntu bash calistirilir.</li>
-  <li><code>docker run -d -p 80:80 --name webserver nginx</code>  nginx imaji kullanilarak webserver adinda bir container olusturur ve calistirir, <code>-d</code> deamon olarak yani servis olarak calismasini saglar <code>-p</code> ise portu belirten parametredir. <code>:</code> ile kullanildiginda ilk configurasyon host a ikincisi ise docker servisine aittir.</li>
+  <li><code class="highlighter-rouge">docker-machine config</code></li>
+  <li><code class="highlighter-rouge">docker-machine env</code></li>
+  <li><code class="highlighter-rouge">docker-machine inspect</code></li>
+  <li><code class="highlighter-rouge">docker-machine ip</code></li>
+  <li><code class="highlighter-rouge">docker-machine kill</code></li>
+  <li><code class="highlighter-rouge">docker-machine provision</code></li>
+  <li><code class="highlighter-rouge">docker-machine regenerate-certs</code></li>
+  <li><code class="highlighter-rouge">docker-machine restart</code></li>
+  <li><code class="highlighter-rouge">docker-machine ssh</code></li>
+  <li><code class="highlighter-rouge">docker-machine status</code></li>
+  <li><code class="highlighter-rouge">docker-machine upgrade</code></li>
+  <li><code class="highlighter-rouge">docker-machine url</code></li>
+  <li><code class="highlighter-rouge">docker run -it ubuntu bash</code> ubuntu bash calistirilir.</li>
+  <li><code class="highlighter-rouge">docker run -d -p 80:80 --name webserver nginx</code>  nginx imaji kullanilarak webserver adinda bir container olusturur ve calistirir, <code class="highlighter-rouge">-d</code> deamon olarak yani servis olarak calismasini saglar <code class="highlighter-rouge">-p</code> ise portu belirten parametredir. <code class="highlighter-rouge">:</code> ile kullanildiginda ilk configurasyon host a ikincisi ise docker servisine aittir.</li>
   <li>bir container a ssh ile baglamak, usiswiki adli containera baglaniyoruz
     <pre><code class="language-beanshell">bash -c "clear &amp;&amp; DOCKER_HOST=tcp://192.168.99.100:2376 DOCKER_CERT_PATH=/Users/atilla/.docker/machine/machines/default DOCKER_TLS_VERIFY=1 docker exec -it usiswiki sh"
 </code></pre>
   </li>
   <li>Kitematik programini kullanarak ta container lara baglanabilirsiniz.</li>
   <li>ssh ile baglanmanin diger yolu OpenSSH kurmak olabilir</li>
-  <li><code>docker run --name usiswiki -p 80:80 -v $(pwd):/usr/share/nginx/html -d nginx</code> usiswiki adinda bir container olusturur ve onu calistirir <code>-v</code> parametresi host taki bir directory yi tamemen container a yansitmaktadir. mapleme isi yapilmaktadir.</li>
-  <li><code>:ro</code> readonly demektir. <code>-v</code> parametresinden sonra kullanilir, bir directory maplendiginde sanal makinanin bu directory ye readonly erismesini saglar.</li>
+  <li><code class="highlighter-rouge">docker run --name usiswiki -p 80:80 -v $(pwd):/usr/share/nginx/html -d nginx</code> usiswiki adinda bir container olusturur ve onu calistirir <code class="highlighter-rouge">-v</code> parametresi host taki bir directory yi tamemen container a yansitmaktadir. mapleme isi yapilmaktadir.</li>
+  <li><code class="highlighter-rouge">:ro</code> readonly demektir. <code class="highlighter-rouge">-v</code> parametresinden sonra kullanilir, bir directory maplendiginde sanal makinanin bu directory ye readonly erismesini saglar.</li>
   <li>Dockerfile : docker image olusturmak icin kullanilan dosyadir, bu dosyanin oldugu klasorde</li>
-  <li><code>docker build -t imagename .</code> komutu verildiginde <strong>imagename</strong> adinda bir image olusturulur.
+  <li><code class="highlighter-rouge">docker build -t imagename .</code> komutu verildiginde <strong>imagename</strong> adinda bir image olusturulur.
 sonundaki . nokta bulundugu klasoru ifade eder</li>
-  <li><code>docker run --name containername -P -d imagename</code>  bir image dan container olusturup calistirmak.</li>
-  <li><code>docker run -i -t --volumes-from containername --name imagename debian /bin/bash</code> dockerfile da VOLUME maping var ise volume lara ulasmak icin</li>
+  <li><code class="highlighter-rouge">docker run --name containername -P -d imagename</code>  bir image dan container olusturup calistirmak.</li>
+  <li><code class="highlighter-rouge">docker run -i -t --volumes-from containername --name imagename debian /bin/bash</code> dockerfile da VOLUME maping var ise volume lara ulasmak icin</li>
 </ul>
 
-<pre><code class="language-bash">docker build -t nginximage1 .
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker build <span class="nt">-t</span> nginximage1 <span class="nb">.</span>
 docket images
-docker run --name nginxcontainer1 -P -d nginximage1
+docker run <span class="nt">--name</span> nginxcontainer1 <span class="nt">-P</span> <span class="nt">-d</span> nginximage1
 docker ps
-docker run -it --volumes-from nginxcontainer1 --name nginxvolumecontainer1 debian /bin/bash
-</code></pre>
+docker run <span class="nt">-it</span> <span class="nt">--volumes-from</span> nginxcontainer1 <span class="nt">--name</span> nginxvolumecontainer1 debian /bin/bash
+</code></pre></div></div>
 
 <ul>
   <li>Mounting files
-    <pre><code class="language-bash">docker run --name nginx-container \
--v /path/to/static/files/on/host:/usr/share/nginx/html:ro \
--v /path/to/conf/on/host:/etc/nginx/nginx.conf:ro \
--P -d nginx
-</code></pre>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run <span class="nt">--name</span> nginx-container <span class="se">\</span>
+<span class="nt">-v</span> /path/to/static/files/on/host:/usr/share/nginx/html:ro <span class="se">\</span>
+<span class="nt">-v</span> /path/to/conf/on/host:/etc/nginx/nginx.conf:ro <span class="se">\</span>
+<span class="nt">-P</span> <span class="nt">-d</span> nginx
+</code></pre></div>    </div>
     <p>yada</p>
-    <pre><code class="language-bash">docker run --name nginx-container \
--v $(pwd)/html:/usr/share/nginx/html:ro \
--v $(pwd)/nginx.conf:/etc/nginx/nginx.conf:ro \
--P -d nginx
-</code></pre>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run <span class="nt">--name</span> nginx-container <span class="se">\</span>
+<span class="nt">-v</span> <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/html:/usr/share/nginx/html:ro <span class="se">\</span>
+<span class="nt">-v</span> <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/nginx.conf:/etc/nginx/nginx.conf:ro <span class="se">\</span>
+<span class="nt">-P</span> <span class="nt">-d</span> nginx
+</code></pre></div>    </div>
   </li>
-  <li>interaktif olarak loglari gondermek <code>-it</code>
-    <pre><code class="language-bash">docker run -it --name nginx-container \
--v $(pwd)/html:/usr/share/nginx/html:ro \
--v $(pwd)/nginx.conf:/etc/nginx/nginx.conf:ro \
--P nginx bash
-</code></pre>
+  <li>interaktif olarak loglari gondermek <code class="highlighter-rouge">-it</code>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run <span class="nt">-it</span> <span class="nt">--name</span> nginx-container <span class="se">\</span>
+<span class="nt">-v</span> <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/html:/usr/share/nginx/html:ro <span class="se">\</span>
+<span class="nt">-v</span> <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/nginx.conf:/etc/nginx/nginx.conf:ro <span class="se">\</span>
+<span class="nt">-P</span> nginx bash
+</code></pre></div>    </div>
   </li>
 </ul>
 
 <h3 id="ozet-olarak-4-adimda-nginx-kurulumu-yapilabilir">Ozet olarak 4 adimda nginx kurulumu yapilabilir</h3>
 <ol>
   <li>Dockerfile olusturulur, icinde FROM ifadesinde docker hub taki hangi image kullanilacagi bildirlirlir.
-    <pre><code class="language-bash">FROM nginx
-RUN echo "runing command"
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM nginx
+RUN <span class="nb">echo</span> <span class="s2">"runing command"</span>
 VOLUME /usr/share/nginx/html
 VOLUME /etc/nginx
-</code></pre>
+</code></pre></div>    </div>
   </li>
-  <li><code>docker build -t nginximagename .</code> seklinde image olusturulur, olusan image <code>docker images</code> komutu ile gorulebilir.</li>
+  <li><code class="highlighter-rouge">docker build -t nginximagename .</code> seklinde image olusturulur, olusan image <code class="highlighter-rouge">docker images</code> komutu ile gorulebilir.</li>
   <li>image kullanilarak container olusturulur ve run edilir.
-<code>docker run -it --name usiswikicontainer -v $(pwd)/src:/usr/share/nginx/html:ro -v $(pwd)/nginx/nginx.conf:/etc/nginx/nginx.conf:ro -P -d nginximagename</code><br />
+<code class="highlighter-rouge">docker run -it --name usiswikicontainer -v $(pwd)/src:/usr/share/nginx/html:ro -v $(pwd)/nginx/nginx.conf:/etc/nginx/nginx.conf:ro -P -d nginximagename</code><br />
 veya
-<code>docker run -it --name wiki1 -p 8181:80 -v /Users/atilla/WP/usiswiki/src/:/usr/share/nginx/html/ -v /Users/atilla/WP/usiswiki/nginx/nginx.conf:/etc/nginx/nginx.conf:ro -P -d usiswikiimage</code></li>
+<code class="highlighter-rouge">docker run -it --name wiki1 -p 8181:80 -v /Users/atilla/WP/usiswiki/src/:/usr/share/nginx/html/ -v /Users/atilla/WP/usiswiki/nginx/nginx.conf:/etc/nginx/nginx.conf:ro -P -d usiswikiimage</code></li>
   <li>sonraki calistirma ve kapatma islemleri su sekulde yapilir.
-    <pre><code class="language-bash">docker start usiswikicontainer
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker start usiswikicontainer
 docker stop usiswikicontainer
-</code></pre>
+</code></pre></div>    </div>
   </li>
 </ol>
 
 <ul>
   <li>
-    <p><code>docker network ls</code></p>
+    <p><code class="highlighter-rouge">docker network ls</code></p>
   </li>
   <li>
-    <p><code>docker run --name mysqlc1 -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123 -d mysql</code> mysql container olusturmak <code>-e</code> parametresi environment variable vermek oluyor.</p>
+    <p><code class="highlighter-rouge">docker run --name mysqlc1 -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123 -d mysql</code> mysql container olusturmak <code class="highlighter-rouge">-e</code> parametresi environment variable vermek oluyor.</p>
   </li>
-  <li><code>docker exec ...</code> container icinde komut calistiriyor.</li>
+  <li><code class="highlighter-rouge">docker exec ...</code> container icinde komut calistiriyor.</li>
   <li>
-    <p><code>docker exec -it mysqlc1 bash</code></p>
+    <p><code class="highlighter-rouge">docker exec -it mysqlc1 bash</code></p>
   </li>
   <li>
     <p>Widows ta docker in networke acilmi var fakat mac te yok, -p parameteresine host ip adresi de eklenerek yapiliyor.
-<code>-p 192.168.2.3:80:8080</code> gibi</p>
+<code class="highlighter-rouge">-p 192.168.2.3:80:8080</code> gibi</p>
   </li>
-  <li>image olusturma dosyasi <code>Dockerfile</code> container olusturma dosyasi ise <code>.yml</code></li>
+  <li>image olusturma dosyasi <code class="highlighter-rouge">Dockerfile</code> container olusturma dosyasi ise <code class="highlighter-rouge">.yml</code></li>
 </ul>
 
 <h3 id="ozet">Ozet</h3>
@@ -439,8 +439,8 @@ orgnegin windows hostlar uzerinde docker calistirilirken hyperv kullanmak daha m
 
 <ul>
   <li>Docker machine bir driver eklemek icin</li>
-  <li><code>docker-machine create --driver hyperv vm</code></li>
-  <li><code>eval $(docker-machine env machine-name)</code> yeni docker-machine active etmek icin</li>
+  <li><code class="highlighter-rouge">docker-machine create --driver hyperv vm</code></li>
+  <li><code class="highlighter-rouge">eval $(docker-machine env machine-name)</code> yeni docker-machine active etmek icin</li>
 </ul>
 
                   </article>

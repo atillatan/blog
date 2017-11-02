@@ -257,27 +257,27 @@
 
                     <h1 id="sql-server-icin-maliyetli-sorgularin-tespit-edilmesi">Sql server icin maliyetli sorgularin tespit edilmesi</h1>
 
-<pre><code class="language-sql">SELECT TOP 10 SUBSTRING(qt.TEXT, (qs.statement_start_offset/2)+1,
-((CASE qs.statement_end_offset
-WHEN -1 THEN DATALENGTH(qt.TEXT)
-ELSE qs.statement_end_offset
-END - qs.statement_start_offset)/2)+1),
-qs.execution_count,
-qs.total_logical_reads, qs.last_logical_reads,
-qs.total_logical_writes, qs.last_logical_writes,
-qs.total_worker_time,
-qs.last_worker_time,
-qs.total_elapsed_time/1000000 total_elapsed_time_in_S,
-qs.last_elapsed_time/1000000 last_elapsed_time_in_S,
-qs.last_execution_time,
-qp.query_plan
-FROM sys.dm_exec_query_stats qs
-CROSS APPLY sys.dm_exec_sql_text(qs.sql_handle) qt
-CROSS APPLY sys.dm_exec_query_plan(qs.plan_handle) qp
-ORDER BY qs.total_logical_reads DESC -- logical reads
--- ORDER BY qs.total_logical_writes DESC -- logical writes
--- ORDER BY qs.total_worker_time DESC -- CPU time
-</code></pre>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">TOP</span> <span class="mi">10</span> <span class="k">SUBSTRING</span><span class="p">(</span><span class="n">qt</span><span class="p">.</span><span class="n">TEXT</span><span class="p">,</span> <span class="p">(</span><span class="n">qs</span><span class="p">.</span><span class="n">statement_start_offset</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span>
+<span class="p">((</span><span class="k">CASE</span> <span class="n">qs</span><span class="p">.</span><span class="n">statement_end_offset</span>
+<span class="k">WHEN</span> <span class="o">-</span><span class="mi">1</span> <span class="k">THEN</span> <span class="n">DATALENGTH</span><span class="p">(</span><span class="n">qt</span><span class="p">.</span><span class="n">TEXT</span><span class="p">)</span>
+<span class="k">ELSE</span> <span class="n">qs</span><span class="p">.</span><span class="n">statement_end_offset</span>
+<span class="k">END</span> <span class="o">-</span> <span class="n">qs</span><span class="p">.</span><span class="n">statement_start_offset</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span>
+<span class="n">qs</span><span class="p">.</span><span class="n">execution_count</span><span class="p">,</span>
+<span class="n">qs</span><span class="p">.</span><span class="n">total_logical_reads</span><span class="p">,</span> <span class="n">qs</span><span class="p">.</span><span class="n">last_logical_reads</span><span class="p">,</span>
+<span class="n">qs</span><span class="p">.</span><span class="n">total_logical_writes</span><span class="p">,</span> <span class="n">qs</span><span class="p">.</span><span class="n">last_logical_writes</span><span class="p">,</span>
+<span class="n">qs</span><span class="p">.</span><span class="n">total_worker_time</span><span class="p">,</span>
+<span class="n">qs</span><span class="p">.</span><span class="n">last_worker_time</span><span class="p">,</span>
+<span class="n">qs</span><span class="p">.</span><span class="n">total_elapsed_time</span><span class="o">/</span><span class="mi">1000000</span> <span class="n">total_elapsed_time_in_S</span><span class="p">,</span>
+<span class="n">qs</span><span class="p">.</span><span class="n">last_elapsed_time</span><span class="o">/</span><span class="mi">1000000</span> <span class="n">last_elapsed_time_in_S</span><span class="p">,</span>
+<span class="n">qs</span><span class="p">.</span><span class="n">last_execution_time</span><span class="p">,</span>
+<span class="n">qp</span><span class="p">.</span><span class="n">query_plan</span>
+<span class="k">FROM</span> <span class="n">sys</span><span class="p">.</span><span class="n">dm_exec_query_stats</span> <span class="n">qs</span>
+<span class="k">CROSS</span> <span class="n">APPLY</span> <span class="n">sys</span><span class="p">.</span><span class="n">dm_exec_sql_text</span><span class="p">(</span><span class="n">qs</span><span class="p">.</span><span class="n">sql_handle</span><span class="p">)</span> <span class="n">qt</span>
+<span class="k">CROSS</span> <span class="n">APPLY</span> <span class="n">sys</span><span class="p">.</span><span class="n">dm_exec_query_plan</span><span class="p">(</span><span class="n">qs</span><span class="p">.</span><span class="n">plan_handle</span><span class="p">)</span> <span class="n">qp</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">qs</span><span class="p">.</span><span class="n">total_logical_reads</span> <span class="k">DESC</span> <span class="c1">-- logical reads</span>
+<span class="c1">-- ORDER BY qs.total_logical_writes DESC -- logical writes</span>
+<span class="c1">-- ORDER BY qs.total_worker_time DESC -- CPU time</span>
+</code></pre></div></div>
 
                   </article>
                   
