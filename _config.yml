@@ -22,6 +22,7 @@ disqus:
 
 plugins:
   - jekyll-feed
+  - jekyll-seo-tag
 
 exclude:
   - Readme.md
