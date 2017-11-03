@@ -2,6 +2,7 @@
 layout: article
 title: İletişim
 description: Buradan atilla tanrikulu ile iletişime geçebilirsiniz.
+comments: false
 ---
 
 # İletişim
