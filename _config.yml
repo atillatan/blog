@@ -7,7 +7,7 @@ github_username:  atillatan
 keywords: >- # this means to ignore newlines until "description:"
   java, c#, csharp, code, coding, sql, redis, cache, script, javascript
 description: >- # this means to ignore newlines until "author:"
-  atilla.tanrikulu.biz | Bir çok kategoride güzel ve özgün makaleler okuyabileceğiniz güncel bir blog
+  atilla.tanrikulu.biz Bir çok kategoride güzel ve özgün makaleler okuyabileceğiniz güncel bir blog
 author: Atilla Tanrikulu
 environment: production
 permalink: pretty

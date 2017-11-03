@@ -410,6 +410,8 @@ and create `downloads.html` and loop these files.
 
 [Explore the Jekyll plugins](https://jekyllrb.com/docs/plugins/)
 
+[Useful snippets](https://github.com/mdo/jekyll-snippets)
+
 ## Further Steps
 
 folder structure:
