@@ -4,7 +4,9 @@
     </div>
 
     <div class="panel-body" style="padding:0px;">
-      {% for article in site.articles %}
+      {% assign articleList = site.articles | sort: 'sortorder'  %}
+
+      {% for article in articleList %}
 
       <a class="list-group-item" href="{{site.baseurl}}{{article.url}}">{{article.title}}</a>
 
