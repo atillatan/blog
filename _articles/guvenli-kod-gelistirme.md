@@ -1,11 +1,13 @@
 ---
 layout: article
-title: Guvenlik Kod Gelistirme
-description: Guvenlik Kod Gelistirme
+title: Guvenli Kod Gelistirme
+permalink: /articles/:title/
+description: Guvenli Kod Gelistirme
 comments: true
 sortorder: 20
 ---
-# Guvenlik Kod Gelistirme
+
+# Guvenli Kod Gelistirme
 
 ## Temel Kavramlar
 
