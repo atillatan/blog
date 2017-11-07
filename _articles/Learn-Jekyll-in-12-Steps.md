@@ -48,7 +48,6 @@ content of \_config.yml
 ```xml
 markdown: redcarpet
 baseurl: /blog
-expect: ['readme.md']
 ```
 run jekyll
 ```bash
