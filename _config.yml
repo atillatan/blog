@@ -36,3 +36,5 @@ collections:
   articles:
     output: true
     permalink: /:path/
+
+ 

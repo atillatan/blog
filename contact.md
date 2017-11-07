@@ -17,3 +17,5 @@ comments: false
     <li><a href="https://github.com/atillatan/blog/issues/new" target="_blank"><i class="fa fa-github-square fa-2x social"></i></a></li>
 
 </ul>
+
+<script type="text/javascript" src="https://form.jotform.com/jsform/73105766744966"></script>
