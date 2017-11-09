@@ -1,9 +1,24 @@
 ---
 layout: article
+permalink:
+name:
+file_type:
 title: JMater notlari, kurulum ve kullanim
-description: JMETER NOTLARI, KURULUM VE KULLANIM
+description: >-
+  JMater notlari, kurulum ve kullanim
+tags:  
+category:  
+sort_order: 10
+rating: 100
+changefreq: monthly
+priority: 0.5
+published: true
+create_date: 2017-10-23
+modified_date: 2017-10-23
+created_by: atilla
+modified_by: atilla
 comments: true
-sortorder: 10
+redirect_url:
 ---
 
 <!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->

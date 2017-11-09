@@ -1,9 +1,24 @@
 ---
 layout: article
+permalink:
+name:
+file_type:
 title: Sql server icin maliyetli sorgularin tespit edilmesi
-description: Sql server icin maliyetli sorgularin tespit edilmesi
+description: >-
+  Sql server icin maliyetli sorgularin tespit edilmesi
+tags:  
+category:  
+sort_order: 200
+rating: 100
+changefreq: monthly
+priority: 0.5
+published: true
+create_date: 2017-10-23
+modified_date: 2017-10-23
+created_by: atilla
+modified_by: atilla
 comments: true
-sortorder: 200
+redirect_url:
 ---
 
 

@@ -1,9 +1,24 @@
 ---
 layout: article
+permalink:
+name:
+file_type:
 title: Docker Cok kullanilan komutlar
-description: Docker Cok kullanilan komutlar
+description: >-
+  Docker Cok kullanilan komutlar
+tags:  
+category:  
+sort_order: 30
+rating: 100
+changefreq: monthly
+priority: 0.5
+published: true
+create_date: 2017-10-23
+modified_date: 2017-10-23
+created_by: atilla
+modified_by: atilla
 comments: true
-sortorder: 30
+redirect_url:
 ---
 # DOCKER
 

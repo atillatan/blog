@@ -1,9 +1,24 @@
 ---
 layout: article
+permalink:
+name:
+file_type:
 title: SQL table data compare, and prepare insert satements
-description: SQL table data compare, and prepare insert satements
+description: >-
+  SQL table data compare, and prepare insert satements
+tags:  
+category:  
+sort_order: 150
+rating: 100
+changefreq: monthly
+priority: 0.5
+published: true
+create_date: 2017-10-23
+modified_date: 2017-10-23
+created_by: atilla
+modified_by: atilla
 comments: true
-sortorder: 150
+redirect_url:
 ---
 
 # DATA Compare
