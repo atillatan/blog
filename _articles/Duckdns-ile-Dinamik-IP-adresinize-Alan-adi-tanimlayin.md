@@ -8,7 +8,7 @@ description: >-
   Duckdns ile Dinamik IP adresinize Alan adi tanimlayin.
 tags:  
 category:  
-sort_order: 100
+sort_order: 140
 rating: 100
 changefreq: monthly
 priority: 0.5
