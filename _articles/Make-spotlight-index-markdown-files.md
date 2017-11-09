@@ -51,7 +51,7 @@ Open terminal and paste above text,
 after the `<string>org.openxmlformats.wordprocessingml.document</string>`
 
 ```bash
-sudo vi /System/Library/Spotlight/RichText.mdimporter/Contents/Info.plist
+$ sudo vi /System/Library/Spotlight/RichText.mdimporter/Contents/Info.plist
 # locate your cursor after <string>org.openxmlformats.wordprocessingml.document</string>
 # press key "i" on your keyboard
 # press paste above text with pressing CMD+V
