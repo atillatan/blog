@@ -189,7 +189,7 @@ bununla beraber recoding yapilarak, recod sonucu olusan script ten faydalanmak v
  burdaki 8888 portuna herhangi bir browser proxy tanimlamasi yapar ise, tum requestler jmeter tarafindan kaydedilr.
 
 * Test script recorder icinde "url pattern to exclude" ayari vardir burdan bazi dosya uzantilari exclude edilebilir.
-![4.png]({{site.img}}/jmeter.md.images/4.png = 250x)
+![4.png]({{site.img}}/jmeter.md.images/4.png)
 
 * Record yaptiktan sonra Thread Group altindaki, Recording Controller altina
 her bir sayfa requesti icin bir group olusturur, yani ayni sayfadaki tum requestleri group yapar.
