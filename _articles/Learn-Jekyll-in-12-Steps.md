@@ -420,7 +420,7 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor 
 ```
 and create `downloads.html` and loop these files.
 
-[Download example project](blog.zip)
+[Download example project](/blog.zip)
 
 [Explore the Jekyll plugins](https://jekyllrb.com/docs/plugins/)
 
