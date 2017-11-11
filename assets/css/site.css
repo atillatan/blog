@@ -2,6 +2,8 @@
 
 body {
        padding-top: 53px !important;
+       font-size: 16px;
+       line-height: 27px;
 }
 
 H1:before, H2:before, H3:before {
@@ -16,8 +18,8 @@ H1:before, H2:before, H3:before {
 /*kaynak:http://bootsnipp.com/snippets/featured/responsive-navigation-menu*/
 .nav-side-menu {
     overflow: auto;
-    font-size: 12px;
-    font-weight: 200;
+    font-size: 17px;
+
     background-color: #2e353d;
     position: fixed;
     top: 0px;
