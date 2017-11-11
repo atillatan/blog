@@ -26,34 +26,33 @@ redirect_url:
 
 --Compare result1,
 select * from
-( SELECT  * FROM [80.123.40.123].[CIMS.Settings].[dbo].[Resource] ) a
-right join (SELECT  * FROM  [CIMS.Settings].[dbo].[Resource] ) b
+( SELECT  * FROM [dbo].[Resource1] ) a
+right join (SELECT  * FROM  [dbo].[Resource2] ) b
 on a.Code=b.Code and a.Culture = b.Culture
 where a.No is null
 
 
 --Compare result2,
 select * from
-( SELECT  * FROM [80.123.40.123].[CIMS.Settings].[dbo].[Resource] ) a
-left join (SELECT  * FROM  [CIMS.Settings].[dbo].[Resource] ) b
+( SELECT  * FROM [dbo].[Resource1] ) a
+left join (SELECT  * FROM  [dbo].[Resource2] ) b
 on a.Code=b.Code and a.Culture = b.Culture
 where b.No is null
 
 
 
---Prepare INsert SQL
+--Prepare Insert SQLs
 
-
-select 'INSERT INTO [dbo].[Resource]([Culture], [Code], [Value], [IsEditable])   VALUES('''+b.Culture+''' ,'''+b.Code+''' ,'''+b.[Value]+''' ,0)'  from
-( SELECT  * FROM [80.123.40.123].[CIMS.Settings].[dbo].[Resource] ) a
-right join (SELECT  * FROM  [CIMS.Settings].[dbo].[Resource] ) b
+select 'INSERT INTO [dbo].[Resource1]([Culture], [Code], [Value], [IsEditable])   VALUES('''+b.Culture+''' ,'''+b.Code+''' ,'''+b.[Value]+''' ,0)'  from
+( SELECT  * FROM [Resource1] ) a
+right join (SELECT  * FROM  [dbo].[Resource2] ) b
 on a.Code=b.Code and a.Culture = b.Culture
 where a.No is null
 
 
-select 'INSERT INTO [dbo].[Resource]([Culture], [Code], [Value], [IsEditable])   VALUES('''+a.Culture+''' ,'''+a.Code+''' ,'''+a.[Value]+''' ,0)'  from
-( SELECT  * FROM [80.123.40.123].[CIMS.Settings].[dbo].[Resource] ) a
-left join (SELECT  * FROM  [CIMS.Settings].[dbo].[Resource] ) b
+select 'INSERT INTO [dbo].[Resource2]([Culture], [Code], [Value], [IsEditable])   VALUES('''+a.Culture+''' ,'''+a.Code+''' ,'''+a.[Value]+''' ,0)'  from
+( SELECT  * FROM [Resource1] ) a
+left join (SELECT  * FROM  [dbo].[Resource2] ) b
 on a.Code=b.Code and a.Culture = b.Culture
 where b.No is null
 

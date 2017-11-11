@@ -8,7 +8,7 @@ description: >-
   IdentityServer Nedir
 tags:  
 category:  
-sort_order: 50
+sort_order: 22
 rating: 100
 changefreq: monthly
 priority: 0.5

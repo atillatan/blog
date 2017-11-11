@@ -20,41 +20,65 @@ modified_by: atilla
 comments: true
 redirect_url:
 ---
-# Redis Kurulumu ve ayarlari
+# Redis Kurulumu ve ayarları
 
-- degistirilen ayarlar asagidaki sekildedir.
+- Öncelikle Redis bilgisayara kurulur
 
+- Değiştirilen ayarlar aşağıdaki şekildedir.
+- Redisin konfigürasyon dosyası açılır
+
+```bash
+# ilk kurulumda daha detayli log gormek isteyebilirsiniz
 loglevel debug
-logfile "f:\\redis\\logs\\redis.log"
+# log dosyasini, herzaman rahatlikla ulasabileceginiz ve
+# diski doldurma ihtimali olmayan bir yere kaydedin.
+logfile "f:\\Redis\\logs\\Redis.log"
+# Kac adet databse olmasini istiyorsaniz
 databases 2
-## Memeory i kaydetme islemleri iptal edildi
 ```
+- Log'u verbose yapıp detayları görmek lazım
+- Windows ta test yapıyorsanız ve "Sistem log"'u yes, ise windows event log'larına yazıyor dikkat etmek lazım.
+- Windows serverlarda, Servisin Konfigürasyonunda windows event leri daha kullanışlı olabilir.
+
+## Memory i kaydetme işlemleri iptal edildi
+Redis ilk kurulduğunda, default ayarlarla kurulduğu için, bazı özellikler
+faklı makina kaynaklarına uygun olmayabilir. örneğin redis periyodik olarak database lerini
+diske kaydedebilmektedir. Eğer bu ayar açık olursa ve redise ayrılan memory alanı büyük olursa,
+belirli periyotlarda redisin tıkandığını görebilirsiniz.
+
+```bash
 # save 900 1
 # save 300 10
 # save 60 10000
 ```
 
-## heapdir lokasyonu degistirildi.
-  heapdir "d:\\redis\\"
+## heapdir lokasyonu değiştirildi.
+```bash
+  heapdir "d:\\Redis\\"
+```
 
-- redis in kullanacagi max memroy ayarlanabilir.
-maxheap 8GB
+Eger redisi production a kuruyorsaniz, yuksek bir memory ayari yapmak isteyebilirsiniz.
 
+- Redis in kullanacağı max memroy aşağıdaki şekilde ayarlanabilir.
+```bash
+maxheap 64GB
+```
 
-- veritabani dosyasinin nerede oldugu ayarlanmalidir, c de en az memory kadar bos olmasi lazim
-- eger ./ adresinde yeterince yer yoksa maxheap degeri dusurulebilir, yada ./ adresi degistirilebilir.
+- Veritabanı dosyasının nerede olduğu ayarlanmalıdır, dosylarin kaydedilecegi disk te en az memory kadar boş olması lazım
 
-dir "f:\\redis\\"
-
-
-- yeni susumr github/servicestack/windows-redis sayfasindan indirildi.
-son surum icin bir ayar yapmaya gerek kalmiyor. "redis-lates"
-- komut satirindan redis-server.exe ye configurasyon dosyasinin adi verilerek deneme yapilabilir.
-logu verbose yapip detaylari gormek lazim
-- sistem logu yes, ise windows event larina yaziyor dikkat etmek lazim.
-- servisin configurasyonda windows event leri daha kullanisli olabilir.
-
-# servis olarak kurmak icin
+- Eğer ./ adresinde yeterince yer yoksa maxheap değeri düşürülebilir, yada ./ adresi değiştirilebilir.
+```bash
+dir "f:\\Redis\\"
+```
 
 
-redis-server --service-install redis.windows.conf --loglevel verbose
+- Windows sürümü https://github.com/ServiceStack/redis-windows sayfasından indirilebilir.
+- Son sürüm için bir ayar yapmaya gerek kalmıyor. Default ayarlarda duzenleme yapilmis "Redis-lates"
+
+- Windowsta deneme yaparken, komut satırından Redis-server.exe ye konfigürasyon dosyasının adı verilerek deneme yapılabilir.
+
+
+
+# servis olarak kurmak için
+
+Redis-server --service-ınstall Redis.windows.conf --loglevel verbose

@@ -24,10 +24,10 @@ redirect_url:
 <!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 
 - [JMETER NOTLARI, KURULUM VE KULLANIM](#jmeter-notlari-kurulum-ve-kullanim)
-	- [1. Jmeter Nedir?](#1-jmeter-nedir)
-	- [2. Jmeter Kurulumu ve Ayarlar](#2-jmeter-kurulumu-ve-ayarlar)
-	- [3. Jmeter test dosyalarini otomatik calistirmak](#3-jmeter-test-dosyalarini-otomatik-calistirmak)
-	- [4. Jmeter Egitimi](#4-jmeter-egitimi)
+	- [1. JMeter Nedir?](#1-jmeter-nedir)
+	- [2. JMeter Kurulumu ve Ayarlar](#2-jmeter-kurulumu-ve-ayarlar)
+	- [3. JMeter test dosyalarini otomatik calistirmak](#3-jmeter-test-dosyalarini-otomatik-calistirmak)
+	- [4. JMeter Egitimi](#4-jmeter-egitimi)
 	- [5. Bilinmesi Geken Bazi Kavramlar](#5-bilinmesi-geken-bazi-kavramlar)
 	- [6. Standart bir test icin eklenmesi gereken temel elementler.](#6-standart-bir-test-icin-eklenmesi-gereken-temel-elementler)
 	- [7. Test script olusturmak,](#7-test-script-olusturmak)
@@ -60,19 +60,19 @@ redirect_url:
 **Basliklar**
 
 
-## 1. Jmeter Nedir?
-* Jmeter load test (yuk testi) yada stress testi yapmak icin kullanilan, Apache tarafindan gelistirilen ucretsiz bir aractir.
-* Jmeter kullanarak, bir web sitesi uzerinde yaptiginiz islemleri kaydederek daha sonra bu kaydi ayni anda binlerce defa calistirabilirsiniz. Bu sayede, test yapacaginiz sistem uzerinde ayni anda binlerce kullanicinin bulunma durumunu simule etmis olursunuz.
+## 1. JMeter Nedir?
+* JMeter load test (yuk testi) yada stress testi yapmak icin kullanilan, Apache tarafindan gelistirilen ucretsiz bir aractir.
+* JMeter kullanarak, bir web sitesi uzerinde yaptiginiz islemleri kaydederek daha sonra bu kaydi ayni anda binlerce defa calistirabilirsiniz. Bu sayede, test yapacaginiz sistem uzerinde ayni anda binlerce kullanicinin bulunma durumunu simule etmis olursunuz.
 
 * Kaydederek daha sonra calistirdiginiz test yapisina "Test Senaryosu" yada "Test script" denir.
 * Test scriptler tek kullanici icin kaydedildikten sonra, cok kullanici testleri yapabilmek icin, olusan jmeter test adimlarini amaca uygun sekilde  degistirilmesi gerekir.
-* Jmeter, test yapilacak sisteme gonderilecek verileri (parametre yada degisken de diyebiliriz)
+* JMeter, test yapilacak sisteme gonderilecek verileri (parametre yada degisken de diyebiliriz)
 farkli kaynaklardan alabilir.
   - Bir dosya icinden alabilir, genellikle bu dosya csv dosyasi olur, ornegin bir csv dosya icine bin adet kullaniciadi, parola kaydederek, jmeter ayarlarini yaptiktan sonra  login testi yapabilirsiniz.
   -  Test parametresi olarak, jmeter elemenlerinden bazi veriler alinabilir.
   -  Karsidaki sistemin, bir onceki response (cevabindan) ayiklanarak (parse, extrack) alinabilir.
 
-## 2. Jmeter Kurulumu ve Ayarlar
+## 2. JMeter Kurulumu ve Ayarlar
 www.apache.org sitesinden son surumu indirilebilir.
 indirdikten sonra, terminal ekranindan kurulum klasorune gidilerek
 
@@ -99,7 +99,7 @@ echo  "JVM_ARGS: $JVM_ARGS"
 seklinde ayar yapiliyor, echo ile console/terminal e bastirilan ayarlari kullanarak baslayacaktir.
 diger yandan jmeter adinda bir script dosyasi var oradan da detayli ayarlamalar yapabilirsiniz.
 
-## 3. Jmeter test dosyalarini otomatik calistirmak
+## 3. JMeter test dosyalarini otomatik calistirmak
 * Blazemeter adli siteye jameter scriptini (.jmx dosya) gonderdiginiz zaman, belirli bir ucret karsiliginda
 istediginiz kadar client IP den test uygulayabilirsiniz.
 * Blazemeter uzerinden yapilan testler sayesinde tamamen gercek ortam simule edilebilir. Request lerin hepsi farkli IP adreslerinden gelecektir.
@@ -107,8 +107,8 @@ istediginiz kadar client IP den test uygulayabilirsiniz.
 
 * https://blazemeter.com/ : tesetleri otomatik calistiran cloud
 
-##  4. Jmeter Egitimi
-* Jmeter hakkinda detayli bilgi edinmek icin asagidaki web adresleri incelenebilir.
+##  4. JMeter Egitimi
+* JMeter hakkinda detayli bilgi edinmek icin asagidaki web adresleri incelenebilir.
 https://blazemeter.com/resources
 http://mwebhack.blogspot.com.tr/
 * Benim burada yazdigim makale ise, daha cok ogrendiklerimi unutmamak adina, kendi notlarimdan olusturdugum bir derlemedir.
@@ -118,15 +118,15 @@ http://mwebhack.blogspot.com.tr/
 
 ![1.png]({{site.img}}/jmeter.md.images/1.png)
 
-* Jmeter ilk acildiginda, ekranin 2 bolmeden olustugunu gorursunuz.
+* JMeter ilk acildiginda, ekranin 2 bolmeden olustugunu gorursunuz.
   * **Sol Panel:** Test planindaki tum elementleri/objelerin listesini hiyerarsik bir bicimde duzenli olarak gosterir
   * **Orta Panel:** Sol panelden secilen objelerin ayarlari orta kisimda acilir.
 * Menu de *Options/Coose language (Ayarlar/ Dil secimi)* dil degistirebilirsiniz. Dil degisimi yaptiginizda, tum ekran arayuzleri sectiginiz dile uygun sekilde acilacaktir. fakat Help/Yardim kismi herzaman ingilizce acilacaktir.
 * Burada ingilizce ekranlar uzerinden anlatim yapilacaktir.
-* Jmeter yardim ekranina menuden ulasabilirsiniz. Cok detayli ve cok guzel bir anlatimi vardir.
+* JMeter yardim ekranina menuden ulasabilirsiniz. Cok detayli ve cok guzel bir anlatimi vardir.
 * Yardim icin, cok cok guzel bir ozellik ise sudur, sol paneldeki herhangi bir obje uzerinde sag tikladiktan sonra "Help" tiklandiginda, direk olarak ilgili yardim konusuna gitmektedir.
-* Jmeter ilk acildiginda, sol panel de iki obje yer alir. "Test Plan", "WorkBench" bu container lara asagida deginilmistir.
-* Jmeter da, sol paneldeki herhangi bir element uzerinde sag tiklayip "Add" kismina
+* JMeter ilk acildiginda, sol panel de iki obje yer alir. "Test Plan", "WorkBench" bu container lara asagida deginilmistir.
+* JMeter da, sol paneldeki herhangi bir element uzerinde sag tiklayip "Add" kismina
 	gelindiginde,
 
 >>>>>![3.png]({{site.img}}/jmeter.md.images/3.png)
@@ -193,7 +193,7 @@ bununla beraber recoding yapilarak, recod sonucu olusan script ten faydalanmak v
 
 * Record yaptiktan sonra Thread Group altindaki, Recording Controller altina
 her bir sayfa requesti icin bir group olusturur, yani ayni sayfadaki tum requestleri group yapar.
-* Jmeter sayfa bazinda yaptigi gruplamalari isimlendirirken numara verir. daha sonra bu isimleri degistirebilirsiniz. Ornek ekran goruntusundeki 362 ile baslayan grup, jmeter tarafindan isimlendirilmistir ve ismi degistirilmemistir. digerleri ise degistirilmistir.
+* JMeter sayfa bazinda yaptigi gruplamalari isimlendirirken numara verir. daha sonra bu isimleri degistirebilirsiniz. Ornek ekran goruntusundeki 362 ile baslayan grup, jmeter tarafindan isimlendirilmistir ve ismi degistirilmemistir. digerleri ise degistirilmistir.
 ![2.png]({{site.img}}/jmeter.md.images/2.png)
 ## 9. Regular expression Extractor:
 Response icinden bir datayi extract eder ve bir degiskene atar, bu
@@ -364,7 +364,7 @@ daha sonra www.newrelic.com adresinden detayli raporlar sunuyor.
 yuk testleri sirasinda cok faydali olacaktir.
 
 ### 18.8. Ic methodlar
-loglara dusmeyen is methodlarda
+loglara dusmeyen ic methodlarda
 ```csharp
 Stopwatch sw=new Stopwatch();
 sw.Start();
@@ -399,8 +399,81 @@ gunumuzde en cok ragbet goren cache servisi Redis tir.
  Bazen kurumsal uygulamalarda, bazi script dosyalari, image lar v.b,  MB seviyesinde olabiliyor, browser in her severing bu dosyalari cekmesi
  ciddi bir network I/O  problemi olusturabilir. bu yuzden yazilim icinde tarayiciya hangi elementi nekadar belleginde tutacaginin talimati verilmelidir.
 
+- fakli platformlar icin cache kontolu
+
+PHP:
+```php
+header("Cache-Control: no-cache, no-store, must-revalidate"); // HTTP 1.1.
+header("Pragma: no-cache"); // HTTP 1.0.
+header("Expires: 0"); // Proxies.
+```
+Java Servlet, or Node.js:
+```java
+response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
+response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
+response.setHeader("Expires", "0"); // Proxies.
+```
+ASP.NET-MVC
+```asp.net
+Response.Cache.SetCacheability(HttpCacheability.NoCache);  // HTTP 1.1.
+Response.Cache.AppendCacheExtension("no-store, must-revalidate");
+Response.AppendHeader("Pragma", "no-cache"); // HTTP 1.0.
+Response.AppendHeader("Expires", "0"); // Proxies.
+```
+ASP.NET:
+```asp
+Response.AppendHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
+Response.AppendHeader("Pragma", "no-cache"); // HTTP 1.0.
+Response.AppendHeader("Expires", "0"); // Proxies.
+```
+ASP:
+```asp
+Response.addHeader "Cache-Control", "no-cache, no-store, must-revalidate" ' HTTP 1.1.
+Response.addHeader "Pragma", "no-cache" ' HTTP 1.0.
+Response.addHeader "Expires", "0" ' Proxies.
+```
+Ruby on Rails, or Python on Flask:
+```ruby
+response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate" # HTTP 1.1.
+response.headers["Pragma"] = "no-cache" # HTTP 1.0.
+response.headers["Expires"] = "0" # Proxies.
+```
+Google Go:
+```go
+responseWriter.Header().Set("Cache-Control", "no-cache, no-store, must-revalidate") // HTTP 1.1.
+responseWriter.Header().Set("Pragma", "no-cache") // HTTP 1.0.
+responseWriter.Header().Set("Expires", "0") // Proxies.
+```
+Apache .htaccess file:
 ```html
- <meta http-equiv="cache-control" content="max-age=0" />
+<IfModule mod_headers.c>
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+    Header set Expires 0
+</IfModule>
+```
+HTML4:
+```html
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+```
+Python/Pyramid:
+```python
+def my_api_call(context, request):
+
+    # disable caching
+    request.response.headerlist.extend(
+        (
+            ('Cache-Control', 'no-cache, no-store, must-revalidate'),
+            ('Pragma', 'no-cache'),
+            ('Expires', '0')
+        )
+    )
+```
+
+```html
+<meta http-equiv="cache-control" content="max-age=0" />
 <meta http-equiv="cache-control" content="no-cache" />
 <meta http-equiv="cache-control" content="no-store" />
 <meta http-equiv="cache-control" content="must-revalidate" />

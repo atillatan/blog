@@ -3,9 +3,9 @@ layout: article
 permalink:
 name:
 file_type:
-title: How to use Github Pages for static website
+title: How to use Github Pages for static websites
 description: >-
-  How to use Github Pages for static website
+  How to use Github Pages for static websites
 tags:  
 category:  
 sort_order: 40
@@ -21,7 +21,7 @@ comments: true
 redirect_url:
 ---
 
-# How to use Github Pages for static website
+# How to use Github Pages for static websites
 
 
 - You can turn your Github  repository into a page very easily
@@ -47,6 +47,7 @@ $ git status
 ## Step-2: Create your remote Github repository and push your local repository into Github repository.
 - Open www.github.com and click "+" button in the Github page then type your "new repository" name like "blog", after that click "Create Repository" button.
 - Open terminal and push an existing repository to Github
+
 ```bash
 $ git remote add origin git@github.com:atillatan/blog.git
 $ git push -u origin master

@@ -8,7 +8,7 @@ description: >-
   TFS ile Otomatik deployment yapmak
 tags:  
 category:  
-sort_order: 100
+sort_order: 190
 rating: 100
 changefreq: monthly
 priority: 0.5
@@ -35,9 +35,10 @@ Tfs ile scheduled yada check-in ile tetikelenen build yada deployment islemi yap
 
 ## Build scriptiin TFS icinden calistirilmasi
 TFS icerisinden "Exec" secilerek "bat" dosyasi calistirilabilir
-`<Exec Command="OBS-V3-main-20141124-Patch-Prod.bat $(Configuration)"/>`
+`<Exec Command="BranchName-Prod.bat $(Configuration)"/>`
 
 
 ## Deployment sonucunun mail olarak TFS kullanicilarina gonderilmesi
 
-- Gonderilen dosya dan "Release notes" cok rahat cikartilabilir.
+- Eger projede her check-in isleminde talep numarasi ve yapilan islem yaziliyor ise
+ Gonderilen mail den "Release notes" cok rahat cikartilabilir.

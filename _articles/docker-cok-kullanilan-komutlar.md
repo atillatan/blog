@@ -81,9 +81,11 @@ komutlari calistiriliri.
 - `docker run -it ubuntu bash` ubuntu bash calistirilir.
 - `docker run -d -p 80:80 --name webserver nginx`  nginx imaji kullanilarak webserver adinda bir container olusturur ve calistirir, `-d` deamon olarak yani servis olarak calismasini saglar `-p` ise portu belirten parametredir. `:` ile kullanildiginda ilk configurasyon host a ikincisi ise docker servisine aittir.
 - bir container a ssh ile baglamak, usiswiki adli containera baglaniyoruz
+
 ```beanshell
 bash -c "clear && DOCKER_HOST=tcp://192.168.99.100:2376 DOCKER_CERT_PATH=/Users/atilla/.docker/machine/machines/default DOCKER_TLS_VERIFY=1 docker exec -it usiswiki sh"
 ```
+
 - Kitematik programini kullanarak ta container lara baglanabilirsiniz.
 - ssh ile baglanmanin diger yolu OpenSSH kurmak olabilir
 - `docker run --name usiswiki -p 80:80 -v $(pwd):/usr/share/nginx/html -d nginx` usiswiki adinda bir container olusturur ve onu calistirir `-v` parametresi host taki bir directory yi tamemen container a yansitmaktadir. mapleme isi yapilmaktadir.
@@ -103,20 +105,25 @@ docker run -it --volumes-from nginxcontainer1 --name nginxvolumecontainer1 debia
 ```
 
 - Mounting files
+
 ```bash
 docker run --name nginx-container \
   -v /path/to/static/files/on/host:/usr/share/nginx/html:ro \
   -v /path/to/conf/on/host:/etc/nginx/nginx.conf:ro \
   -P -d nginx
 ```
+
 yada
+
 ```bash
 docker run --name nginx-container \
   -v $(pwd)/html:/usr/share/nginx/html:ro \
   -v $(pwd)/nginx.conf:/etc/nginx/nginx.conf:ro \
   -P -d nginx
 ```
+
 - interaktif olarak loglari gondermek `-it`
+
 ```bash
 docker run -it --name nginx-container \
   -v $(pwd)/html:/usr/share/nginx/html:ro \
@@ -125,19 +132,23 @@ docker run -it --name nginx-container \
 ```
 
 ### Ozet olarak 4 adimda nginx kurulumu yapilabilir
+
 1. Dockerfile olusturulur, icinde FROM ifadesinde docker hub taki hangi image kullanilacagi bildirlirlir.
+
 ```bash
 FROM nginx
 RUN echo "runing command"
 VOLUME /usr/share/nginx/html
 VOLUME /etc/nginx
 ```
+
 2. `docker build -t nginximagename .` seklinde image olusturulur, olusan image `docker images` komutu ile gorulebilir.
 3. image kullanilarak container olusturulur ve run edilir.
 `docker run -it --name usiswikicontainer -v $(pwd)/src:/usr/share/nginx/html:ro -v $(pwd)/nginx/nginx.conf:/etc/nginx/nginx.conf:ro -P -d nginximagename`  
 veya
 `docker run -it --name wiki1 -p 8181:80 -v /Users/atilla/WP/usiswiki/src/:/usr/share/nginx/html/ -v /Users/atilla/WP/usiswiki/nginx/nginx.conf:/etc/nginx/nginx.conf:ro -P -d usiswikiimage`
 4. sonraki calistirma ve kapatma islemleri su sekulde yapilir.
+
 ```bash
 docker start usiswikicontainer
 docker stop usiswikicontainer

@@ -3,9 +3,9 @@ layout: article
 permalink:
 name:
 file_type:
-title: Duckdns ile Dinamik IP adresinize Alan adi tanimlayin.
+title: How to define domain name for your dynamic IP
 description: >-
-  Duckdns ile Dinamik IP adresinize Alan adi tanimlayin.
+  How to define domain name for your dynamic IP
 tags:  
 category:  
 sort_order: 140
@@ -22,7 +22,8 @@ redirect_url:
 ---
 
 
-# Duckdns ile Dinamik IP adresinize Alan adi tanimlayin.
+
+# How to define domain name for your dynamic IP
 osx
 if you are not familiar with using the terminal on OSX consider using the JAR file (from the windows-gui) from http://www.etx.ca/
 
@@ -42,7 +43,7 @@ you can pass a comma separated (no spaces) list of domains
 you can if you need to hard code an IP (best not to - leave it blank and we detect your remote ip)
 hit ESC then use use arrow keys to move the cursor x deletes, i puts you back into insert mode
 ```bash
-echo url="https://www.duckdns.org/update?domains=atilla&token=e61a956c-0fe5-498a-945f-7483addfe736&ip=" | curl -k -o /Users/administrator/duckdns/duck.log -K -
+echo url="https://www.duckdns.org/update?domains=atilla&token=123123123123123&ip=" | curl -k -o /Users/administrator/duckdns/duck.log -K -
 ```
 now save the file (in vi hit ESC then :wq! then ENTER)
 this script will make a https request and log the output in the file duck.log
