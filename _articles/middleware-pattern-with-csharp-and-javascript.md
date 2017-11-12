@@ -8,7 +8,7 @@ description: >-
   Enterprise Integration with Middleware Pattern,
 tags:  
 category:  
-sort_order: 100
+sort_order: 24
 rating: 100
 changefreq: monthly
 priority: 0.5
@@ -368,7 +368,7 @@ In Javascript, the middleware pattern is extensively used by the "Express", "Con
 - Call the next middleware function in the stack.
 
 
-```javascript 
+```javascript
 
 var Middleware = function() {};
 
