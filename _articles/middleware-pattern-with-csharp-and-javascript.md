@@ -366,9 +366,9 @@ In Javascript, the middleware pattern is extensively used by the "Express", "Con
 - Parsing the body of requests
 - End a request – response lifecycle
 - Call the next middleware function in the stack.
-```javascript
 
-'use strict';
+
+```javascript 
 
 var Middleware = function() {};
 
@@ -396,7 +396,7 @@ var middleware = new Middleware();
 middleware.use(function(next) {
   var self = this;
   setTimeout(function() {
-    self.hook1 = true;
+    self.result1 = true;
     next();
   }, 10);
 });
@@ -404,16 +404,17 @@ middleware.use(function(next) {
 middleware.use(function(next) {
   var self = this;
   setTimeout(function() {
-    self.hook2 = true;
+    self.result2 = true;
     next();
   }, 10);
 });
 
 var start = new Date();
+
 middleware.go(function() {
-  console.log(this.hook1); // true
-  console.log(this.hook2); // true
-  console.log(new Date() - start); // around 20
+  console.log(this.result1); // true
+  console.log(this.result2); // true
+  console.log(new Date() - start);
 });
 
 
