@@ -22,7 +22,7 @@ redirect_url:
 ---
 # Object oriented javascript and Inheritance
 
-## How can we define Class in javascript
+## How we can define Class in javascript
 
 ```javascript
 // Object Oriented JavaScript
