@@ -1,25 +1,25 @@
 ---
 layout: article
-permalink:
-name:
-file_type:
-title: Object oriented javascript, Inheritance
-description: >-
-  Object oriented javascript, Inheritance
+permalink: null
+name: null
+file_type: null
+title: 'Object oriented javascript, Inheritance'
+description: 'Object oriented javascript, Inheritance'
 tags: javascript
-category:  
+category: null
 sort_order: 30
 rating: 100
 changefreq: monthly
 priority: 0.5
 published: true
-create_date: 2017-11-13
-modified_date: 2017-11-13
+create_date: 2017-11-13T00:00:00.000Z
+modified_date: 2017-11-13T00:00:00.000Z
 created_by: atilla
 modified_by: atilla
 comments: true
-redirect_url:
+redirect_url: null
 ---
+
 # Object oriented javascript and Inheritance
 
 ## How we can define Class in javascript
@@ -127,8 +127,42 @@ function MyClass(param1, param2) {
 
 
 }
-
 ```
+
+## Getters and setters in JavaScript
+
+
+```javascript
+
+var Person = {
+  city: "val1",
+  street: "val2",
+  myFunc1: function() {
+    //...
+  },
+  myFunc2: function() {
+    //...
+  },
+  SubClass: {
+    subProp1: "sp1Val",
+    subProp2: "sp2Val"
+  },
+  //getter : it is not property or function like above
+  get Address(){
+    return this.city + " " + this.street;
+  },
+  //setter it is not property or function like above
+  set Address(value){
+    this.city=value.split(', ')[0];
+    this.street=value.split(', ')[1];
+  }
+};
+
+// we don't use () like functions
+Person.Address = "mycity, mystreet";
+alert(Person.Address);
+
+````
 
 ## Inheritance 1
 
@@ -164,8 +198,8 @@ function ExtendedClass() {
 var obj = new ExtendedClass();
 obj.ShowVal1();
 obj.ShowVal2();
-
 ```
+
 Result:
 
 ```bash
@@ -174,7 +208,6 @@ ExtendedClass: prop2
 ```
 
 ## Inheritance 2
-
 
 ```javascript
 "use strict";
@@ -214,7 +247,6 @@ var obj = new ExtendedClass();
 obj.ShowVal1();
 obj.ShowVal2();
 obj.ShowVal3();
-
 ```
 
 Result:
@@ -273,7 +305,6 @@ ExtendedClass: prop1
 ExtendedClass: prop2
 ```
 
-
 ## Inheritance 4
 
 ```javascript
@@ -309,8 +340,8 @@ ExtendedClass.prototype.ShowVal = function() {
 //Run
 var obj = new ExtendedClass();
 obj.ShowVal();
-
 ```
+
 Result:
 
 ```bash
@@ -318,7 +349,7 @@ ExtendedClass: extended prop2
 BaseClass: base prop1
 ```
 
-Inheritance 5
+## Inheritance 5
 
 ```javascript
 "use strict";
@@ -352,7 +383,6 @@ ExtendedClass.prototype = new BaseClass();
 
 var obj = new ExtendedClass();
 obj.ShowVal();
-
 ```
 
 Result:
@@ -360,4 +390,64 @@ Result:
 ```bash
 ExtendedClass: extended prop2
 BaseClass: base prop1
+```
+
+## Inheritance 6 (with EC6)
+
+
+```javascript
+
+class Animal {
+
+  constructor(name){
+    this.name=name;
+  }
+
+  toString(){
+    return "Animal is name " + this.name;
+  }
+
+  static getAnimals(){
+    return new Animal("No Name")
+  }
+}
+
+
+class Dog extends Animal{
+
+  constructor(name, owner){
+    super(name);
+    this.owner=owner;
+  }
+
+  toString(){
+    return super.toString() + "<br/>Dog is named " + this.name;
+  }
+}
+
+var rover = new Dog("Rover", "Paul");
+
+document.write(rover.name + " is owned by " + rover.owner + "<br/>");
+document.write(rover.toString() + "<br/>");
+
+var bowser=Animal.getAnimals();
+document.write("Bowser info : " + bowser.toString());
+
+document.write("<hr/>");
+
+
+
+```
+
+## Add additional function into build-in JavaScript objects
+
+```javascript
+Array.prototype.inArray = function inArray(value){
+  for(i=0; i < this.Length ; i++){
+    if(this[i]==value){
+      return true;
+    }
+  }
+  false;
+}
 ```
