@@ -30,7 +30,7 @@ redirect_url:
 
 // 1- We define Class
 
-//Example-1
+//Example-1 (Object Literal)
 var MyClass = {};
 //or
 var MyClass = {
@@ -49,7 +49,7 @@ var MyClass = {
 };
 
 
-//Example-2
+//Example-2 (FunctionConstructor)
 function MyClass() { /*....*/ };
 
 //or
@@ -63,7 +63,70 @@ function MyClass(param1, param2) {
 
 // 2- Create Instance
 var object = new MyClass();
+console.log(typeof obj);//result: object
 
+// Base javascript Object functions
+Object.hasOwnProperty();
+Object.isPrototypeOf();
+Object.propertyIsEnumerable();
+Object.toLocaleString();
+Object.toString();
+Object.valueOf();
+Object.constructor();//FunctionConstructor
+
+
+
+// 3-  Public and Private properties
+function MyClass(param1, param2) {
+
+  this.publicProp1 = "publicProp1";
+
+  var privateProp1 = "privateProp1";
+
+  this.publicFunc1 = function() {
+    /*....*/
+  }
+
+  var privateFunc1 = function() {
+    /*....*/
+  }
+}
+
+// 3- Add Constructor 1
+
+function MyClass(param1, param2) {
+
+  this.propName1 = "val1";
+
+  this.propName2 = "val2";
+
+  // Constructor
+  this.MyClass = function(p1, p2) {
+     this.propName1=p1;
+     this.propName2=p2;
+  }
+
+  //....
+
+  // Call Constructor
+  this.myClass(arg1, arg2);
+}
+
+// 3- Add Constructor 2
+
+function MyClass(param1, param2) {
+
+  // Constructor Begin
+  this.propName1=p1;
+  this.propName2=p2;
+  // Constructor End
+
+  this.propName1 = "val1";
+
+  this.propName2 = "val2";
+
+
+}
 
 ```
 
