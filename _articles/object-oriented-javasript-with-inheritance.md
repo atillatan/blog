@@ -3,11 +3,11 @@ layout: article
 permalink: null
 name: null
 file_type: null
-title: 'Object oriented javascript, Inheritance'
-description: 'Object oriented javascript, Inheritance'
+title: 'Object oriented javascript and Inheritance'
+description: 'Object oriented javascript and Inheritance'
 tags: javascript
 category: null
-sort_order: 30
+sort_order: 71
 rating: 100
 changefreq: monthly
 priority: 0.5
@@ -22,7 +22,10 @@ redirect_url: null
 
 # Object oriented javascript and Inheritance
 
+
+
 ## How we can define Class in javascript
+
 
 ```javascript
 // Object Oriented JavaScript
@@ -392,59 +395,7 @@ ExtendedClass: extended prop2
 BaseClass: base prop1
 ```
 
-## Inheritance 6 (with EC6)
 
-
-```javascript
-
-class Animal {
-
-  constructor(name){
-    this.name=name;
-  }
-
-  toString(){
-    return "Animal is name " + this.name;
-  }
-
-  static getAnimals(){
-    return new Animal("No Name")
-  }
-}
-
-
-class Dog extends Animal{
-
-  constructor(name, owner){
-    super(name);
-    this.owner=owner;
-  }
-
-  toString(){
-    return super.toString() + "<br/>Dog is named " + this.name;
-  }
-}
-
-var rover = new Dog("Rover", "Paul");
-
-document.write(rover.name + " is owned by " + rover.owner + "<br/>");
-document.write(rover.toString() + "<br/>");
-
-var bowser=Animal.getAnimals();
-document.write("Bowser info : " + bowser.toString());
-
-document.write("<hr/>");
-
-
-
-```
-Result:
-```bash
-Rover is owned by Paul
-Animal is name Rover
-Dog is named Rover
-Bowser info : Animal is name No Name
-```
 
 ## Add additional function into build-in JavaScript objects
 
