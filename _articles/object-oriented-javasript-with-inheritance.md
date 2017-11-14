@@ -438,6 +438,13 @@ document.write("<hr/>");
 
 
 ```
+Result:
+```bash
+Rover is owned by Paul
+Animal is name Rover
+Dog is named Rover
+Bowser info : Animal is name No Name
+```
 
 ## Add additional function into build-in JavaScript objects
 
