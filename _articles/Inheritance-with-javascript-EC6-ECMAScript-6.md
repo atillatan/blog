@@ -25,9 +25,9 @@ redirect_url: null
 
 ## Inheritance with JavaScript, EC6 (ECMAScript 6, ECMAScript 2015)
 
+- With EC6 the basic class syntax looks like this:
 
 ```javascript
-//The basic class syntax looks like this:
 class MyClass {
   constructor(...) {
     // ...
