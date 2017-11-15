@@ -27,6 +27,25 @@ redirect_url: null
 
 
 ```javascript
+//The basic class syntax looks like this:
+class MyClass {
+  constructor(...) {
+    // ...
+  }
+  method1(...) {}
+  method2(...) {}
+  get something(...) {}
+  set something(...) {}
+  static staticMethod(..) {}
+  // ...
+}
+```
+The value of MyClass is a function provided as constructor. If there’s no constructor, then an empty function.
+
+In any case, methods listed in the class declaration become members of its prototype, with the exception of static methods that are written into the function itself and callable as MyClass.staticMethod(). Static methods are used when we need a function bound to a class, but not to any object of that class.
+
+## Inheritance Example
+```javascript
 
 class Animal {
 
