@@ -24,7 +24,7 @@ redirect_url:
 # AOP Framework without proxy pattern
 
 AOP addresses the problem of cross-cutting concerns, which would be any kind of code that is repeated in different methods.
-separating of concerns prevents code repeatings.
+separating of concerns prevents code repetitions.
 
 People generally use proxy pattern (Dynamic Proxy generators) for Applying AOP in C#,
 This example don't use dynamic proxy generators, it is simple because it uses only function definition.
