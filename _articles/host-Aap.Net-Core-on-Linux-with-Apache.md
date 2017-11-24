@@ -3,9 +3,9 @@ layout: article
 permalink:
 name:
 file_type:
-title: ASP.NET Core on Linux with Apache
+title: Host Aap.Net Core on Linux with Apache
 description: >-
-  ASP.NET Core on Linux with Apache
+  Host Aap.Net Core on Linux with Apache
 tags:  
 category:  
 sort_order: 100
@@ -23,7 +23,7 @@ redirect_url:
 
 
 
-# ASP.NET Core on Linux with Apache
+# Host ASP.NET Core on Linux with Apache
 
 Apache is a very popular HTTP server and can be configured as a proxy to redirect HTTP traffic to kestrel.
 We will learn how to set up Apache on CentOS 7 and use it as a reverse proxy to welcome incoming connections and redirect them to the ASP.NET Core application running on Kestrel.
