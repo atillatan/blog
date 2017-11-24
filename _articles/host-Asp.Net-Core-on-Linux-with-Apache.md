@@ -3,9 +3,9 @@ layout: article
 permalink:
 name:
 file_type:
-title: Host Aap.Net Core on Linux with Apache
+title: Host Asp.Net Core on Linux with Apache
 description: >-
-  Host Aap.Net Core on Linux with Apache
+  Host Asp.Net Core on Linux with Apache
 tags:  
 category:  
 sort_order: 100
