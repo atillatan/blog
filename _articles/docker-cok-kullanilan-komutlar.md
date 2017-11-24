@@ -3,9 +3,9 @@ layout: article
 permalink:
 name:
 file_type:
-title: Docker Cok kullanilan komutlar
+title: Docker cok kullanilan komutlar
 description: >-
-  Docker Cok kullanilan komutlar
+  Docker cok kullanilan komutlar
 tags:  
 category:  
 sort_order: 30
