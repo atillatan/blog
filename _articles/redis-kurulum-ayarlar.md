@@ -3,9 +3,9 @@ layout: article
 permalink:
 name:
 file_type:
-title: Redis Kurulumu ve ayarlari
+title: Redis kurulumu ve ayarlari
 description: >-
-  Redis Kurulumu ve ayarlari
+  Redis kurulumu ve ayarlari
 tags:  
 category:  
 sort_order: 100
@@ -20,7 +20,7 @@ modified_by: atilla
 comments: true
 redirect_url:
 ---
-# Redis Kurulumu ve ayarları
+# Redis kurulumu ve ayarları
 
 - Öncelikle Redis bilgisayara kurulur
 
