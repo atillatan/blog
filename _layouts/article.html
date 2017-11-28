@@ -16,7 +16,12 @@
                 </div>
                 <div class="col-md-9 content">
                    <article>
-
+                    {% if page.toc %}
+                    <div class="col-xl-2 bd-toc">
+                      {{ content | toc_only }}
+                    </div>
+                    <!-- Panel -->
+                    {% endif %}
                     {{content}}
                   </article>
                   {% if site.disqus.shortname %}

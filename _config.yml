@@ -1,6 +1,6 @@
 title: Atilla Tanrikulu
 baseurl: # the subpath of your site, e.g. /blog
-domain-name: atilla.tanrikulu.biz
+domain_name: atilla.tanrikulu.biz
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: atillatanrikulu
 github_username:  atillatan
@@ -21,6 +21,7 @@ disqus:
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
+  - jekyll-toc
 
 
 exclude:

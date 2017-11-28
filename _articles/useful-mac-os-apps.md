@@ -19,6 +19,7 @@ created_by: atilla
 modified_by: atilla
 comments: true
 redirect_url:
+toc: false
 ---
 
 # Useful Mac OS Apps

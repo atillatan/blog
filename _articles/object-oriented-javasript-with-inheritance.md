@@ -18,6 +18,7 @@ created_by: atilla
 modified_by: atilla
 comments: true
 redirect_url: null
+toc: false
 ---
 
 # Object oriented javascript and Inheritance

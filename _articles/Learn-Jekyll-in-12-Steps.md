@@ -19,6 +19,7 @@ created_by: atilla
 modified_by: atilla
 comments: true
 redirect_url:
+toc: true
 ---
 {% raw %}
 # Learn Jekyll in 12 Steps
