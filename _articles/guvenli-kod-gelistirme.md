@@ -19,7 +19,7 @@ created_by: atilla
 modified_by: atilla
 comments: true
 redirect_url:
-toc: true
+toc: false
 ---
 
 # Guvenli Kod Gelistirme
