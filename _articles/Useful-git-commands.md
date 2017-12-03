@@ -3,9 +3,9 @@ layout: article
 permalink: 
 name: 
 file_type: 
-title: reqired
+title: Useful Git Commands
 description: >-
-  reqired
+  Useful Git Commands
 tags:  
 category:  
 sort_order: 170
