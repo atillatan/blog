@@ -22,11 +22,6 @@ redirect_url: null
 
 
 
-
-
-_Not: Bu yazim 2007 yilinda PC-LIFE dergisinde yayinlamistir. Tabiki o gunden bu gune teknoloji de cok buyuk degisiklikler oldu, ozellikle SEO konusunda binlerce yazi yazildi, fakat yinede SEO ile ilgilenenlerin  okumasinda fayda var diye dusunuyorum._
-
-
 # Arama Motoru Optimizasyonu (SEO)
 Atilla Tanrıkulu
 
