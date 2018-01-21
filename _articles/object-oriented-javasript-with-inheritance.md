@@ -25,7 +25,7 @@ toc: false
 
 
 
-## How we can define Class in javascript
+## How can we define Class in javascript
 
 
 ```javascript
