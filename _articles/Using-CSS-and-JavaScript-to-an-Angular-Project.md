@@ -183,7 +183,7 @@ Then add your utility to your typescript component
 ```js
 // app-component.ts
 import { Component, OnInit } from '@angular/core';
-import * as util from '../../assets/core-utility.js'; // <= inserted line 1.
+import * as util from '../../assets/custom-utility.js'; // <= inserted line 1.
 
 @Component({
   selector: 'app-root',
