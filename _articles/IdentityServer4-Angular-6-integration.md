@@ -231,7 +231,12 @@ ng generate component `unauthorized`
 Then pase below code to  `unauthorized.component.html`
 
 ```html
-<div>{{message}}</div>
+<br>
+
+<div class="alert alert-danger">
+  <strong>{{message}}</strong>
+</div>
+
 ```
 
 Then pase below code to  `unauthorized.component.ts`
@@ -349,6 +354,114 @@ export class NavmenuComponent implements OnInit, OnDestroy {
   }
 
 }
+
+```
+
+Adding `AuthorizationGuard`
+create `authorization.guard.ts` file
+ad paste below code
+
+```js
+import { Injectable } from '@angular/core';
+import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
+import { OidcSecurityService } from 'angular-auth-oidc-client';
+
+@Injectable()
+export class AuthorizationGuard implements CanActivate {
+
+  constructor(
+    private router: Router,
+    private oidcSecurityService: OidcSecurityService
+  ) { }
+
+  public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean {
+    console.log(route + '' + state);
+    console.log('AuthorizationGuard, canActivate');
+
+    return this.oidcSecurityService.getIsAuthorized().pipe(
+      map((isAuthorized: boolean) => {
+        console.log('AuthorizationGuard, canActivate isAuthorized: ' + isAuthorized);
+
+        if (isAuthorized) {
+          return true;
+        }
+
+        this.router.navigate(['/unauthorized']);
+        return false;
+      })
+    );
+  }
+}
+
+```
+Add `AuthorizationGuard` to providers in `app.module.js`
+
+```js
+....
+import { AuthorizationGuard } from './services/authorization.guard';
+...
+
+providers: [
+    OidcSecurityService,
+    AuthorizationGuard,
+    ...
+  ],
+```
+
+### Http Intercepter
+
+The HttpClient allows you to write interceptors. We would be to intercept any outgoing HTTP request and add an authorization header. Keep in mind that injecting OidcSecurityService into the interceptor via the constructor results in a cyclic dependency. To avoid this use the injector instead.
+
+```js
+/// auth.Interceptor.ts
+@Injectable()
+export class AuthInterceptor implements HttpInterceptor {
+    private oidcSecurityService: OidcSecurityService;
+ 
+    constructor(private injector: Injector) {
+    }
+ 
+    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+        let requestToForward = req;
+ 
+        if (this.oidcSecurityService === undefined) {
+            this.oidcSecurityService = this.injector.get(OidcSecurityService);
+        }
+        if (this.oidcSecurityService !== undefined) {
+            let token = this.oidcSecurityService.getToken();
+            if (token !== "") {
+                let tokenValue = "Bearer " + token;
+                requestToForward = req.clone({ setHeaders: { "Authorization": tokenValue } });
+            }
+        } else {
+            console.debug("OidcSecurityService undefined: NO auth header!");
+        }
+ 
+        return next.handle(requestToForward);
+    }
+}
+```
+Then add to `app.module.ts` following code
+
+```js
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+...
+import { AuthInterceptor } from './services/auth.Interceptor';
+...
+providers: [
+
+    .....
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    },
+    ....
+   
+  ],
 
 ```
 
