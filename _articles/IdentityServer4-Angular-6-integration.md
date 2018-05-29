@@ -494,6 +494,7 @@ public void ConfigureServices(IServiceCollection services){
         options.Authority = "http://localhost:5000";
         options.RequireHttpsMetadata = false;
         options.ApiName = "core.service.api";
+        options.ApiSecret = "******";
     });
     // ...
 }
