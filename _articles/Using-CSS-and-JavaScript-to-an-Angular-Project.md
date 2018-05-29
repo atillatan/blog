@@ -33,6 +33,20 @@ add following line
 // styles.css
 
 @import '~src/assets/custom-styles.css';
+
+```
+
+or you can add angular.json 
+
+```js
+"architect": {
+    "build": {
+      "styles": [
+          "src/assets/custom-styles.css",
+          "src/styles.css"
+        ],
+    }
+}
 ```
 
 Then add some style to custom-styles.css
