@@ -92,8 +92,7 @@ public static IEnumerable<IdentityResource> GetIdentityResources(){
       new IdentityResource {
           Name = "role",
           DisplayName="Your role names",
-          Description="Your role names and role codes",
-          UserClaims = { "role", "admin", "user"},
+          Description="Your role names and role codes", 
           ShowInDiscoveryDocument=true
       }
   };
@@ -102,14 +101,10 @@ public static IEnumerable<IdentityResource> GetIdentityResources(){
 // authorized applications, protedted resources
 public static IEnumerable<ApiResource> GetApiResources()
 {
-    return new List<ApiResource> {
-        new ApiResource(){
-            Name = "core.api",
-            DisplayName ="Core.API",
-            UserClaims = {"name", "role", "email"}
-        },
-        new ApiResource("alarm.api", "Alarm.API")
-    };
+  return new List<ApiResource> { 
+      new ApiResource("core.api", "Core.API", new List<string> { "name", "role", "email" }), 
+      new ApiResource("alarm.api", "Alarm.API") 
+  };
 }
 
 
