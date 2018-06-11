@@ -24,131 +24,187 @@ toc: false
 
 # IdentityServer4-Angular-6-integration
 
-### 1. Add Client configuration to IdentityServer4
+### 1. Configure IdentityServer4
 
- 
+In this example we are using RESTFull API, it's name is `core.api`
 
 ```csharp
+// File name = Startup.cs
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddCors();
+    // configure identity server with in-memory stores, keys, clients and resources
+    services.AddIdentityServer(options =>
+        {
+            options.Events.RaiseErrorEvents = true;
+            options.Events.RaiseInformationEvents = true;
+            options.Events.RaiseFailureEvents = true;
+            options.Events.RaiseSuccessEvents = true;
+        })
+        .AddDeveloperSigningCredential()
+        .AddInMemoryIdentityResources(Config.GetIdentityResources())
+        .AddInMemoryApiResources(Config.GetApiResources())
+        .AddInMemoryClients(Config.GetClients())
+        .AddTestUsers(Config.GetUsers());
 
-// Angular client config
+    services.AddMvc();
+}
+
+public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+{
+    if (env.IsDevelopment())
+    {
+        app.UseDeveloperExceptionPage();
+    }
+    else
+    {
+        app.UseExceptionHandler("/Home/Error");
+    }
+    app.UseCors(policy => policy.AllowAnyOrigin()
+                                .AllowAnyHeader()
+                                .AllowAnyMethod());
+
+    
+    app.UseStaticFiles();
+
+    app.UseIdentityServer();
+
+    app.UseMvc(routes =>
+    {
+        routes.MapRoute(
+            name: "default",
+            template: "{controller=Home}/{action=Index}/{id?}");
+    });
+}
+```
+
+
+```csharp
+//File name = Config.cs
+
+// Identity Resources
+public static IEnumerable<IdentityResource> GetIdentityResources(){
+  return new List<IdentityResource>
+  {
+      new IdentityResources.OpenId(),
+      new IdentityResources.Profile(),
+      new IdentityResources.Email(),
+      new IdentityResource {
+          Name = "role",
+          DisplayName="Your role names",
+          Description="Your role names and role codes",
+          UserClaims = { "role", "admin", "user"},
+          ShowInDiscoveryDocument=true
+      }
+  };
+}
+
+// authorized applications, protedted resources
+public static IEnumerable<ApiResource> GetApiResources()
+{
+    return new List<ApiResource> {
+        new ApiResource(){
+            Name = "core.api",
+            DisplayName ="Core.API",
+            UserClaims = {"name", "role", "email"}
+        },
+        new ApiResource("alarm.api", "Alarm.API")
+    };
+}
+
+
+// Angular client 
+public static IEnumerable<Client> GetClients() =>
 new Client
 {
-    ClientId = "angular-client",
-    ClientName = "AngularClient",
+    ClientId = "cweb",
+    ClientName = "cweb",
     AccessTokenLifetime = 60*60,// 60 minutes
     AllowedGrantTypes =  GrantTypes.Implicit,
+    AlwaysSendClientClaims=true,
+    AlwaysIncludeUserClaimsInIdToken = true,
     ClientSecrets ={new Secret("*****".Sha256())},
     RequireConsent = false,
     AllowAccessTokensViaBrowser = true,
-    RedirectUris = {
-        "http://localhost:4200" // Your Angular client url
-    },
-    PostLogoutRedirectUris = {
-        "http://localhost:4200" // Your Angular client url
-    },
-    AllowedScopes = {
-        IdentityServerConstants.StandardScopes.OpenId,
-        IdentityServerConstants.StandardScopes.Profile,
-        IdentityServerConstants.StandardScopes.Email,
-        "role",
-        "core.service.api"
-    },
+    AllowOfflineAccess = true,
+    AccessTokenType = AccessTokenType.Jwt,
+    AllowedScopes = { "openid", "profile", "email", "role", "core.api" },
+    RedirectUris = { "http://localhost:4200" },
+    PostLogoutRedirectUris = { "http://localhost:4200" },
     AllowedCorsOrigins = new List<string>{
-        "http://127.0.0.1:4200",
-        "http://127.0.0.1:5001"
+        "http://127.0.0.1:4200", // web
+        "http://127.0.0.1:5001", // api
+        "http://localhost:4200",
+        "http://localhost:5001",
     }
+}
 
+// Users
+public static List<TestUser> GetUsers()
+{
+    return new List<TestUser>
+    {
+        new TestUser
+        {
+            SubjectId = "1",
+            Username = "systemuser",
+            Password = "123",
+            Claims = {
+                new Claim(JwtClaimTypes.Name,"Systemuser"),
+                new Claim(JwtClaimTypes.Role,"system"),
+                new Claim(JwtClaimTypes.Email, "systemuser@mycompany.com")
+            }
+        },
+        new TestUser
+        {
+            SubjectId = "2",
+            Username = "adminuser",
+            Password = "123",
+            Claims = {
+                new Claim(JwtClaimTypes.Name,"Adminuser"),
+                new Claim(JwtClaimTypes.Role,"admin"),
+                new Claim(JwtClaimTypes.Email, "adminuser@mycompany.com")                    }
+        },
+        new TestUser
+        {
+            SubjectId = "3",
+            Username = "testuser",
+            Password = "123",
+            Claims = {
+                new Claim(JwtClaimTypes.Name,"Testuser"),
+                new Claim(JwtClaimTypes.Role,"test"),
+                new Claim(JwtClaimTypes.Email, "testuser@mycompany.com")
+            }
+        }
+
+    };
 }
 
 ```
 
-### 2. Add Module to Angular Project
+you can download full source code from : [https://github.com/atillatan/sso-with-identityserver4](https://github.com/atillatan/sso-with-identityserver4)
+
+### 2. Configuration Angular Project
 
 
 ```shell
 npm install angular-auth-oidc-client --save
+
 ```
-
-Then configure your `app.module.ts`
-
-```js
-// app.module.ts
-import { NgModule, APP_INITIALIZER } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
- 
-import {
-    AuthModule,
-    OidcSecurityService,
-    OpenIDImplicitFlowConfiguration,
-    OidcConfigService,
-    AuthWellKnownEndpoints
-} from 'angular-auth-oidc-client';
- 
-export function loadConfig(oidcConfigService: OidcConfigService) {
-    console.log('APP_INITIALIZER STARTING');
-    return () => oidcConfigService.load_using_stsServer('https://localhost:44318');
-}
- 
-@NgModule({
-    imports: [
-        ...
-        HttpClientModule,
-        AuthModule.forRoot()
-    ],
-    declarations: [
-        ...
-    ],
-    providers: [
-        OidcConfigService,
-        {
-            provide: APP_INITIALIZER,
-            useFactory: loadConfig,
-            deps: [OidcConfigService],
-            multi: true
-        },
-        ...
-    ],
-    bootstrap:    [AppComponent],
-})
-
-export class AppModule {
-
-  constructor(
-    private oidcSecurityService: OidcSecurityService,
-    private configService: ConfigService,
-  ) {
-    this.configService.onConfigurationLoaded.subscribe(() => this.configService.setupSSO(this.oidcSecurityService));
-    console.log('APP STARTING');
-  }
-}
-```
-
-Then provide API method on your RESTFull  service, it must return like below
-
-```json
-//  http://localhost:5001/api/js/json/config.js
-{
-  Name: "core", 
-  DefaultLanguage: "tr-TR",
-  DefaultPagingSize: "15",  
-  DefaultAPIAddress: "http://localhost:5001",
-  SSOAddress: "http://localhost:5000",
-  SSOClientId: "angular-client",
-  AllowedMaxExportSize: "2000",
-  FileUploadPath: "wwwroot/files",
-}
-```
-
 
 Then add `ConfigService` to Angular project
+
 ```shell
 ng generate service config
 ```
+
 then paste below code
 
 ```js
-import { Injectable, EventEmitter, Output } from '@angular/core';
+// File Name = config.service.ts
+import { Injectable, EventEmitter, Output, Injector } from '@angular/core';
 import { AuthModule, OidcSecurityService, OpenIDImplicitFlowConfiguration, AuthWellKnownEndpoints } from 'angular-auth-oidc-client';
+import { MessageService } from './message.service';
 
 @Injectable({
   providedIn: 'root'
@@ -161,9 +217,7 @@ export class ConfigService {
   config: any;
   wellKnownEndpoints: any;
 
-  constructor(
-
-  ) { }
+  constructor() { }
 
   async loadConfig(configUrl: string) {
     try {
@@ -203,8 +257,8 @@ export class ConfigService {
     c.redirect_url = window.location.origin;
     c.client_id = this.config.SSOClientId;
     c.response_type = 'id_token token';
-    c.scope = 'openid profile email role core.service.api';
-    c.post_logout_redirect_uri = this.config.SSOAddress + '/Account/logout';
+    c.scope = 'openid profile email role core.api';
+    c.post_logout_redirect_uri = window.location.origin + '/unauthorized';
     c.forbidden_route = '/forbidden';
     c.unauthorized_route = '/unauthorized';
     c.auto_userinfo = true;
@@ -213,12 +267,80 @@ export class ConfigService {
     c.max_id_token_iat_offset_allowed_in_seconds = 10;
     c.start_checksession = false;
     c.silent_renew = false;
-    // c.post_login_route = this.configService.clientConfiguration.startup_route;
     const wn = new AuthWellKnownEndpoints();
     wn.setWellKnownEndpoints(this.wellKnownEndpoints);
     oidcSecurityService.setupModule(c, wn);
   }
 
+}
+
+```
+
+
+Then configure your `app.module.ts`
+
+```js
+// app.module.ts
+import { NgModule, APP_INITIALIZER } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http'; 
+import { AuthModule, OidcSecurityService, OpenIDImplicitFlowConfiguration, AuthWellKnownEndpoints } from 'angular-auth-oidc-client';
+import { ConfigService } from './services/config.service';
+ 
+export function loadConfig(configService: ConfigService) {
+  console.log('APP_INITIALIZER STARTING');
+  return () => configService.loadConfig(`http://localhost:5001/api/js/json/config.js`);
+}
+ 
+@NgModule({
+    imports: [
+        ...
+        HttpClientModule,
+        AuthModule.forRoot()
+    ],
+    declarations: [
+        ...
+    ],
+    providers: [
+        OidcConfigService,
+        {
+          provide: APP_INITIALIZER,
+          useFactory: loadConfig,
+          multi: true,
+          deps: [ConfigService]
+        },
+        ConfigService,
+        ...
+    ],
+    bootstrap:    [AppComponent],
+})
+
+export class AppModule {
+
+  constructor(
+    private oidcSecurityService: OidcSecurityService,
+    private configService: ConfigService,
+  ) {
+    registerLocaleData(localeTr, 'tr');
+
+    this.configService.onConfigurationLoaded.subscribe(() => this.configService.setupSSO(this.oidcSecurityService));
+    console.log('APP STARTING');
+  }
+}
+```
+
+Then provide API method on your RESTFull  service, it must return like below
+
+```json
+//  http://localhost:5001/api/js/json/config.js
+{
+  Name: "core", 
+  DefaultLanguage: "tr-TR",
+  DefaultPagingSize: "15",  
+  DefaultAPIAddress: "http://localhost:5001",
+  SSOAddress: "http://localhost:5000",
+  SSOClientId: "cweb",
+  AllowedMaxExportSize: "2000",
+  FileUploadPath: "wwwroot/files",
 }
 ```
 
@@ -411,6 +533,19 @@ providers: [
   ],
 ```
 
+Then add your routin config
+
+```js
+const routes: Routes = [
+   ...
+  { path: 'home', component: HomeComponent, canActivate: [AuthorizationGuard]  },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthorizationGuard] },
+  { path: 'detail/:id', component: UserDetailComponent, canActivate: [AuthorizationGuard] },
+  { path: 'users', component: UsersComponent, canActivate: [AuthorizationGuard] },
+  { path: 'unauthorized', component: UnauthorizedComponent}
+];
+```
+
 ### Http Intercepter
 
 The HttpClient allows you to write interceptors. We would be to intercept any outgoing HTTP request and add an authorization header. Keep in mind that injecting OidcSecurityService into the interceptor via the constructor results in a cyclic dependency. To avoid this use the injector instead.
@@ -494,7 +629,7 @@ public void ConfigureServices(IServiceCollection services){
         options.Authority = "http://localhost:5000";
         options.RequireHttpsMetadata = false;
         options.ApiName = "core.service.api";
-        options.ApiSecret = "******";
+        options.ApiSecret = "*****";
     });
     // ...
 }
