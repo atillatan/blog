@@ -41,10 +41,14 @@ or you can add angular.json
 ```js
 "architect": {
     "build": {
+      "options": {
+      ...
       "styles": [
           "src/assets/custom-styles.css",
           "src/styles.css"
         ],
+      ...
+      }
     }
 }
 ```
@@ -76,10 +80,20 @@ You can add the javascript file to "angular-cli.json" (Angular 6 and above add t
 
 ```json
 // angular.json / angular-cli.json
-
-"scripts": [  
-  "src/assets/custom-module.js"
-],
+ 
+"architect": {
+  "build": {
+	"options": {
+	    ...
+		"scripts": [
+			...
+      "src/assets/custom-module.js"
+      ],
+		...
+		}
+  }
+}
+ 
 ```
 
 Then add  some function to your `custom-module.js` file
@@ -103,7 +117,7 @@ Then add your module to your typescript component
 ```js
 // app-component.ts
 import { Component, OnInit } from '@angular/core';
-import { CustomModule } from '../../assets/custom-module.js'; // <= inserted line 1.
+import { CustomModule } from '../assets/custom-module.js'; // <= inserted line 1.
 
 @Component({
   selector: 'app-root',
@@ -150,7 +164,7 @@ Then add your utility to your typescript component
 ```js
 // app-component.ts
 import { Component, OnInit } from '@angular/core';
-import { testMethod1, testMethod2 } from '../../assets/custom-utility.js'; // <= inserted line 1.
+import { testMethod1, testMethod2 } from '../assets/custom-utility.js'; // <= inserted line 1.
 
 @Component({
   selector: 'app-root',
@@ -197,7 +211,7 @@ Then add your utility to your typescript component
 ```js
 // app-component.ts
 import { Component, OnInit } from '@angular/core';
-import * as util from '../../assets/custom-utility.js'; // <= inserted line 1.
+import * as util from '../assets/custom-utility.js'; // <= inserted line 1.
 
 @Component({
   selector: 'app-root',
