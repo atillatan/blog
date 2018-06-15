@@ -22,7 +22,7 @@ redirect_url:
 toc: false
 ---
 
-userinfo sessionStorage a kaydedilecek
+<!-- userinfo sessionStorage a kaydedilecek
 language localStorage a kaydedilecek
 
 identity server blog yazisi okunacak
@@ -46,7 +46,8 @@ Angular language integration
 1. save user language to localStorage
 if localstorage empty use default language
 if user select language save it to local storage
-2. make angular intercepter for get user language from localStorage add header
+2. make angular intercepter for get user language from localStorage add header -->
+
 
 
 
