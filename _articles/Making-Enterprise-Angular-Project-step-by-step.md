@@ -89,7 +89,8 @@ npm install --save @angular/material @angular/cdk
 npm install moment --save
 ```
 
-Import the NgModule for each component you want to use:
+Import required modules, that you want to use
+in this example I want to use Material Modules
 
 Then modify your `app.module.ts` like this
 
