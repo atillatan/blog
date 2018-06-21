@@ -61,16 +61,16 @@ In this example it created initial `package.json` then I modified like this
 
 ```json
 {
-  "name": "cross-platform-desktop-app",
+  "name": "cross-platform-desktop-application-with-netcore2x-and-angular6x",
   "version": "1.0.0",
   "description": "Cross Platform Desktop Application with .Net Core 2 and Angular 6",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
     "package-mac": "electron-packager . --overwrite --asar=true --platform=darwin --arch=x64 --icon=assets/icons/mac/icon.icns --prune=true --out=release-builds",
-    "package-win": "electron-packager . --overwrite --asar=true --platform=win32 --arch=ia32 --icon=assets/icons/windows/icon.ico --prune=true --out=release-builds --version-string.CompanyName='atillatan' --version-string.FileDescription='Cross Platform Desktop App' --version-string.ProductName='Cross Platform Desktop App'",
+    "package-win": "electron-packager . --overwrite --asar=true --platform=win32 --arch=ia32 --icon=assets/icons/windows/icon.ico --prune=true --out=release-builds --version-string.CompanyName='atillatan' --version-string.FileDescription='Cross Platform Desktop Application with .Net Core 2 and Angular 6' --version-string.ProductName='Cross Platform Desktop Application with .Net Core 2 and Angular 6'",
     "package-linux": "electron-packager . --overwrite --asar=true --platform=linux --arch=x64 --icon=assets/icons/png/1024x1024.png --prune=true --out=release-builds"
-},
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/atillatan/cross-platform-desktop-application-with-netcore2x-and-angular6x.git"
@@ -92,13 +92,15 @@ In this example it created initial `package.json` then I modified like this
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
-    "electron": "^2.0.2"
+    "electron": "^2.0.2",
+    "electron-builder": "^20.0.0"
   },
   "bugs": {
     "url": "https://github.com/atillatan/cross-platform-desktop-application-with-netcore2x-and-angular6x/issues"
   },
   "homepage": "https://github.com/atillatan/cross-platform-desktop-application-with-netcore2x-and-angular6x#readme"
 }
+
 ```
 
 ## 3. Install Angular CLI
@@ -131,11 +133,154 @@ code .
 Create `main.js` and paste below code
 
 ```js
+const {
+    app,
+    BrowserWindow,
+    Menu
+} = require('electron');
+
+const path = require('path');
+const url = require('url');
+//process.env.NODE_ENV = 'production';
+
+let mainWindow;
+const os = require('os');
+var apiProcess = null;
+
+// #region Events
+app.on('ready', init);
+
+
+app.on('window-all-closed', function () {
+    if (process.platform !== 'darwin') {
+        app.quit()
+    }
+});
+
+app.on('activate', function () {
+    if (mainWindow === null) {
+        createMainWindow()
+    }
+});
+
+process.on('exit', function () {
+    console.log('exit');
+    apiProcess.kill();
+});
+
+// #endregion
+
+function init() {
+    startCoreApi();
+    createMainWindow();
+}
+
+function createMainWindow() {
+    console.log('start');
+    //create new window
+    mainWindow = new BrowserWindow({
+        width: 800,
+        height: 600,
+        frame: true,
+        resizable: false
+    });
+    // Load html into window
+    mainWindow.loadURL(url.format({
+        pathname: path.join(__dirname, 'src/angularweb/dist/angularweb/index.html'),
+        protocol: 'file:',
+        slashes: true,
+    }));
+
+    // Quit app when closed
+    mainWindow.on('close', function (e) {
+        mainWindow = null;
+    })
+    // Create menu  
+    const mainMenuTemplate = [{
+        label: 'File',
+        submenu: [{
+            label: 'Quit',
+            accelerator: process.platform == 'darwin' ? 'Command+Q' : 'Ctrl+q',
+            click() {
+                app.quit();
+            }
+        }]
+    }];
+
+    // if mac, add empty object to menu
+    if (process.platform == 'darwin') {
+        mainMenuTemplate.unshift({});
+    }
+
+    // Add developer tools item if not in production
+    if (process.env.NODE_ENV !== 'production') {
+        mainMenuTemplate.push({
+            label: 'Developer Tools',
+            submenu: [{
+                    label: 'Toggle Devtools',
+                    accelerator: process.platform == 'darwin' ? 'Command+i' : 'Ctrl+i',
+                    click(item, focusedWindow) {
+                        focusedWindow.toggleDevTools();
+                    }
+                },
+                {
+                    role: 'reload'                                   
+                }
+            ]
+        })
+    }
+
+    // Build menu from temmplate 
+    const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
+    // Insert menu
+    Menu.setApplicationMenu(mainMenu);
+}
+
+
+function startCoreApi() {
+    var proc = require('child_process').spawn;
+
+    var apiPath = path.join(__dirname, 'src\\coreapi\\bin\\dist\\win\\coreapi.exe')
+    if (os.platform() === 'darwin') {
+        apiPath = path.join(__dirname, 'src//coreapi//bin//dist//osx//coreapi')
+    }
+
+    console.log(apiPath);
+
+    apiProcess = proc(apiPath);
+
+    apiProcess.stdout.on('data', (data) => {
+        console.log(`stdout: ${data}`);
+        if (mainWindow == null) {
+            console.log('createMainWindow');
+            createMainWindow();
+        }
+    });
+};
 ```
 
 Create `index.html` and paste below code
 
 ```html
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Angularweb</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+</head>
+
+<body>
+  <app-root>Loading...</app-root>
+</body>
+
+</html>
+
 ```
 
 
@@ -157,107 +302,69 @@ dotnet build
 dotnet run
 ```
 
-Change `coreapi/Controllers/ValuesController.cs` like this
+Add `coreapi/Controllers/HomeController.cs` like this
 
 ```csharp
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace coreapi.Controllers
-{
-    [Route("api/[controller]")]
-    public class ValuesController : Controller
-    {
+public class HomeController : Controller{
+ 
         // GET api/values
         [HttpGet]
-        public IEnumerable<dynamic> Get()
-        {
+        public IEnumerable<dynamic> Users()
+        {   
             return new List<dynamic> {
-                new { Name = "Bob", FamilyName = "Smith", Age = 32, email = "test1@mydomain.com" },
-                new { Name = "Alice", FamilyName = "Smith", Age = 33, email = "test2@mydomain.com" },
-                new { Name = "Amy", FamilyName = "Smith", Age = 32, email = "test3@mydomain.com" },
-                new { Name = "Adam", FamilyName = "Smith", Age = 32, email = "test4@mydomain.com" }
+                new { Name = "Bob", FamilyName = "Smith", Age = 32, email = "test1" },
+                new { Name = "Alice", FamilyName = "Smith", Age = 33, email = "test2" },
+                new { Name = "Amy", FamilyName = "Smith", Age = 32, email = "test3" },
+                new { Name = "Adam", FamilyName = "Smith", Age = 32, email = "test4" }
              };
-        } 
-
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
         }
-
-        // POST api/values
-        [HttpPost]
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
-    }
 }
-
 ```
 
 Change  `startup.cs` like this
 
 ```csharp
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 
 namespace coreapi
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
-
         public IConfiguration Configuration { get; }
+        public Startup(IConfiguration configuration) => Configuration = configuration;
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors();
             services.AddMvc();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
-            app.UseCors(policy => policy.AllowAnyOrigin()
-                                        .AllowAnyHeader()
-                                        .AllowAnyMethod());
-            app.UseMvc();
+
+            app.UseCors(policy => policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+
+            app.UseMvcWithDefaultRoute();
+
+            app.UseStaticFiles();
+
+            app.UseDefaultFiles(new DefaultFilesOptions { DefaultFileNames = new List<string> { "index.html" } });
+
         }
     }
 }
+
 
 ```
 
@@ -350,11 +457,13 @@ export class AppComponent {
   }
 
   listUsers(): void {
-    this.http.get<any>(`http://localhost:5000/api/values`).subscribe(data => {
+    this.http.get<any>(`http://localhost:5000/home/users`).subscribe(data => {
       this.users = data;
     });
   }
+
 }
+
 ```
 
 Change `src/app/app.component.html` like this
@@ -366,7 +475,7 @@ Change `src/app/app.component.html` like this
   </div>
 </nav>
 
-<table class="striped responsive-table"> 
+<table class="striped"> 
   <thead>
     <tr>
       <th>Name</th>
@@ -385,7 +494,37 @@ Change `src/app/app.component.html` like this
     </tr>
 </table>
 
+
 ```
 
 ## 6. Integrate with Electron
+
+```bash
+// run.cmd
+::@echo off
+
+:: publish netcore project
+cd src/coreapi
+dotnet restore
+dotnet build
+dotnet publish -r win10-x64 --self-contained --output bin/dist/win
+
+:: publish angular project
+cd ../angularweb
+
+npm install
+
+cmd /c ng build --base-href ./
+
+
+:: publish electron project
+cd ../
+:: CMD /C npm install
+
+cmd /c npm start
+
+```
+
+project source code: [https://github.com/atillatan/cross-platform-desktop-application-with-netcore2x-and-angular6x](https://github.com/atillatan/cross-platform-desktop-application-with-netcore2x-and-angular6x)
+
 
