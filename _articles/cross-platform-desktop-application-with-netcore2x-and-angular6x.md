@@ -24,37 +24,48 @@ toc: false
 
 # Cross Platform Desktop Application With .Net Core 2x and Angular 6x
 
-We will use 4 kind framework for our desktop application
+We will use 4 framework for our desktop application
 which are;
 
-- **NodeJs:** JavaScript runtime environment, on various platforms (Windows, Linux, Unix, Mac OS X, etc.)
-- **Electron:** Electron enables you to create cross platform desktop applications with pure JavaScript by providing a runtime
-- **Angular CLI:** Angular CLI is a command line interface to scaffold and build angular apps using nodejs
 - **Net Core:** Open source cross platform framework, developed by Microsoft and the community
+- **Angular CLI:** Angular CLI is a command line interface to scaffold and build angular apps using nodejs
+- **Electron:** Electron enables you to create cross platform desktop applications with pure JavaScript by providing a runtime (NodeJS)
+- **NodeJs:** JavaScript runtime environment, on various platforms (Windows, Linux, Unix, Mac OS X, etc.)
+
+
 
 ## 1. Install NodeJS
 
 If you want to create Angular project, you must install nodejs first.
-Because Angular uses nodejs development environment.
+Because Angular and Angular CLI uses nodejs development environment.
 
 - Download nodejs from [https://nodejs.org](https://nodejs.org) and install it
 
 After the installation, you will have npm (Node Package Manager) on your terminal/command line
 
-## 2. Install Electron and Create NodeJs Project
+## 2. Create Project Directories, Install Electron
 
 ```bash
-npm i -D electron@latest
-```
 
-- Create NodeJs Project
+// create project directory
+mkdir desktopapp
 
-```bash
-mkdir electronapp
-cd electronapp
+// create src directory
+mkdir src
+
+// create project directories
+cd src
+
+mkdir angular, netcore, electron
+
+// Create NodeJS Project
 npm init
 // After above command, it will ask some questions
 // response apropriate information for npm init questions
+
+// install electron libraries with nodejs
+cd electron
+npm i -D electron@latest
 ```
 
 In this example it created initial `package.json` then I modified like this
@@ -67,9 +78,7 @@ In this example it created initial `package.json` then I modified like this
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "package-mac": "electron-packager . --overwrite --asar=true --platform=darwin --arch=x64 --icon=assets/icons/mac/icon.icns --prune=true --out=release-builds",
-    "package-win": "electron-packager . --overwrite --asar=true --platform=win32 --arch=ia32 --icon=assets/icons/windows/icon.ico --prune=true --out=release-builds --version-string.CompanyName='atillatan' --version-string.FileDescription='Cross Platform Desktop Application with .Net Core 2 and Angular 6' --version-string.ProductName='Cross Platform Desktop Application with .Net Core 2 and Angular 6'",
-    "package-linux": "electron-packager . --overwrite --asar=true --platform=linux --arch=x64 --icon=assets/icons/png/1024x1024.png --prune=true --out=release-builds"
+    "build": "build"
   },
   "repository": {
     "type": "git",
@@ -92,22 +101,38 @@ In this example it created initial `package.json` then I modified like this
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
-    "electron": "^2.0.2",
-    "electron-builder": "^20.0.0"
+    "electron": "^2.0.3",
+    "electron-builder": "^20.15.1",
+    "electron-packager": "12.1.0"
   },
   "bugs": {
     "url": "https://github.com/atillatan/cross-platform-desktop-application-with-netcore2x-and-angular6x/issues"
   },
-  "homepage": "https://github.com/atillatan/cross-platform-desktop-application-with-netcore2x-and-angular6x#readme"
+  "homepage": "https://github.com/atillatan/cross-platform-desktop-application-with-netcore2x-and-angular6x#readme",
+  "build": {
+    "appId": "Cross-Platform-Desktop-Application-with-Net-Core-Angular",
+    "directories": {
+      "buildResources": "../../assets",
+      "output": "../../dist/electron"
+    },
+    "extraResources": {
+      "from": "../../dist/netcore/",
+      "to": "dist/netcore",
+      "filter": [
+        "**/*"
+      ]
+    },
+    "mac": {
+      "category": "Cross Platform Desktop Application with .Net Core 2 and Angular 6"
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ]
+    }
+  }
 }
 
-```
-
-## 3. Install Angular CLI
-
-```bash
-// in root directory
-npm install -g @angular/cli
 ```
 
 install node packages, that is defined in `package.json`
@@ -116,10 +141,24 @@ install node packages, that is defined in `package.json`
 npm install
 ```
 
-Create these directories `dist` and `src`
+## 3. Install Angular CLI
 
 ```bash
-mkdir src, dist
+// go to angular directory
+cd ../angular
+
+// install angular
+npm install -g @angular/cli
+```
+
+Create `dist` directory
+
+```bash
+// go to root directory
+cd ../
+
+// create dist, build directories
+mkdir dist, build
 ```
 
 **Editor**
@@ -130,7 +169,8 @@ open project with Visual Studio Code
 code .
 ```
 
-Create `main.js` and paste below code
+In the `electron` project directory, Create `main.js` and paste below code
+electron application is a nodejs aplication, it's has only single js file `main.js`
 
 ```js
 const {
@@ -141,7 +181,7 @@ const {
 
 const path = require('path');
 const url = require('url');
-//process.env.NODE_ENV = 'production';
+// process.env.NODE_ENV = 'production';
 
 let mainWindow;
 const os = require('os');
@@ -149,7 +189,6 @@ var apiProcess = null;
 
 // #region Events
 app.on('ready', init);
-
 
 app.on('window-all-closed', function () {
     if (process.platform !== 'darwin') {
@@ -164,14 +203,13 @@ app.on('activate', function () {
 });
 
 process.on('exit', function () {
-    console.log('exit');
+    console.log('Exit electron application..');
     apiProcess.kill();
 });
-
 // #endregion
 
 function init() {
-    startCoreApi();
+    startNetCoreApi();
     createMainWindow();
 }
 
@@ -179,18 +217,13 @@ function createMainWindow() {
     console.log('start');
     //create new window
     mainWindow = new BrowserWindow({
-        width: 800,
+        width: 920,
         height: 600,
         frame: true,
-        resizable: false
+        resizable: true
     });
-    // Load html into window
-    mainWindow.loadURL(url.format({
-        pathname: path.join(__dirname, 'src/angularweb/dist/angularweb/index.html'),
-        protocol: 'file:',
-        slashes: true,
-    }));
 
+    mainWindow.loadURL('http://localhost:5000/index.html');
     // Quit app when closed
     mainWindow.on('close', function (e) {
         mainWindow = null;
@@ -224,7 +257,7 @@ function createMainWindow() {
                     }
                 },
                 {
-                    role: 'reload'                                   
+                    role: 'reload'
                 }
             ]
         })
@@ -237,17 +270,26 @@ function createMainWindow() {
 }
 
 
-function startCoreApi() {
-    var proc = require('child_process').spawn;
+function startNetCoreApi() {
+    var spawn = require('child_process').spawn;
 
-    var apiPath = path.join(__dirname, 'src\\coreapi\\bin\\dist\\win\\coreapi.exe')
+    var wokingDirectory = path.join(__dirname, '../../dist/netcore');
+
+    if(process.env.NODE_ENV === 'production'){
+        wokingDirectory = path.join(__dirname, '../dist/netcore');
+    }
+
+    var apiPath = path.join(wokingDirectory, '/netcore.exe');
+
     if (os.platform() === 'darwin') {
-        apiPath = path.join(__dirname, 'src//coreapi//bin//dist//osx//coreapi')
+        apiPath = path.join(wokingDirectory, '//netcore');
     }
 
     console.log(apiPath);
 
-    apiProcess = proc(apiPath);
+    apiProcess = spawn(apiPath, {
+        cwd: wokingDirectory
+    });
 
     apiProcess.stdout.on('data', (data) => {
         console.log(`stdout: ${data}`);
@@ -259,31 +301,6 @@ function startCoreApi() {
 };
 ```
 
-Create `index.html` and paste below code
-
-```html
-<!doctype html>
-<html lang="en">
-
-<head>
-  <meta charset="utf-8">
-  <title>Angularweb</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
-</head>
-
-<body>
-  <app-root>Loading...</app-root>
-</body>
-
-</html>
-
-```
-
-
 ## 4. Create .Net Core Project
 
 - Install .Net Core
@@ -294,26 +311,31 @@ After the installation you will have `dotnet` command environment in you termina
 - Open your terminal or, windows PowerShell, then execute following commands
 
 ```bash
+// Go to netcore project
 cd src
-dotnet new webapi -n coreapi
-cd coreapi
+
+dotnet new webapi -n netcore
+cd netcore
 dotnet restore
 dotnet build
 dotnet run
 ```
 
-Add `coreapi/Controllers/HomeController.cs` like this
+Add `netcore/Controllers/SpaController.cs` like this
 
 ```csharp
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 
-public class HomeController : Controller{
- 
-        // GET api/values
+namespace netcore.Controllers
+{
+    [Route("[controller]/[action]")]
+    public class SpaController : Controller
+    {
+        // GET spa/getusers
         [HttpGet]
-        public IEnumerable<dynamic> Users()
-        {   
+        public IEnumerable<dynamic> GetUsers()
+        {
             return new List<dynamic> {
                 new { Name = "Bob", FamilyName = "Smith", Age = 32, email = "test1" },
                 new { Name = "Alice", FamilyName = "Smith", Age = 33, email = "test2" },
@@ -321,6 +343,26 @@ public class HomeController : Controller{
                 new { Name = "Adam", FamilyName = "Smith", Age = 32, email = "test4" }
              };
         }
+    }
+}
+```
+
+Add `netcore/Controllers/DefaultController.cs` like this
+
+```csharp
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
+
+namespace netcore.Controllers
+{
+    public class DefaultController : Controller
+    {
+        public IActionResult Index()
+        {
+            return File("~/index.html", "text/html");
+        }
+    }
 }
 ```
 
@@ -332,8 +374,9 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
 
-namespace coreapi
+namespace netcore
 {
     public class Startup
     {
@@ -342,8 +385,15 @@ namespace coreapi
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors();
-            services.AddMvc();
+            services
+            .AddCors()
+            .AddMvc()
+            .AddJsonOptions(options =>
+             {
+                 options.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.DefaultContractResolver();
+                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Serialize;
+                 options.SerializerSettings.PreserveReferencesHandling = PreserveReferencesHandling.Objects;
+             });
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -355,16 +405,27 @@ namespace coreapi
 
             app.UseCors(policy => policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 
-            app.UseMvcWithDefaultRoute();
-
             app.UseStaticFiles();
 
             app.UseDefaultFiles(new DefaultFilesOptions { DefaultFileNames = new List<string> { "index.html" } });
 
+            app.UseMvc(routes =>
+           {
+               routes.MapRoute(
+                 name: "default",
+                 template: "{controller}/{action}/{id?}");
+
+               // Catch all Route - catches anything not caught be other routes
+               routes.MapRoute(
+                   name: "catch-all",
+                   template: "{*url}",
+                   defaults: new { controller = "Default", action = "Index" }
+               );
+           });
+
         }
     }
 }
-
 
 ```
 
@@ -378,11 +439,11 @@ and test it [http://localhost:5000/api/values](http://localhost:5000/api/values)
 ```bash
 // go to `src` directory
 cd src
-npm install -g @angular/cli
-ng new angularweb --skip-tests --routing
+ng new angular --skip-tests --routing
 // --routing : add routing functionality to project
 // --skip-test: skip test functionality
-cd angularweb
+
+cd angular
 ng serve --open
 ```
 
@@ -393,6 +454,7 @@ You can also read the following tutorial [https://angular.io/guide/quickstart](h
 Add  HtmlClientModule to `app.module.ts` like this
 
 ```js
+//  angular/src/app/app.module.ts
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -419,21 +481,26 @@ export class AppModule { }
 Add Materialize to `index.html` like this
 
 ```html
+// angular/src/index.html
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
-  <title>Angularweb</title>
+  <title>Cross Platform Desktop Application</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
 </head>
+
 <body>
   <app-root>Loading...</app-root>
 </body>
+
 </html>
+
 ```
 
 Change `src/app/app.component.ts` like this
@@ -457,13 +524,12 @@ export class AppComponent {
   }
 
   listUsers(): void {
-    this.http.get<any>(`http://localhost:5000/home/users`).subscribe(data => {
+    this.http.get<any>(`http://localhost:5000/spa/getusers`).subscribe(data => {
       this.users = data;
     });
   }
 
 }
-
 ```
 
 Change `src/app/app.component.html` like this
@@ -487,13 +553,34 @@ Change `src/app/app.component.html` like this
 
   <tbody>
     <tr *ngFor="let user of users">
-      <td>{{ user.name }}</td>
-      <td>{{ user.familyName }}</td>
-      <td>{{ user.age }}</td>
+      <td>{{ user.Name }}</td>
+      <td>{{ user.FamilyName }}</td>
+      <td>{{ user.Age }}</td>
       <td>{{ user.email }}</td>
     </tr>
 </table>
 
+```
+
+Change output directory from `angular.json`
+
+```js
+{
+    "projects": {
+        "angular": {
+            "architect": {
+                "build": {
+                    ...
+                    "options": {
+                        ...
+                        "outputPath": "../../dist/netcore/win/wwwroot",
+                        ...
+                    }
+                    ...
+                }
+            }
+    }
+}
 
 ```
 
@@ -501,30 +588,51 @@ Change `src/app/app.component.html` like this
 
 ```bash
 // run.cmd
-::@echo off
+@echo off
 
 :: publish netcore project
-cd src/coreapi
+cd src/netcore
 dotnet restore
 dotnet build
-dotnet publish -r win10-x64 --self-contained --output bin/dist/win
+dotnet publish -r win10-x64 --self-contained --output ../../dist/netcore
 
 :: publish angular project
-cd ../angularweb
-
-npm install
+cd ../angular
+:: npm install
 
 cmd /c ng build --base-href ./
 
 
 :: publish electron project
-cd ../
-:: CMD /C npm install
+cd ../electron
+::npm install
 
 cmd /c npm start
 
 ```
 
-project source code: [https://github.com/atillatan/cross-platform-desktop-application-with-netcore2x-and-angular6x](https://github.com/atillatan/cross-platform-desktop-application-with-netcore2x-and-angular6x)
+```bash
+// run.sh
+#!/bin/sh
 
+# publish netcore project
+cd src/netcore
+dotnet restore
+dotnet build
+dotnet publish -r osx.10.11-x64 --self-contained --output ../../dist/netcore
+
+# publish angular project
+cd ../angular
+npm install
+
+ng build --base-href=./ 
+
+# publish electron project
+cd ../electron
+npm install
+
+npm start
+```
+
+project source code: [https://github.com/atillatan/cross-platform-desktop-application-with-netcore2x-and-angular6x](https://github.com/atillatan/cross-platform-desktop-application-with-netcore2x-and-angular6x)
 
