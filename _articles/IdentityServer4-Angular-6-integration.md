@@ -347,7 +347,7 @@ ng generate component `unauthorized`
 
 Then pase below code to  `unauthorized.component.html`
 
-```html
+```xml
 <br>
 
 <div class="alert alert-danger">
