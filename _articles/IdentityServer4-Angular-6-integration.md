@@ -351,7 +351,7 @@ Then pase below code to  `unauthorized.component.html`
 <br>
 
 <div class="alert alert-danger">
-  <strong>{{message}}</strong>
+  <strong>\\{{message\\}}</strong>
 </div>
 
 ```
