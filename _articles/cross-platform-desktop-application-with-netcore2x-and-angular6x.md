@@ -636,3 +636,4 @@ npm start
 
 project source code: [https://github.com/atillatan/cross-platform-desktop-application-with-netcore2x-and-angular6x](https://github.com/atillatan/cross-platform-desktop-application-with-netcore2x-and-angular6x)
 
+![/assets/img/interface.PNG](/assets/img/interface.PNG)
