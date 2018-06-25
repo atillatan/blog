@@ -4,7 +4,7 @@
     </div>
 
     <div class="panel-body" style="padding:0px;">
-      {% assign articleList = site.articles | sort: 'sort_order' %}
+      {% assign articleList = site.articles | sort: 'create_date' %}
 
       {% for article in articleList %}
 
