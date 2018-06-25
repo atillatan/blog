@@ -12,7 +12,7 @@ rating: 100
 changefreq: monthly
 priority: 0.5
 published: true
-create_date: 2007-11-13T00:00:00
+create_date: 2007-11-13 00:00:00 +0000
 modified_date: 2007-11-13
 created_by: atilla
 modified_by: atilla
