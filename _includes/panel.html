@@ -4,7 +4,7 @@
     </div>
 
     <div class="panel-body" style="padding:0px;">
-      {% assign articleList = site.articles | sort: 'sort_order' | reverse %}
+      {% assign articleList = site.articles | sort: 'create_date' | reverse %}
 
       {% for article in articleList limit:5 %}
 
