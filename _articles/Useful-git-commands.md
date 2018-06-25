@@ -13,8 +13,8 @@ rating: 100
 changefreq: monthly
 priority: 0.5
 published: true
-create_date: 2017-12-03
-modified_date: 2017-12-03
+create_date: 2017-12-03T00:00:00.000Z
+modified_date: 2017-12-03T00:00:00.000Z
 created_by: atilla
 modified_by: atilla
 comments: true
