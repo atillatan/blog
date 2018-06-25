@@ -12,6 +12,7 @@ permalink: pretty
 markdown: kramdown
 highlighter: rouge
 img: /assets/img
+timezone: Europe/Paris
 disqus:
   shortname: atilla-tanrikulu-biz
 #google_analytics: UA-2498474-2
