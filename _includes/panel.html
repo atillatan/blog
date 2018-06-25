@@ -8,7 +8,7 @@
 
       {% for article in articleList %}
 
-      <a class="list-group-item" href="{{site.baseurl}}{{article.url}}" title="{{article.create_date}}">{{article.title}}</a>
+      <a class="list-group-item" href="{{site.baseurl}}{{article.url}}" title="{{article.title}} - {{article.create_date}}">{{article.title}}</a>
 
       {% endfor %}
     </div>
