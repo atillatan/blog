@@ -23,7 +23,7 @@
                     <!-- Panel -->
                     {% endif %}
                     {{content}}
-                    {{ page.create_date | date_to_long_string }}
+                    Date: {{ page.create_date }}
                   </article>
                   {% if site.disqus.shortname %}
                     {% include disqus-comments.html %}
