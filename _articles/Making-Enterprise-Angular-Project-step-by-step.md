@@ -2407,6 +2407,90 @@ You can add two type data grid to your project
 
 ## 21. Add Tooltip for icons
 
+```html
+<button mat-raised-button
+        matTooltip="Info about the action"
+        aria-label="Button that displays a tooltip when focused or hovered over">
+  Action
+</button>
+```
+
+Then change `user.component.html` like this
+
+```html
+<div class="animate-bottom w-75" style="padding-left:30px;">
+  <h2>Users</h2>
+
+  <!-- Entry -->
+  <form (ngSubmit)="postOrPut()">
+    <!-- form-group separator -->
+    <div style="display:flex; flex-direction: column;">
+      <mat-form-field>
+        <input matInput type="text" placeholder="{{'Name' | translate}}" [(ngModel)]="entryDto.Name" name="Name" id="Name" />
+        <button mat-button *ngIf="entryDto.Name" matSuffix mat-icon-button aria-label="Clear" (click)="entryDto.Name=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+    <!-- form-group separator -->
+    <div style="display:flex; flex-direction: column;">
+      <mat-form-field>
+        <input matInput type="text" placeholder="{{'Last Name' | translate}}" [(ngModel)]="entryDto.LastName" name="LastName" id="LastName"
+        />
+        <button mat-button *ngIf="entryDto.LastName" matSuffix mat-icon-button aria-label="Clear" (click)="entryDto.LastName=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+    <!-- form-group separator -->
+    <div style="text-align: right;">
+      <button type="submit" matTooltip="{{'Save' | translate}}" mat-raised-button color="primary">
+        <i class="material-icons">save</i>
+      </button>&nbsp;
+      <button type="button" matTooltip="{{'Clear' | translate}}" mat-raised-button color="accent" (click)="resetEntry()">
+        <i class="material-icons">refresh</i>
+      </button>
+    </div>
+  </form>
+  <!-- Entry -->
+  <br>
+
+
+  <!-- List -->
+  <div class=”container”>
+    <table class="table table-bordered table-sm m-0">
+      <thead style="background-color:#b4cff1">
+        <tr>
+          <th>#</th>
+          <th>{{'Name' | translate}}</th>
+          <th>{{'Last Name' | translate}}</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let dto of dtoList; let i = index">
+          <th scope="row">{{ i + 1 }}</th>
+          <td>{{ dto.Name }}</td>
+          <td>{{ dto.LastName }}</td>
+          <td>
+            <button type="button" matTooltip="{{'Edit Row' | translate}}" mat-mini-fab  color="primary" (click)="get(dto)">
+              <i class="material-icons">border_color</i>
+            </button>
+            &nbsp;
+            <button type="button" matTooltip="{{'Delete Row' | translate}}" mat-mini-fab  (click)="openDialog(dto)">
+              <i class="material-icons">cancel</i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- List -->
+</div>
+
+```
+
+for more detail fallow the link [https://material.angular.io/components/tooltip/overview](https://material.angular.io/components/tooltip/overview)
 
 
 ![/assets/img/ea-interface.PNG](/assets/img/ea-interface.PNG)
