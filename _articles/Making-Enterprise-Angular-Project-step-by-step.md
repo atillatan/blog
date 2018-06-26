@@ -22,44 +22,103 @@ redirect_url:
 toc: false
 ---
 
-<!-- userinfo sessionStorage a kaydedilecek
-language localStorage a kaydedilecek
+# Making Enterprise Angular Project Step by Step
 
-identity server blog yazisi okunacak
-auth intercepter in token i gonderip gondermedigine bakilacak
-kullanici bilgisi, arayuzde gosterilecek
+This project demonstrates how to build Enterprise Grade Angular Project.
 
+## When we want to build Enterprise Project, We always need following pieces/functionalities 
 
-localization
-multilanguage
-serverside message totomatik mesaj
-user info 
-intercepter
-paging
-input clear button
+- **User Interface and Design:** Bootstrap and Material Design give you easily create beautiful user interfaces, nowadays these two libraries is best practices
 
+- **Web Icons:** We will need some useful icons on our project `Material Icons` is more common for Angular projects
 
+- **Enterprise CSS Style:** All Enterprise project must have common enterprise style, you can add global CSS file for this purpose
 
+- **Enterprise Utility Class:** All Enterprise project must have common utility methods, you can add global JavaScript/TypeScript file for this purpose.
 
-Angular language integration
+- **JQuery:** Generally we don't use `JQuery` in Angular project but some developer likes JQuery, they believe JQuery more handy tool than others. "Just in case", you can add JQuery to your project.
 
-1. save user language to localStorage
-if localstorage empty use default language
-if user select language save it to local storage
-2. make angular intercepter for get user language from localStorage add header -->
+- **Best Practice Angular Modules:** You can add best practice Angular modules to your project, for example, CommonModule, BrowserModule, HttpClientModule, FromsModule, AppRoutingModule, BrowserAnimationsModule, Mat**Module etc.
 
+- **Browser Storage Module:** SPA applications need to use these browser storages `SessionStorage`, `LocalStorage` 
 
+- **Configuration:** All Enterprise applications needs `Configuration` you can take configuration from js/json file like this `http://localhost:4200/assets/config.js`
 
+```js
+{
+    Name: "core",
+    AssetsUrl: "http://asset.mycompany.com",
+    DefaultLanguage: "en",
+    DefaultPagingSize: "15",
+    DefaultBrowserTitle: "My Company",
+    DefaultWebAPIAddress: "http://localhost:5001",
+    SSOAddress: "http://sso.mycompany.com",    
+    AllowedMaxExportSize: "2000",
+    FileUploadPath: "wwwroot/files",
+    //...
+}
+```
 
+- **Authentication Interceptor:** All Enterprise applications must have `Authentication`, For this purpose, you can use "IdentityServer4". It supports `OpenID` and `OAuth2`, Then you can make `AuthenticationInterceptor` in Angular project in order to add the token to http header.
 
+- **Authorization Guard:** A Common usage of Authorization guard is activating or deactivating authorized components
 
-# Making Enterprise Angular Project step by step
+- **Unauthorized Component:** If user don't have an access permission to specific pages, you can redirect `unauthorized` page.
+
+- **Internationalization:** By default, Angular uses the locale en-US, which is English as spoken in the United States of America, if you want to use another locale you can use `LOCALE_ID`
+
+- **Application Loading Animation:** SPA application always use loading animation for the first visit.
+
+- **Page Load Animation:** Using page routing animation is a common approach for SPA. The purpose of animation  related UX  concerns
+
+- **Menu:** All application must have `Menu` for navigation. 
+
+- **Progress Bar:** According to UX Concerns, some server requests takes a long time, you can show what's going on the background with a progress bar.
+
+- **Dialog Window:** We are building an interactive web application. Sometimes we want to ask/show some confirmation/information to the user, for example, delete confirmation.
+
+- **Notifications:**  According to UX Concerns, Interactive applications always give feedback to the user. Best way to notify the user is using `toast` component.
+
+- **Common Back-End and Front-End Objects** Angular applications can communicate with back-end using `JSON`. Enterprise application always uses common object between Back-end and Front-end because we want to know Request.IsSuccess, what is the resultType (information, Success, Warning, Error) is response have a message or exception? for this purpose, we want to use some common object between to side. For Example:
+
+```js
+export class ServiceResponse<T> {
+    public IsSuccess: boolean;
+    public ResultType: ResultType;
+    public Message: string;
+    public TotalCount: number;
+    public Data: T;
+}
+
+export enum ResultType {
+    Information = 1,
+    Validation = 2,
+    Success = 3,
+    Warning = 4,
+    Error = 5,
+}
+```
+
+- **Interceptor for Server Side Messages:** Usually Enterprise application have Exception handling, we can intercept server-side messages/exceptions with Angular Interceptor.
+
+- **CRUD Operation Service:** Best way to prevent code repetition is making a common class. Sometimes we always repeat same code on the same application layer. For example database layer always have CRUD (Create, Read, Update, Delete) operations, But Enterprise applications generally use common object/classes for this. We can make Angular service that includes these methods: post, get, put, delete
+
+- **Translate Service:** If we want to build multilingual application we must create translator service.
+
+- **Delete Confirmation:** If we want to make enterprise application, we usually show data with data grid or data table, then we have to implement delete confirmation on table or grid.
+
+- **ToolTip:** Sometimes we use Icons on the user interface, in enterprise application we have to show icon meaning with tooltip.
+
+- **Data Table or Data Grid:** If we want to make enterprise application, we usually show data with data grid or data table.
+
+- **Database Pagination:** Sometimes we have a lot of record on the database table, we don't show all record on the user interface, it's effect application performance and usability of the application. Pagination is the best way to show data.
+
 
 ## 1. Create Angular Project
 
 - Download nodejs from [https://nodejs.org](https://nodejs.org) and install it
 
-- Open your terminal or, windows PowerShell, then execute following commands
+- Open your terminal or, Windows PowerShell, then execute following commands
 
 
 **Install Angular**
@@ -89,8 +148,10 @@ npm install --save @angular/material @angular/cdk
 npm install moment --save
 ```
 
+`moment` will be used from DateTimePicket component
+
 Import required modules, that you want to use
-in this example I want to use Material Modules
+in this example, I want to use Material Modules
 
 Then modify your `app.module.ts` like this
 
@@ -126,7 +187,7 @@ import {CdkTableModule} from '@angular/cdk/table';
 
 Including a theme is required to apply all of the core and theme styles to your application.
 
-To get started with a prebuilt theme, include one of Angular Material's prebuilt themes globally in your application. If you're using the Angular CLI, you can add this to your `styles.css`:
+To get started with a pre-built theme, include one of Angular Material's prebuilt themes globally in your application. If you're using the Angular CLI, you can add this to your `styles.css`:
 
 ```css
 // styles.css
@@ -156,7 +217,7 @@ import 'hammerjs';
 you can also use the following tutorial [https://material.angular.io/guide/getting-started](https://material.angular.io/guide/getting-started)
 
 
-## 3. Install Bootstrap, Jquery and popper.js
+## 3. Install Bootstrap, Jquery, and popper.js
 
 ```shell
 npm i bootstrap --save
@@ -200,7 +261,7 @@ for more details read following link [https://github.com/valor-software/ngx-boot
 
 ## 3. Add Custom Global CSS 
 
-Create file named `custom.css`  in assets folder
+Create a file named `custom.css`  in the assets folder
 then insert following code
 
 ```css
@@ -234,11 +295,11 @@ Then test it in `index.html`
  
 </body>
 ```
-you can also read following link [http://atilla.tanrikulu.biz/Using-CSS-and-JavaScript-to-an-Angular-Project/](http://atilla.tanrikulu.biz/Using-CSS-and-JavaScript-to-an-Angular-Project/)
+you can also read following the link [http://atilla.tanrikulu.biz/Using-CSS-and-JavaScript-to-an-Angular-Project/](http://atilla.tanrikulu.biz/Using-CSS-and-JavaScript-to-an-Angular-Project/)
 
 ## 4. Add Custom JavaScript file
 
-Create files named `custom-utility.js`, `custom-module.js`  in assets folder
+Create files named `custom-utility.js`, `custom-module.js`  in the assets folder
 
 ```json
 "architect": {
@@ -361,7 +422,7 @@ export class AppModule { }
 
 ## 6. Add Browser Storage Module
 
-In this example I'll use `ngx-webstorage` module
+In this example, I'll use `ngx-webstorage` module
 you can use the installation guide [https://www.npmjs.com/package/ngx-webstorage](https://www.npmjs.com/package/ngx-webstorage)
 
 ```shell
@@ -431,7 +492,7 @@ Generate service in `services` directory
 ng generate service services/config
 ```
 
-Then insert followng code
+Then insert following code
 
 ```js
 import { Injectable, EventEmitter, Output, Injector } from '@angular/core';
@@ -553,7 +614,7 @@ export class AppModule {
 
 ## 8. Add Authentication 
 
-In this example I'll use "[IdentityServer4](http://identityserver.io/)" on server side and I'll use "[angular-auth-oidc-client](https://github.com/damienbod/angular-auth-oidc-client)" angular module on client side.
+In this example, I'll use "[IdentityServer4](http://identityserver.io/)" on server-side and I'll use "[angular-auth-oidc-client](https://github.com/damienbod/angular-auth-oidc-client)" angular module on client-side.
 
 ```shell
 npm install angular-auth-oidc-client --save
@@ -791,13 +852,13 @@ export class AppComponent implements OnInit, OnDestroy {
 
 ```
 
-**Add Http Intercepter for Authentication**
+**Add Http Interceptor for Authentication**
 
-You would be intercept any outgoing HTTP request and add an authorization header to http header
+You would intercept any outgoing HTTP request and add an authorization header to http header
 The HttpClient allows you to write interceptors
 Keep in mind that injecting OidcSecurityService into the interceptor via the constructor results in a cyclic dependency. To avoid this use the injector instead.
 
-Create `auth.intercepter.ts` in services directory
+Create `auth.interceptor.ts` in the services directory
 
 ```js
 import { Injectable, Injector } from '@angular/core';
@@ -862,9 +923,9 @@ import { AuthInterceptor } from './services/auth.Interceptor';
 
 **Use AuthorizationGuard**
 
-A Comon usage of Authorization guard is activate and deactivate components
+A Common usage of Authorization guard is activating and deactivating components
 
-Create `auth.guard.ts` in services directory
+Create `auth.guard.ts` in the services directory
 
 ```js
 import { Injectable } from '@angular/core';
@@ -1331,7 +1392,7 @@ import { ContactComponent, ExampleDialogComponent } from './contact/contact.comp
 
 ## 13. Add Toast Component
 
-In this example I'll use `ngx-toastr` package, which has the most on github
+In this example, I'll use `ngx-toastr` package, which has the most on github
 
 ```shell
 npm install ngx-toastr --save
@@ -1345,7 +1406,7 @@ npm install @angular/animations --save
 
 copy `toastcss` to your project [https://github.com/scttcper/ngx-toastr/blob/master/src/lib/toastr.css](https://github.com/scttcper/ngx-toastr/blob/master/src/lib/toastr.css)
 
-and add following line to `angular.json`
+and add the following line to `angular.json`
 
 ```js
  "architect": {
@@ -1749,9 +1810,9 @@ Then insert following code to `user.component.html`
 ```
 
 
-## 16. Add Intercepter for API Response Messages
+## 16. Add Interceptor for API Response Messages
 
-Create intercepter `api.intercepter.ts` in services folder
+Create interceptor `api.interceptor.ts` in services folder
 
 ```js
 import { Injectable, Injector } from '@angular/core';
@@ -1895,7 +1956,7 @@ We will run correctly above code after `TranslateService`
 ## 17. Create TranslaterService
 
 We will use `ngx-translate/core` for translation
-First you need to install the npm module:
+First, you need to install the npm module:
 
 ```shell
 npm install @ngx-translate/core --save
@@ -1980,7 +2041,7 @@ export class HomeComponent implements OnInit {
 }
 ```
 
-Then Change your `api.intercepter.ts` for server messages
+Then Change your `api.interceptor.ts` for server messages
 
 ```js
 import { Injectable, Injector } from '@angular/core';
@@ -2122,7 +2183,7 @@ following lines
   </mat-menu>
 ```
 
-Then add `app.component.ts` followng method
+Then add `app.component.ts` the following method
 
 ```js
 langChange(lang: string) {
@@ -2133,7 +2194,7 @@ langChange(lang: string) {
 Then add current user language to sessionStorage
 Change `app.module.ts` file
 we subscribe `onLangChange` event then we store 'current_language'
-`api.intercepter` will use this data for every Request  
+`api.interceptor` will use this data for every Request  
 
 ```js
 export class AppModule {
@@ -2164,7 +2225,7 @@ export class AppModule {
 ```
 
 ```js
-//api.intercepter.ts
+//api.interceptor.ts
 private addLanguageHeader(request: HttpRequest<any>) {
 
         const userLanguage = sessionStorage.getItem('ng2-webstorage|current_language');
@@ -2182,7 +2243,7 @@ private addLanguageHeader(request: HttpRequest<any>) {
 
 ## 18. Add Delete Confirmation
 
-Create `DeleteConfirmatin` component
+Create `DeleteConfirmation` component
 
 `ng generate component deleteConfirmation`
 
@@ -2259,7 +2320,7 @@ Then modify your `user.component.html`
 <!-- Entry -->
 <div class="entryDto w-75">
   <form (ngSubmit)="postOrPut()">
-    <!-- form-group seperator -->
+    <!-- form-group separator -->
     <div class="form-group row">
       <label for="Name" class="col-2 col-form-label-sm">{{'Name' | translate}}</label>
       <div class="col-10">
@@ -2267,7 +2328,7 @@ Then modify your `user.component.html`
           placeholder="Name">
       </div>
     </div>
-      <!-- form-group seperator -->
+      <!-- form-group separator -->
       <div class="form-group row">
         <label for="LastName" class="col-2 col-form-label-sm">{{'Last Name' | translate}}</label>
         <div class="col-10">
@@ -2275,7 +2336,7 @@ Then modify your `user.component.html`
             placeholder="LastName">
         </div>
       </div> 
-    <!-- form-group seperator -->
+    <!-- form-group separator -->
     <div class="text-right">
       <button type="submit" class="btn btn-success btn-sm" ngbTooltip="Save"><i class="material-icons" >save</i></button>&nbsp;
       <button type="button" class="btn btn-primary btn-sm" ngbTooltip="Cancel" (click)="resetEntry()"><i class="material-icons">refresh</i></button>
@@ -2349,3 +2410,10 @@ You can add two type data grid to your project
 
 
 ![/assets/img/ea-interface.PNG](/assets/img/ea-interface.PNG)
+
+Source codes: 
+1. Enterprise-Angular-Project [https://github.com/atillatan/Enterprise-Angular-Project](https://github.com/atillatan/Enterprise-Angular-Project)
+
+2. SSO [https://github.com/atillatan/sso-with-identityserver4](https://github.com/atillatan/sso-with-identityserver4)
+
+3. Enterprise WebApi Project [Developing](Developing)
