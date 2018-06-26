@@ -1128,11 +1128,11 @@ add following style your css file
 
 /* #endregion*/
 ```
-Then change your `app.component.html` like this
+Then change your page html `user.component.html` like this
 
 ```html
 <div class="animate-bottom">
-<router-outlet></router-outlet>
+<!-- //.... -->
 </div>
 ```
 
@@ -1468,7 +1468,7 @@ export class PagingDto {
 
 ```
 
-## 15. Creage CRUD operation Component
+## 15. Create CRUD operation Component
 
 We will create one service for CRUD operations then we will create Angular Component 
 
@@ -2182,8 +2182,170 @@ private addLanguageHeader(request: HttpRequest<any>) {
 
 ## 18. Add Delete Confirmation
 
+Create `DeleteConfirmatin` component
+
+`ng generate component deleteConfirmation`
+
+Then Paste below html to `delete-confirmation.component.html`
+
+```html
+<h1 mat-dialog-title>{{'LBL_WARNING' | translate}}</h1>
+<div mat-dialog-content>
+  <p>{{ 'ARE_YOU_SURE' | translate }}</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick(data.dto)" cdkFocusInitial>{{ 'NO' | translate}}</button>
+  <button mat-button (click)="onYesClick(data.dto)">{{ 'YES' | translate }}</button>
+</div>
+
+```
+
+Then Paste below script to `delete-confirmation.component.ts`
+
+```js
+import { Component, OnInit, Inject } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+
+@Component({
+  selector: 'app-delete-confirmation',
+  templateUrl: './delete-confirmation.component.html'
+})
+export class DeleteConfirmationComponent {
+
+  constructor(
+    public dialogRef: MatDialogRef<DeleteConfirmationComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any) { }
+
+  onNoClick(dto: any): void {    
+    this.data.confirmation = 'NO';
+    this.dialogRef.close(this.data);
+  }
+
+  onYesClick(dto: any): void {    
+    this.data.confirmation = 'YES';
+    this.dialogRef.close(this.data);
+  }
+
+}
+
+```
+
+Then modify your `app.module.ts` like this
+
+```js
+@NgModule({
+  imports: [
+    //...
+  ],
+  declarations: [
+    //..
+    DeleteConfirmationComponent
+
+  ],
+  providers: [
+    //..
+  ],
+  //..
+  entryComponents: [DeleteConfirmationComponent]
+})
+```
+
+Then modify your `user.component.html` 
+
+```html
+<div class="animate-bottom">
+<h2>Users</h2>
+
+<!-- Entry -->
+<div class="entryDto w-75">
+  <form (ngSubmit)="postOrPut()">
+    <!-- form-group seperator -->
+    <div class="form-group row">
+      <label for="Name" class="col-2 col-form-label-sm">{{'Name' | translate}}</label>
+      <div class="col-10">
+        <input class="form-control form-control-sm" type="text" [(ngModel)]="entryDto.Name" name="Name" id="Name"
+          placeholder="Name">
+      </div>
+    </div>
+      <!-- form-group seperator -->
+      <div class="form-group row">
+        <label for="LastName" class="col-2 col-form-label-sm">{{'Last Name' | translate}}</label>
+        <div class="col-10">
+          <input class="form-control form-control-sm" type="text" [(ngModel)]="entryDto.LastName" name="LastName" id="LastName"
+            placeholder="LastName">
+        </div>
+      </div> 
+    <!-- form-group seperator -->
+    <div class="text-right">
+      <button type="submit" class="btn btn-success btn-sm" ngbTooltip="Save"><i class="material-icons" >save</i></button>&nbsp;
+      <button type="button" class="btn btn-primary btn-sm" ngbTooltip="Cancel" (click)="resetEntry()"><i class="material-icons">refresh</i></button>
+    </div>
+  </form>
+</div>
+<!-- Entry -->
+<br>
+
+
+<!-- List -->
+<div class=”container”>
+  <table class="table table-bordered table-sm m-0">
+    <thead style="background-color:#b4cff1">
+      <tr>
+        <th>#</th>
+        <th>{{'Name' | translate}}</th>
+        <th>{{'Last Name' | translate}}</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let dto of dtoList; let i = index">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{ dto.Name }}</td>     
+        <td>{{ dto.LastName }}</td>     
+        <td>
+          <button type="button" class="btn btn-sm btn-outline-primary" (click)="get(dto)" ngbTooltip="Edit row"><i class="material-icons">border_color</i></button>&nbsp;
+          <button type="button" class="btn btn-sm btn-outline-danger" (click)="openDialog(dto)" ngbTooltip="Delete row"><i class="material-icons">cancel</i></button>          
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<!-- List -->
+</div>
+```
+
+Then add below method to `user.component.ts` 
+
+```js
+openDialog(dto: any): void {
+    const dialogRef = this.dialog.open(DeleteConfirmationComponent, {
+      width: '250px',
+      data: { dto: dto }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result.confirmation === 'YES') {
+        this.delete(result.dto);
+      }
+      console.log('The dialog was closed');
+    });
+  }
+```
+
+
 ## 19. Improve Entry and DataGrid 
+
+You can add two type data grid to your project
+
+1. Material `Data Table` [https://material.angular.io/components/table/overview](https://material.angular.io/components/table/overview)
+  and Meterial `Paginator` [https://material.angular.io/components/paginator/overview](https://material.angular.io/components/paginator/overview)
+
+2. ag-Grid [https://www.ag-grid.com/best-angular-2-data-grid/](https://www.ag-grid.com/best-angular-2-data-grid/) 
 
 ## 20. Add Pagination
 
 ## 21. Add Tooltip for icons
+
+
+
+![/assets/img/ea-interface.PNG](/assets/img/ea-interface.PNG)
