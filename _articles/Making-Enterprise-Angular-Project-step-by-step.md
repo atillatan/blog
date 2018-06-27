@@ -3,9 +3,9 @@ layout: article
 permalink:
 name:
 file_type:
-title: Making Enterprise Angular Project step by step
+title: Making Enterprise Angular Project Step by Step
 description: >-
-  Making Enterprise Angular Project step by step
+  Making Enterprise Angular Project Step by Step
 tags:  
 category:  
 sort_order: 100
@@ -148,6 +148,7 @@ npm install --save @angular/material @angular/cdk
 npm install moment --save
 ```
 
+Moment.JS is an intelligent JavaScript library to Parse, validate, manipulate, and display dates and times for given formats.
 `moment` will be used from DateTimePicket component
 
 Import required modules, that you want to use
@@ -1094,7 +1095,7 @@ import localeTr from '@angular/common/locales/tr';
 @NgModule({
   imports: [ BrowserModule ],
   declarations: [ AppComponent ],
-  providers: [ { provide: LOCALE_ID, useValue: 'tr' } ],
+  providers: [ { provide: LOCALE_ID, useValue: 'en-US' } ],
   bootstrap: [ AppComponent ]
 })
 
@@ -2405,7 +2406,130 @@ You can add two type data grid to your project
 
 ## 20. Add Pagination
 
-## 21. Add Tooltip for icons
+[https://material.angular.io/components/paginator/overview](https://material.angular.io/components/paginator/overview)
+
+Add the following line to `app.module.ts` 
+```js
+import {MatPaginatorModule} from '@angular/material/paginator';
+```
+
+Then change your `user.component.ts`
+
+```js
+import {PageEvent} from '@angular/material';
+
+list(): void {
+  this.crudService.list(this.searchDto, this.pagingDto, `${this.url}/listuser`).subscribe(
+    serviceResponse => {
+      this.dtoList = serviceResponse.Data;
+      this.pagingDto.count = serviceResponse.TotalCount;
+    }
+  );
+}
+
+changePage(pageEvent: PageEvent) : void {
+  this.pagingDto.count = pageEvent.length;
+  this.pagingDto.pageSize = pageEvent.pageSize;
+  this.pagingDto.pageNumber = pageEvent.pageIndex + 1;
+  this.list();
+}
+
+
+```
+
+Then change your `user.component.html`
+
+```html
+  <mat-paginator [length]="pagingDto.count"
+    [pageSize]="pagingDto.pageSize"
+    [pageSizeOptions]="[10, 15, 20, 50]"
+    (page)="changePage($event)">
+  </mat-paginator>
+```
+
+## 21. Add Sort Functionality in Current Table Page
+
+Change `user.component.ts` 
+
+```js
+import { Sort } from '@angular/material';
+
+  sortData(sort: Sort): void {
+    if (!sort.active || sort.direction === '') {
+      return;
+    }
+    // local paging
+    this.dtoList = this.dtoList.sort((a, b) => {
+      const isAsc = sort.direction === 'asc';
+      switch (sort.active) {
+        case 'Name': return this.compare(a.Name, b.Name, isAsc);
+        case 'LastName': return this.compare(a.LastName, b.LastName, isAsc);
+        case 'BirthDate': return this.compare(a.BirthDate, b.BirthDate, isAsc);
+        default: return 0;
+      }
+    });
+  }
+
+  compare(a, b, isAsc) {
+    return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
+  }
+```
+
+Then change `user.component.html` data table, like this
+
+```html
+<!-- List -->
+  <div class=”container”>
+    <table class="table table-bordered table-sm m-0" matSort (matSortChange)="sortData($event)">
+      <thead style="background-color:#b4cff1">
+        <tr>
+          <th>#</th>
+          <th mat-sort-header="Name">{{'Name' | translate}}</th>
+          <th mat-sort-header="LastName">{{'Last Name' | translate}}</th>
+          <th mat-sort-header="BirthDate">{{'Birth Date' | translate}}</th>
+          <th>-</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let dto of dtoList; let i = index">
+          <th scope="row">{{ i + 1 }}</th>
+          <td>{{ dto.Name }}</td>
+          <td>{{ dto.LastName }}</td>
+          <td>{{ dto.BirthDate | date: 'medium' }}</td>
+          <td>
+            <button type="button" matTooltip="{{'Edit Row' | translate}}" mat-mini-fab color="primary" (click)="get(dto)">
+              <i class="material-icons">border_color</i>
+            </button>
+            &nbsp;
+            <button type="button" matTooltip="{{'Delete Row' | translate}}" mat-mini-fab (click)="openDialog(dto)">
+              <i class="material-icons">cancel</i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- List -->
+```
+
+## 21. Add Sort Functionality in Database
+
+If  you want to sort data in database query
+you can change pagingDto order direction and recall list() method.
+```js
+  sortData(sort: Sort): void {
+    if (!sort.active || sort.direction === '') {
+      return;
+    }
+    // Database paging
+    this.pagingDto.order  = sort.direction;
+    this.list();
+  }
+```
+
+
+
+## 22. Add Tooltip for icons
 
 ```html
 <button mat-raised-button
@@ -2443,6 +2567,14 @@ Then change `user.component.html` like this
       </mat-form-field>
     </div>
     <!-- form-group separator -->
+    <div style="display:flex; flex-direction: column;">
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker" placeholder="{{'Choose' | translate}}" [(ngModel)]="entryDto.BirthDate" name="BirthDate" id="BirthDate">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <!-- form-group separator -->
     <div style="text-align: right;">
       <button type="submit" matTooltip="{{'Save' | translate}}" mat-raised-button color="primary">
         <i class="material-icons">save</i>
@@ -2464,7 +2596,8 @@ Then change `user.component.html` like this
           <th>#</th>
           <th>{{'Name' | translate}}</th>
           <th>{{'Last Name' | translate}}</th>
-          <th></th>
+          <th>{{'Birth Date' | translate}}</th>
+          <th>-</th>
         </tr>
       </thead>
       <tbody>
@@ -2472,12 +2605,13 @@ Then change `user.component.html` like this
           <th scope="row">{{ i + 1 }}</th>
           <td>{{ dto.Name }}</td>
           <td>{{ dto.LastName }}</td>
+          <td>{{ dto.BirthDate | date: 'medium' }}</td>
           <td>
-            <button type="button" matTooltip="{{'Edit Row' | translate}}" mat-mini-fab  color="primary" (click)="get(dto)">
+            <button type="button" matTooltip="{{'Edit Row' | translate}}" mat-mini-fab color="primary" (click)="get(dto)">
               <i class="material-icons">border_color</i>
             </button>
             &nbsp;
-            <button type="button" matTooltip="{{'Delete Row' | translate}}" mat-mini-fab  (click)="openDialog(dto)">
+            <button type="button" matTooltip="{{'Delete Row' | translate}}" mat-mini-fab (click)="openDialog(dto)">
               <i class="material-icons">cancel</i>
             </button>
           </td>
@@ -2486,11 +2620,17 @@ Then change `user.component.html` like this
     </table>
   </div>
   <!-- List -->
+  <mat-paginator [length]="pagingDto.count"
+    [pageSize]="pagingDto.pageSize"
+    [pageSizeOptions]="[10, 15, 20, 50]"
+    (page)="changePage($event)">
+  </mat-paginator>
 </div>
+
 
 ```
 
-for more detail fallow the link [https://material.angular.io/components/tooltip/overview](https://material.angular.io/components/tooltip/overview)
+for more detail follow the link [https://material.angular.io/components/tooltip/overview](https://material.angular.io/components/tooltip/overview)
 
 
 ![/assets/img/ea-interface.PNG](/assets/img/ea-interface.PNG)
