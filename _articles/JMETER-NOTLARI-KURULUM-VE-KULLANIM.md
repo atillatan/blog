@@ -8,7 +8,7 @@ description: >-
   JMater notlari, kurulum ve kullanim
 tags:  
 category:  
-sort_order: 10
+sort_order: 100
 rating: 100
 changefreq: monthly
 priority: 0.5
