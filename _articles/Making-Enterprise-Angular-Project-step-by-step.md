@@ -991,11 +991,10 @@ insert following code to `unauthorized.component.html`
 <br>
 <mat-card>
   <strong>"{"{message"}"}</strong>
-  <strong> { {message } }</strong>
+  <strong> { { message } }</strong>
   <strong> {{ message }}</strong>
-  <strong> \{\{ message \}\}</strong>
-  <strong> `{`{ message `}`}</strong>
-  <strong> '{'{ message '}'}</strong>
+
+  <strong> \"{\"{ message \"}\"}</strong>
 </mat-card>
 
 
