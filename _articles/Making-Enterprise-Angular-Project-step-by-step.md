@@ -990,7 +990,7 @@ insert following code to `unauthorized.component.html`
 ```html
 <br>
 <mat-card>
-  <strong>&#123;&#123message&#125;&#125</strong>
+  <strong>"{"{message"}"}</strong>
 </mat-card>
 
 
