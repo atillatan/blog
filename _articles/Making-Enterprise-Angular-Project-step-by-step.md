@@ -989,12 +989,8 @@ insert following code to `unauthorized.component.html`
 
 ```html
 <br>
-<mat-card>
-  <strong>"{"{message"}"}</strong>
-  <strong> { { message } }</strong>
-  <strong> {{ message }}</strong>
-
-  <strong> \"{\"{ message \"}\"}</strong>
+<mat-card>  
+  <strong> { { message } }</strong>  
 </mat-card>
 
 
@@ -1291,7 +1287,7 @@ Add follogin lines to `contact.component.html`
 ```html
 <button mat-raised-button (click)="openDialog()">Pick one</button>
 <p>
- You chose: <i>&123;&123;animal&125;&125;</i>
+ You chose: <i>{ { animal } } </i>
 </p>
 ```
 
@@ -1782,9 +1778,9 @@ Then insert following code to `user.component.html`
     </thead>
     <tbody>
       <tr *ngFor="let dto of dtoList; let i = index">
-        <th scope="row">>&123;&123; i ++ &125;&125;</th>
-        <td>>&123;&123;dto.Name&125;&125;</td>     
-        <td>&123;&123; dto.LastName &125;&125;</td>     
+        <th scope="row">>{ {  i ++  } } </th>
+        <td>>{ { dto.Name } } </td>     
+        <td>{ {  dto.LastName  } } </td>     
         <td>
           <button type="button" class="btn btn-sm btn-outline-primary" (click)="get(dto)" ngbTooltip="Edit row"><i class="material-icons">border_color</i></button>&nbsp;
           <button type="button" class="btn btn-sm btn-outline-danger" (click)="delete(dto)" ngbTooltip="Delete row"><i class="material-icons">cancel</i></button>
@@ -2005,7 +2001,7 @@ Then test it in `home.component.html`
 ```html
 // home.component.html
 <p>
-  &123;&123; 'YOUR_TRANSLATION_KEY' | translate &125;&125;
+  { {  'YOUR_TRANSLATION_KEY' | translate  } } 
 </p>
 ```
 
@@ -2237,13 +2233,13 @@ Create `DeleteConfirmation` component
 Then Paste below html to `delete-confirmation.component.html`
 
 ```html
-<h1 mat-dialog-title>&123;&123;'LBL_WARNING' | translate&125;&125;</h1>
+<h1 mat-dialog-title>{ { 'LBL_WARNING' | translate } } </h1>
 <div mat-dialog-content>
-  <p>&123;&123; 'ARE_YOU_SURE' | translate &125;&125;</p>
+  <p>{ {  'ARE_YOU_SURE' | translate  } } </p>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick(data.dto)" cdkFocusInitial>&123;&123; 'NO' | translate&125;&125;</button>
-  <button mat-button (click)="onYesClick(data.dto)">&123;&123; 'YES' | translate &125;&125;</button>
+  <button mat-button (click)="onNoClick(data.dto)" cdkFocusInitial>{ {  'NO' | translate } } </button>
+  <button mat-button (click)="onYesClick(data.dto)">{ {  'YES' | translate  } } </button>
 </div>
 
 ```
@@ -2309,7 +2305,7 @@ Then modify your `user.component.html`
   <form (ngSubmit)="postOrPut()">
     <!-- form-group separator -->
     <div class="form-group row">
-      <label for="Name" class="col-2 col-form-label-sm">&123;&123;'Name' | translate&125;&125;</label>
+      <label for="Name" class="col-2 col-form-label-sm">{ { 'Name' | translate } } </label>
       <div class="col-10">
         <input class="form-control form-control-sm" type="text" [(ngModel)]="entryDto.Name" name="Name" id="Name"
           placeholder="Name">
@@ -2317,7 +2313,7 @@ Then modify your `user.component.html`
     </div>
       <!-- form-group separator -->
       <div class="form-group row">
-        <label for="LastName" class="col-2 col-form-label-sm">&123;&123;'Last Name' | translate&125;&125;</label>
+        <label for="LastName" class="col-2 col-form-label-sm">{ { 'Last Name' | translate } } </label>
         <div class="col-10">
           <input class="form-control form-control-sm" type="text" [(ngModel)]="entryDto.LastName" name="LastName" id="LastName"
             placeholder="LastName">
@@ -2340,16 +2336,16 @@ Then modify your `user.component.html`
     <thead style="background-color:#b4cff1">
       <tr>
         <th>#</th>
-        <th>&123;&123;'Name' | translate&125;&125;</th>
-        <th>&123;&123;'Last Name' | translate&125;&125;</th>
+        <th>{ { 'Name' | translate } } </th>
+        <th>{ { 'Last Name' | translate } } </th>
         <th></th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let dto of dtoList; let i = index">
-        <th scope="row">&123;&123; i + 1 &125;&125;</th>
-        <td>&123;&123; dto.Name &125;&125;</td>     
-        <td>&123;&123; dto.LastName &125;&125;</td>     
+        <th scope="row">{ {  i + 1  } } </th>
+        <td>{ {  dto.Name  } } </td>     
+        <td>{ {  dto.LastName  } } </td>     
         <td>
           <button type="button" class="btn btn-sm btn-outline-primary" (click)="get(dto)" ngbTooltip="Edit row"><i class="material-icons">border_color</i></button>&nbsp;
           <button type="button" class="btn btn-sm btn-outline-danger" (click)="openDialog(dto)" ngbTooltip="Delete row"><i class="material-icons">cancel</i></button>          
@@ -2470,24 +2466,24 @@ Then change `user.component.html` data table, like this
       <thead style="background-color:#b4cff1">
         <tr>
           <th>#</th>
-          <th mat-sort-header="Name">&123;&123;'Name' | translate&125;&125;</th>
-          <th mat-sort-header="LastName">&123;&123;'Last Name' | translate&125;&125;</th>
-          <th mat-sort-header="BirthDate">&123;&123;'Birth Date' | translate&125;&125;</th>
+          <th mat-sort-header="Name">{ { 'Name' | translate } } </th>
+          <th mat-sort-header="LastName">{ { 'Last Name' | translate } } </th>
+          <th mat-sort-header="BirthDate">{ { 'Birth Date' | translate } } </th>
           <th>-</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let dto of dtoList; let i = index">
-          <th scope="row">&123;&123; i + 1 &125;&125;</th>
-          <td>&123;&123; dto.Name &125;&125;</td>
-          <td>&123;&123; dto.LastName &125;&125;</td>
-          <td>&123;&123; dto.BirthDate | date: 'medium' &125;&125;</td>
+          <th scope="row">{ {  i + 1  } } </th>
+          <td>{ {  dto.Name  } } </td>
+          <td>{ {  dto.LastName  } } </td>
+          <td>{ {  dto.BirthDate | date: 'medium'  } } </td>
           <td>
-            <button type="button" matTooltip="&123;&123;'Edit Row' | translate&125;&125;" mat-mini-fab color="primary" (click)="get(dto)">
+            <button type="button" matTooltip="{ { 'Edit Row' | translate } } " mat-mini-fab color="primary" (click)="get(dto)">
               <i class="material-icons">border_color</i>
             </button>
             &nbsp;
-            <button type="button" matTooltip="&123;&123;'Delete Row' | translate&125;&125;" mat-mini-fab (click)="openDialog(dto)">
+            <button type="button" matTooltip="{ { 'Delete Row' | translate } } " mat-mini-fab (click)="openDialog(dto)">
               <i class="material-icons">cancel</i>
             </button>
           </td>
@@ -2536,7 +2532,7 @@ Then change `user.component.html` like this
     <!-- form-group separator -->
     <div style="display:flex; flex-direction: column;">
       <mat-form-field>
-        <input matInput type="text" placeholder="&123;&123;'Name' | translate&125;&125;" [(ngModel)]="entryDto.Name" name="Name" id="Name" />
+        <input matInput type="text" placeholder="{ { 'Name' | translate } } " [(ngModel)]="entryDto.Name" name="Name" id="Name" />
         <button mat-button *ngIf="entryDto.Name" matSuffix mat-icon-button aria-label="Clear" (click)="entryDto.Name=''">
           <mat-icon>close</mat-icon>
         </button>
@@ -2545,7 +2541,7 @@ Then change `user.component.html` like this
     <!-- form-group separator -->
     <div style="display:flex; flex-direction: column;">
       <mat-form-field>
-        <input matInput type="text" placeholder="&123;&123;'Last Name' | translate&125;&125;" [(ngModel)]="entryDto.LastName" name="LastName" id="LastName"
+        <input matInput type="text" placeholder="{ { 'Last Name' | translate } } " [(ngModel)]="entryDto.LastName" name="LastName" id="LastName"
         />
         <button mat-button *ngIf="entryDto.LastName" matSuffix mat-icon-button aria-label="Clear" (click)="entryDto.LastName=''">
           <mat-icon>close</mat-icon>
@@ -2555,17 +2551,17 @@ Then change `user.component.html` like this
     <!-- form-group separator -->
     <div style="display:flex; flex-direction: column;">
       <mat-form-field>
-        <input matInput [matDatepicker]="picker" placeholder="&123;&123;'Choose' | translate&125;&125;" [(ngModel)]="entryDto.BirthDate" name="BirthDate" id="BirthDate">
+        <input matInput [matDatepicker]="picker" placeholder="{ { 'Choose' | translate } } " [(ngModel)]="entryDto.BirthDate" name="BirthDate" id="BirthDate">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
     </div>
     <!-- form-group separator -->
     <div style="text-align: right;">
-      <button type="submit" matTooltip="&123;&123;'Save' | translate&125;&125;" mat-raised-button color="primary">
+      <button type="submit" matTooltip="{ { 'Save' | translate } } " mat-raised-button color="primary">
         <i class="material-icons">save</i>
       </button>&nbsp;
-      <button type="button" matTooltip="&123;&123;'Clear' | translate&125;&125;" mat-raised-button color="accent" (click)="resetEntry()">
+      <button type="button" matTooltip="{ { 'Clear' | translate } } " mat-raised-button color="accent" (click)="resetEntry()">
         <i class="material-icons">refresh</i>
       </button>
     </div>
@@ -2580,24 +2576,24 @@ Then change `user.component.html` like this
       <thead style="background-color:#b4cff1">
         <tr>
           <th>#</th>
-          <th>&123;&123;'Name' | translate&125;&125;</th>
-          <th>&123;&123;'Last Name' | translate&125;&125;</th>
-          <th>&123;&123;'Birth Date' | translate&125;&125;</th>
+          <th>{ { 'Name' | translate } } </th>
+          <th>{ { 'Last Name' | translate } } </th>
+          <th>{ { 'Birth Date' | translate } } </th>
           <th>-</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let dto of dtoList; let i = index">
-          <th scope="row">&123;&123; i + 1 &125;&125;</th>
-          <td>&123;&123; dto.Name &125;&125;</td>
-          <td>&123;&123; dto.LastName &125;&125;</td>
-          <td>&123;&123; dto.BirthDate | date: 'medium' &125;&125;</td>
+          <th scope="row">{ {  i + 1  } } </th>
+          <td>{ {  dto.Name  } } </td>
+          <td>{ {  dto.LastName  } } </td>
+          <td>{ {  dto.BirthDate | date: 'medium'  } } </td>
           <td>
-            <button type="button" matTooltip="&123;&123;'Edit Row' | translate&125;&125;" mat-mini-fab color="primary" (click)="get(dto)">
+            <button type="button" matTooltip="{ { 'Edit Row' | translate } } " mat-mini-fab color="primary" (click)="get(dto)">
               <i class="material-icons">border_color</i>
             </button>
             &nbsp;
-            <button type="button" matTooltip="&123;&123;'Delete Row' | translate&125;&125;" mat-mini-fab (click)="openDialog(dto)">
+            <button type="button" matTooltip="{ { 'Delete Row' | translate } } " mat-mini-fab (click)="openDialog(dto)">
               <i class="material-icons">cancel</i>
             </button>
           </td>
