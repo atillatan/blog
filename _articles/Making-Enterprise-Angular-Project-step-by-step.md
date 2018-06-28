@@ -240,24 +240,6 @@ Add bootstrap to `angular.json`
 ]
 ```
 
-Adding the required Bootstrap modules in `app.module.ts`
-
-```js
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-import { TooltipModule } from 'ngx-bootstrap/tooltip';
-import { ModalModule } from 'ngx-bootstrap/modal';
-
-@NgModule({
-  imports: [
-    BrowserModule,
-    BsDropdownModule.forRoot(),
-    TooltipModule.forRoot(),
-    ModalModule.forRoot()
-  ],
-  // ...
-})
-export class AppBootstrapModule {}
-```
 for more details read following link [https://github.com/valor-software/ngx-bootstrap](https://github.com/valor-software/ngx-bootstrap)
 
 ## 3. Add Custom Global CSS 
@@ -1008,7 +990,7 @@ insert following code to `unauthorized.component.html`
 ```html
 <br>
 <mat-card>
-  <strong>{{message}}</strong>
+  <strong>&#123;&#123message&#125;&#125</strong>
 </mat-card>
 
 
