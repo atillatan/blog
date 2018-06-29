@@ -278,27 +278,11 @@ Then test it in `index.html`
  
 </body>
 ```
-you can also read following the link [http://atilla.tanrikulu.biz/Using-CSS-and-JavaScript-to-an-Angular-Project/](http://atilla.tanrikulu.biz/Using-CSS-and-JavaScript-to-an-Angular-Project/)
+you can also read following the link [http://atilla.tanrikulu.biz/Using-Custom-CSS-and-Custom-JavaScript-to-an-Angular-Project/](http://atilla.tanrikulu.biz/Using-Custom-CSS-and-Custom-JavaScript-to-an-Angular-Project/)
 
 ## 4. Add Custom JavaScript file
 
 Create files named `custom-utility.js`, `custom-module.js`  in the assets folder
-
-```json
-"architect": {
-    "build": {
-	"options": {
-	    ...
-		"scripts": [             
-                ...
-                  "src/assets/custom-utility.js",
-                  "src/assets/custom-module.js"            
-                ],
-           ...
-      }
-    }
-}
-```
 
 Then test it in `app.component.ts`
 
@@ -323,7 +307,7 @@ export class AppComponent implements OnInit {
 
 ```
 
-you can also read following link [http://atilla.tanrikulu.biz/Using-CSS-and-JavaScript-to-an-Angular-Project/](http://atilla.tanrikulu.biz/Using-CSS-and-JavaScript-to-an-Angular-Project/)
+you can also read following link [http://atilla.tanrikulu.biz/Using-Custom-CSS-and-Custom-JavaScript-to-an-Angular-Project/](http://atilla.tanrikulu.biz/Using-Custom-CSS-and-Custom-JavaScript-to-an-Angular-Project/)
 
 
 ## 5. Add Best Practice Angular Modules To Your Angular Project
@@ -1736,7 +1720,7 @@ Then insert following code to `user.component.html`
 <h2>Users</h2>
 
 <!-- Entry -->
-<div class="entryDto w-75">
+<div>
   <form (ngSubmit)="postOrPut()">
     <!-- form-group seperator -->
     <div class="form-group row">
