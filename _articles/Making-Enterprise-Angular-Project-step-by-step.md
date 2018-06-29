@@ -235,7 +235,7 @@ Add bootstrap to `angular.json`
 ],
 "scripts": [ 
   "node_modules/jquery/dist/jquery.slim.min.js",
-  "node_modules/popper.js/dist/popper.min.js",
+  "node_modules/popper.js/dist/umd/popper.min.js",
   "node_modules/bootstrap/dist/js/bootstrap.min.js"
 ]
 ```
@@ -1418,10 +1418,10 @@ import { ToastrModule } from 'ngx-toastr';
     BrowserAnimationsModule, // required animations module
    ToastrModule.forRoot({ closeButton: true, timeOut: 2000 }) // ToastrModule added
   ],
-  bootstrap: [App],
-  declarations: [App],
+  bootstrap: [AppComponent],
+  declarations: [AppComponent],
 })
-class MainModule {}
+class AppComponent {}
 ```
 
 Then use in `contact` component
