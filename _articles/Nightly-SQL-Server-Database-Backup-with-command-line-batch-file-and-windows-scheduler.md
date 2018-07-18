@@ -25,6 +25,12 @@ toc: false
 # Nightly SQL Server Database Backup with command line batch file and windows scheduler
 
 
+- We create windows scheduled task then select running period for `Backup.bat` file.
+- `Backup.bat` file performs database backup then transfers backup file to another servers.
+- `Backup.bat` file also performs nightly backup that is named with current date.
+- `Backup.sql` called from  `Backup.bat` file.
+- `Restore.bat` file performs restoration on target server. `Restore.bat` file schaduled on target server and it will have ran after backup operation.
+
 ### Backup.bat
 
 ```batch
@@ -70,5 +76,44 @@ select @backupSetId = position from msdb..backupset where database_name=N'mydata
 if @backupSetId is null begin raiserror(N'Verify failed. Backup information for database ''mydatabase'' not found.', 16, 1) end
 RESTORE VERIFYONLY FROM  DISK =@dest WITH  FILE = @backupSetId,  NOUNLOAD,  NOREWIND
 GO
+
+```
+
+### Restore.bat
+
+
+```sql
+echo off
+cls
+echo -- RESTORE DATABASE --
+set BACKUPFILENAME=mydatabase.bak
+set DATABASENAME=mydatabase
+set SERVERNAME=HOSTNAME2
+sqlcmd -E -S %SERVERNAME% -d master -Q "ALTER DATABASE [%DATABASENAME%] SET SINGLE_USER WITH ROLLBACK IMMEDIATE"
+
+:: WARNING - delete the database, suits me
+sqlcmd -E -S %SERVERNAME% -d master -Q "IF EXISTS (SELECT * FROM sysdatabases WHERE name=N'%DATABASENAME%' ) DROP DATABASE [%DATABASENAME%]"
+sqlcmd -E -S %SERVERNAME% -d master -Q "CREATE DATABASE [%DATABASENAME%]"
+
+
+:: restore
+sqlcmd -E -S %SERVERNAME% -d master -Q "RESTORE DATABASE [%DATABASENAME%] FROM DISK = N'F:\backups\%BACKUPFILENAME%' WITH  FILE = 1,  MOVE N'mydatabase' TO N'F:\data\mydb.mdf',  MOVE N'mydatabase_log' TO N'F:\data\mydb_1.ldf', NOUNLOAD,  REPLACE,  STATS = 10"
+::sqlcmd -E -S %SERVERNAME% -d master -Q "RESTORE DATABASE [%DATABASENAME%] FROM DISK = N'F:\backups\%BACKUPFILENAME%' WITH  REPLACE"
+
+sqlcmd -E -S %SERVERNAME% -d master -Q "ALTER DATABASE [%DATABASENAME%] SET MULTI_USER"
+sqlcmd -E -S %SERVERNAME% -d master -Q "use mydatabase"
+sqlcmd -E -S %SERVERNAME% -d master -Q "GO"
+
+:: Executing custom sql statements
+sqlcmd -E -S %SERVERNAME% -d master -Q "UPDATE mydatabase.dbo.Users set Password='098f6bcd4621d373cade4e832627b4f6'"
+::sqlcmd -E -S %SERVERNAME% -d master -Q "truncate table mydatabase.dbo.BigLogTable"
+sqlcmd -E -S %SERVERNAME% -d master -Q "update mydatabase.dbo.Config set Val = 'new config' where Id = 'DD46010A-9581-4096-9406-BEEE87A16B8A'"
+sqlcmd -E -S %SERVERNAME% -d master -Q "update mydatabase.dbo.Sabit set Val = new config' where Id = 'BF0BCE43-74CF-435F-A787-6A77BCC6A4DA'"
+
+:: Create Test Users
+sqlcmd -E -S %SERVERNAME% -d mydatabase -Q "CREATE USER testuser1 FOR LOGIN [testuser1]"
+sqlcmd -E -S %SERVERNAME% -d mydatabase -Q "EXEC sp_addrolemember 'db_datareader', 'testuser1'"
+sqlcmd -E -S %SERVERNAME% -d mydatabase -Q "ALTER LOGIN testuser1 WITH PASSWORD='DTCFdtcf1*'"
+
 
 ```
