@@ -11,7 +11,7 @@ comments: false
 
 
 <ul class="nav navbar-nav">
-    <li><a href="https://www.linkedin.com/in/atillatan" target="_blank"><i class="fa fa-linkedin-square fa-2x social"></i></a></li>
+    <li><a href="https://www.linkedin.com/in/atillatanrikulu" target="_blank"><i class="fa fa-linkedin-square fa-2x social"></i></a></li>
     <li><a href="https://twitter.com/atillatanrikulu" target="_blank"><i class="fa fa-twitter-square fa-2x social"></i></a></li>
 
     <li><a href="https://github.com/atillatan/blog/issues/new" target="_blank"><i class="fa fa-github-square fa-2x social"></i></a></li>

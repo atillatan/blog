@@ -8,4 +8,4 @@ comments: false
 
 
 ## Linkedin
-<a href="https://www.linkedin.com/in/atillatan" target="_blank"><i class="fa fa-linkedin-square fa-2x social"></i> https://www.linkedin.com/in/atillatan</a>
+<a href="https://www.linkedin.com/in/atillatanrikulu" target="_blank"><i class="fa fa-linkedin-square fa-2x social"></i> https://www.linkedin.com/in/atillatanrikulu</a>
