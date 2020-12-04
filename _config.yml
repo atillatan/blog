@@ -24,11 +24,8 @@ plugins:
   - jekyll-seo-tag
   - jekyll-toc
 
-
 exclude:
   - README.md
-  - node_modules
-  - lib
   - CNAME
 
 collections:
