@@ -56,15 +56,9 @@ Ease of reading and writing makes any language simple. This holds true for Java 
 
 ### Compile a Java Program 
 
-
 - You need to save your Java Program by the name of the class containing `main()` method along with `.java` extension. Example: `className.java`
-- Execution of your program is going to start in the main function by default.
 
-```java
-public static void main(String[] args){...}
-```
-
-- Call the compiler using javac command.
+- Call the compiler using "javac" command.
 
 ```shell
 # Compile your .java file
@@ -74,10 +68,19 @@ javac className
 java className 
 ```
 
+
+- Execution of your program is going to start in the `main()` function by default.
+
+```java
+public static void main(String[] args){...}
+```
+
+
+
 ### Comment
 
-- single line comment: // this is inline comment
-- multiline comment: /* ..multiline.. */
+- Single line comment: // this is inline comment
+- Multiline comment: /* ..multiline.. */
 
 ```java
  // this is in-line comment
@@ -90,7 +93,7 @@ java className
 
 ### "TODO" keyword in comment
 
-you can view your all "TODO" list in the "menu: window/Show view/Tasks" view
+you can view your all "TODO" list in the "eclipse/menu: window/Show view/Tasks" view
 
 ### Console
 
