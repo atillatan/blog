@@ -8,8 +8,8 @@ description: >-
   Java Quick Reference
 tags:  java
 category:  
-sort_order: 100
-rating: 100
+sort_order: 299
+rating: 299
 changefreq: monthly
 priority: 0.5
 published: true
