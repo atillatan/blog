@@ -172,6 +172,7 @@ Long Min: -9223372036854775808
 There are 3 types of variable in java
 
 Definition: 
+
 ```java
 {public | private} → [static] → type → name → [= expression | value];
 ```
@@ -861,6 +862,7 @@ public void add(int, int, int)
 ### Streams
 
 - Streams represent groups of objects  you can perform aggregate operations on
+
 ```java
     // Streams in Java has `.collect()` method, and it takes `Collectors.wrapperMethod()`.  it defines collecting strategies. 
 		List<Integer> oneTo10 = IntStream.rangeClosed(1, 10).boxed().collect(Collectors.toList()); 
@@ -891,6 +893,7 @@ public void add(int, int, int)
 		System.out.println("Min " + iStats.getMin());
 		System.out.println("Max " + iStats.getMax());
 ```
+
 -  Streams in Java has some important methods.
 - `.collect()` method, and it takes `Collectors.wrapperMethod()`.  it defines collecting strategies. 
 - `.filter()`  eliminates values based on a condition
@@ -932,6 +935,7 @@ fib.forEach(x -> System.out.println(x));
 ### Managing File		
 
 - A File object is a file or directory
+
 ```java
 		
 File f1 = new File("f1.log"); // Create a file object not a file on the drive
@@ -1259,11 +1263,13 @@ class TestMyException {
 - The predefined annotation types defined in java.lang are @Deprecated, @Override, and @SuppressWarnings.
 - **@Deprecated:**   indicates that the marked element is deprecated and should no longer be used. The compiler generates a warning whenever a program uses a method, class, or field with the
 - **@Override:**  informs the compiler that the element is meant to override an element declared in a superclass. Overriding methods will be discussed in Interfaces and Inheritance.
+
 ```java
 // mark method as a superclass method that has been overridden
 @Override 
 int overriddenMethod() { }
 ```
+
 - **@SuppressWarnings:** annotation tells the compiler to suppress specific warnings that it would otherwise generate. In the following example, a deprecated method is used, and the compiler usually generates a warning. In this case, however, the annotation causes the warning to be suppressed.
 - **@SafeVarargs** annotation, when applied to a method or constructor, asserts that the code does not perform potentially unsafe operations on its varargs parameter. When this annotation type is used, unchecked warnings relating to varargs usage are suppressed.
 - **@FunctionalInterface** annotation, introduced in Java SE 8, indicates that the type declaration is intended to be a functional interface, as defined by the Java Language Specification.
