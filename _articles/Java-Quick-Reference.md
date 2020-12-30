@@ -479,7 +479,7 @@ Day myVar = Day.FRIDAY;
 - Iterable is top of the Collections-framework
 - Collection extend Iterable: Collection → Iterable
 
-![image-20201229002505436]({{site.img}}/java-quick-reference/image-20201229002505436.png)
+![Java.util.Collection_hierarchy.svg]({{site.img}}/java-quick-reference/Java.util.Collection_hierarchy.svg)
 
 
 |               **Interface**               |               **Description**                |
@@ -493,7 +493,7 @@ Day myVar = Day.FRIDAY;
 | NavigableSet→ Set → Collection → Iterable |                                              |
 
 
-![image-20201229003123863]({{site.img}}/java-quick-reference/image-20201229003123863.png)
+![java-map.svg]({{site.img}}/java-quick-reference/java-map.svg)
 
 |      **Interface**       |                     **Description**                     |
 | ------------------------ | ------------------------------------------------------- |
@@ -1353,3 +1353,4 @@ https://tobloef.com/text2mindmap/
 https://hackr.io/blog/features-of-java
 https://hackr.io/blog/java-cheat-sheet#java-ide-and-executing-code
 https://www.youtube.com/watch?v=n-xAqcBCws4
+https://vi.wikipedia.org/wiki/Java_collections_framework
