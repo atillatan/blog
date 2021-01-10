@@ -259,7 +259,7 @@ long l = (long)d; //explicit type casting
 
 // Numeric values to String (Class.WrapperMethod)
 String str = String.valueOf(value);
-String str2 = Double.toString(1.234);
+String str2 = Double.valueOf(1.234);
 
 // String to Numeric values 
 int i = Integer.parseInt(str);
@@ -271,8 +271,8 @@ double d = Double.parseDouble(str);
 
 ### Wrapper class methods
 
-- Use wrapper class to convert to data: `Wrapper.toTargetType();`
-  - Double.toString(1.234);
+- Use wrapper class to convert to data: `Wrapper.valueOf();`
+  - Double.valueOf("1.234");
 
 - Use wrapper class to convert String to primitives: `Wrapper.parseTargetPrimitive();`
   - int a=Integer.parseInt("23");
@@ -419,6 +419,10 @@ Note: If you use LinkedList, you can reverse your list with using the `.previous
 
 - inheritance: ArrayList ← AbstractList:List ← Collection ← Iterable (interface)
 - ArrayList is not a synchronized collection. 
+- ArrayList maintains the insertion order i.e order of the object in which they are inserted.
+- ArrayList uses index for its performance i.e its index based one can retrieve object by calling get(index) or remove objects by calling remove(index)
+- Any number of null value can be inserted in arraylist without any restriction.
+- ArrayList allows duplicate values in its collection.
 - We can create synchronized List from ArrayList like that `List<String> list = Collections.synchronizedList(new ArrayList<String>());`
 - `ArrayList<Integer> aL2 = new ArrayList<>(Arrays.asList(1,2,3,4));` generates ArrayList
 - `arrList.get(2)` get value with index number.
@@ -482,15 +486,15 @@ Day myVar = Day.FRIDAY;
 ![Java.util.Collection_hierarchy.svg]({{site.img}}/java-quick-reference/Java.util.Collection_hierarchy.svg)
 
 
-|               **Interface**               |               **Description**                |
-| ----------------------------------------- | -------------------------------------------- |
-| Iterator                                  | object used to traverse through a collection |
-| Collection → Iterable                     | collection of elements                       |
-| Set → Collection → Iterable               | collection of unique elements                |
-| List → Collection → Iterable              | sequence of elements                         |
-| Queue → Collection→ Iterable              | special type of list                         |
-| SortedSet→ Set → Collection → Iterable    | sorted collection of unique elements         |
-| NavigableSet→ Set → Collection → Iterable |                                              |
+|                     **Interface**                      |               **Description**                |
+| ------------------------------------------------------ | -------------------------------------------- |
+| Iterator                                               | object used to traverse through a collection |
+| Collection → Iterable                                  | collection of elements                       |
+| Set → Collection → Iterable                            | collection of unique elements                |
+| List → Collection → Iterable                           | sequence of elements                         |
+| Queue → Collection→ Iterable                           | special type of list                         |
+| SortedSet→ Set → Collection → Iterable                 | sorted collection of unique elements         |
+| NavigableSet → SortedSet → Set → Collection → Iterable |                                              |
 
 
 ![java-map.svg]({{site.img}}/java-quick-reference/java-map.svg)
@@ -502,6 +506,25 @@ Day myVar = Day.FRIDAY;
 | NavigableMap → SortedMap |                                                         |
 
 
+### Java class prefixes and meaning
+
+- TreeXXX: sorted (natural order) 
+- HashXXX: not sorted/ordered
+- LinkedXXX: Elements are linked and maintain insertion order.
+- ArrayXXX: Uses an index for its performance. Accessing an element by calling .get(index) .remove(index)
+
+### Java Abstract classes prefixes and meaning
+
+- Navigable.... : provide .next() .previous() for navigate through a collection
+  NavigableSet, NavigableMap
+- Sorted... : provide sorted collections, as natural order
+  TreeMap extends SortedMap, TreeSet extends SortedSet
+
+
+
+### Java Collection Decision Tree
+
+![java-decision-tree]({{site.img}}/java-quick-reference/java-decision-tree.png)
 
 ## 3. Operations
 
@@ -544,20 +567,20 @@ if(age >= 16){
 - We can use it for limited options
 
 ```java
-		String lang = "de";
-		String labelValue = "Unknown";
+String lang = "de";
+String labelValue = "Unknown";
 
-      switch (lang) {
-      case "en":
-        labelValue = "Hello";
-        break;
-      case "de":
-        labelValue = "Hallo";
-        break;
-      default:
-        labelValue = "Hello";
-        break;
-      }
+  switch (lang) {
+  case "en":
+    labelValue = "Hello";
+    break;
+  case "de":
+    labelValue = "Hallo";
+    break;
+  default:
+    labelValue = "Hello";
+    break;
+  }
 ```
 
 
@@ -567,7 +590,7 @@ if(age >= 16){
 // Single line 
 for(Integer item: myList) System.out.println(i); 
 
-// over list item
+// over list item, ":" means "in"
 for (String item : myList) {
     System.out.println(item);
 }
@@ -588,6 +611,7 @@ for (Iterator<Integer> itr1=myList.iterator(); itr1.hasNext(); )
 ### While
 
 ```java
+//over variable
 int i=0;
 while (i<=10) {
   System.out.println(i);
@@ -602,48 +626,59 @@ while (i<10) {
      break;
    }   
 }
+// over iterator
+   // Traversing the list in forward direction 
+while (iterator.hasNext()) {
+    System.out.print(iterator.next() + " "); 
+}
+
+   // Traversing the list in backward direction 
+while (iterator.hasPrevious()) {
+    System.out.print(iterator.previous() + " "); 
+}
 ```
 
 ### Do ... While
 
 ```java
 int secretNum = 7;
-		int guess = 0;
-		do {
-			System.out.println("Guess : ");
-			if(sc.hasNextInt()){
-				guess = sc.nextInt();
-			}
-		}while(secretNum != guess);
-		System.out.println("You guessed it");
+int guess = 0;
+do {
+  System.out.println("Guess : ");
+  if(sc.hasNextInt()){
+    guess = sc.nextInt();
+  }
+}while(secretNum != guess);
+System.out.println("You guessed it");
 ```
 
 ### recursive 
 
 ```java
-   public static long fact(long n) {
-      if (n = 1)
-         return 1;
-      else
-         return n * fact(n - 1);
-   }
-   public static void main(String args[]) {
-      System.out.println("The factorial of 6 is: " + fact(6));
-      System.out.println("The factorial of 0 is: " + fact(0));
-   }
+public static long fact(long n) {
+  if (n == 0)
+      return 1;
+  else
+      return n * fact(n - 1);
+}
+
+public static void main(String args[]) {
+  System.out.println("The factorial of 6 is: " + fact(6));
+  System.out.println("The factorial of 0 is: " + fact(0));
+}
 ```
 
 ### Exceptions
 
 ```java
 try {
-      int[] myNumbers = {1, 2, 3};
-      System.out.println(myNumbers[10]);
-    } catch (Exception e) {
-      System.out.println("Something went wrong.");
-    } finally {
-      System.out.println("The 'try catch' is finished.");
-    }
+  int[] myNumbers = {1, 2, 3};
+  System.out.println(myNumbers[10]);
+} catch (Exception e) {
+  System.out.println("Something went wrong.");
+} finally {
+  System.out.println("The 'try catch' is finished.");
+}
 ```
 
 ###  User Input
@@ -688,17 +723,16 @@ String name = System.console().readLine();
 ```
 
 ```java
-private String color;
-  
-  // Getter
-  public String getColor() {
-    return color;
-  }
-  
-  // Setter
-  public void setColor(String c) {
-    this.color = c;
-  }
+private int number;
+
+//getter
+public int getNumber() {
+    return this.number;
+}
+//setter
+public void setNumber(int num) {
+    this.number = num;
+}
 ```
 
 ### System.format()
