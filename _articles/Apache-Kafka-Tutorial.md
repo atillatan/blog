@@ -33,85 +33,70 @@ toc: false
 
 
 - Kafka is a distributed streaming platform (it lets you publish/subscribe messaging, fault-tolerant, message order)
-- Kafka is highly scalable, fault-tolerant enterprise messaging system.
+- Kafka is a highly scalable, fault-tolerant enterprise messaging system.
 - it's used streaming applications as well
 - Key abstraction of Kafka: Commit log (transaction log): persistent, replicated, you can have lots of it.
 - it's used as a real-time data pipelines (low latency < 10ms)
-- it doesn't publish messages itself, it waits consumers
-- When you publish data into a topic, these are spread over a set of machines, and replicated for fault-tolerant. 
+- it doesn't publish messages itself, it waits for consumers
+- When you publish data into a topic, these are spread over a set of machines and replicated for fault-tolerant. 
 - The topic is made up of a bunch of log shard/partition, and then each shard/partition is replicated
-- if controller will die, servers will reelect new controller
+- if the controller will die, servers will reelect new controller
 - it's an open-source project since 2011.
-
 - It can be used for streaming processing
-- It can be used as a ETL tool with connectors
+- It can be used as an ETL tool with connectors
 
 ##  Definitions
 
 
-- **Message:** Small to medium sized piece of data. For Kafka message is simple array of byte
-
+- **Message:** Small to a medium-sized piece of data. For Kafka message is a simple array of byte
 - **Producer:** An application that sends messages to Kafka cluster
-
-- **Broker:** (Kafka Server) take messages from producers and store them into kafka message log (commit log/Transaction log).
-
-- **Consumer:** An application that reads data from Kafka, and do whatever they want to do. (send them to hadoop, casandra, HBase, push-back again into Kafka)
-
+- **Broker:** (Kafka Server) take messages from producers and store them into Kafka message log (commit log/Transaction log).
+- **Consumer:** An application that reads data from Kafka, and does whatever they want to do. (send them to Hadoop, Casandra, HBase, push-back again into Kafka)
 - **Cluster:** A group of computers sharing workload for a common purpose.
-
 - **Topic:** A topic is a unique name for Kafka stream
-
-- **Partitions:** Broker log can be huge, maybe larger then storage capacity of single computer. In that case Kafka use partitions for spreading data. Kafka doesn't care how many partitions required for a Topic. We have to take that decision. When we create a Topic we have to create partitions for every single machines.  
-
-- **What is stream:** Continuous flow of data, constantly steam of messages, time series data. Kafka give you a stream and you can use stream in other steam processing frameworks.
-
+- **Partitions:** Broker log can be huge, maybe larger than the storage capacity of a single computer. In that case, Kafka use partitions for spreading data. Kafka doesn't care how many partitions required for a Topic. We have to take that decision. When we create a Topic we have to create partitions for every single machine. 
+- **What is a stream:** Continuous flow of data, constantly steam of messages, time-series data. Kafka gives you a stream and you can use the stream in other stream processing frameworks.
 - **Connectors:** They are ready to use connectors, import data from DBs into Kafka, or export data from Kafka to DBs
-
 - **Offset:** a sequence id given to messages as they arrive in a partition. offset never change, there is no global offset across partitions.
-
-  ![image-20210205222033499]({{site.img}}/apache-kafka-tutorial/image-20210205222033499.png)
-
 - **Locating messages:** if you want to locate massage you need 
-    1. Topic Name 
-    2. Partition Number 
-    3. Offset number
+
+1. 1. Topic Name 
+   2. Partition Number 
+   3. Offset number
 
 - **Consumer group:** A group of consumers acting a single logical unit.
 
-- **Replication factor:** number of total copies of partitions, one of them active (leader) the others passive (followers). we define replication factor for each topic, and applied all partition in the topic. The broker can be follerver for some partitions at the same time can be a leader for  some partitions.
+- **Replication factor:** number of total copies of partitions, one of them active (leader) the others passive (followers). we define the replication factor for each topic and applied all partition in the topic. The broker can be follerwer for some partitions at the same time can be a leader for some partitions.
 
-    ![image-20210205223805338]({{site.img}}/apache-kafka-tutorial/image-20210205223805338.png)
-
-- **ZooKeeper:** is part of Hadoop project, centralized service for maintaining configuration information, naming, providing distributed synchronization. Kafka uses zookeeper coordinating among brokers. 
+- **ZooKeeper:** is part of the Hadoop project, centralized service for maintaining configuration information, naming, providing distributed synchronization. Kafka uses zookeeper coordinating among brokers. 
 
 - Zookeeper is the storage of the state of a Kafka cluster. It is used for the controller election either in the very beginning or when the current controller crashes. The controller is also responsible for telling other replicas to become partition leaders when the partition leader broker of a topic fails/crashes.
 
 - **Is the controller the leader?:** Not really.. Each partition has its own leader. 
 
--  **ISRs:** in-sync replica list, 
+- **ISRs:** in-sync replica list, 
 
--  **Kafka Controler:** is a Kafka service that runs on every broker in a Kafka cluster, but only one can be [active](https://jaceklaskowski.gitbooks.io/apache-kafka/content/kafka-controller.html#isActive) (*elected*) at any point in time. which is responsible for state management of partitions and replicas
+- **Kafka Controler:** is a Kafka service that runs on every broker in a Kafka cluster, but only one can be [active](https://jaceklaskowski.gitbooks.io/apache-kafka/content/kafka-controller.html#isActive) (*elected*) at any point in time. which is responsible for state management of partitions and replicas
 
--  **Kafka Controler election:** simply a random replica in the in-sync replica list aka **ISRs** of that partition
+- **Kafka Controler election:** simply a random replica in the in-sync replica list aka **ISRs** of that partition
 
-- **How many Kafka Controler?:** Within a Kafka cluster, a single broker serves as the active controller which is responsible for state management of partitions and replicas.  In order to find which broker is the controller of a cluster you first need to connect to Zookeeper through ZK CLI:
+- **How many Kafka Controler?:** Within a Kafka cluster, a single broker serves as the active controller which is responsible for state management of partitions and replicas. In order to find which broker is the controller of a cluster you first need to connect to Zookeeper through ZK CLI:
 
-    ```bash
-    ./bin/zkCli.sh -server localhost:2181 
-    zk: localhost:2181(CONNECTED) 0] get /controller
-    ```
-    
-- **Server:** The server is a single computer and we can install a sample Kafka Broker on each server. In Kafka Cluster, every server works actively, there is no idle server. Each Kafka server has some episodes of the Subject and works as a copy for some episodes, but also acts as a leader for some episodes. This means there is no idle server. If you want to scale the load for some Topics, you can create partitions as many as your server number. Your Kafka client library contains Partitioner, and partitioner choose a partition (round robin) for the message.
+- ./bin/zkCli.sh -server localhost:2181 
+
+- zk: localhost:2181(CONNECTED) 0] get /controller
+
+- Kafka can also resolve bottleneck problems, Kafka can scale itself horizontally using partition/brokers
 
 - **Where can we use Kafka?**
 
-    - Kafa resolves data integration problems,   we need create producer and consumers,  kafka connectors
-    - We can use Kafka for serious of validations, data transformations, and buid complex data pipelines.
-    - We can use Kafka for collect information for later consumption.
-    - We can use it log transactions and create applictions to responding realtime.
-    - Exchanging data between microservices.
+- - Kafa resolves data integration problems, we need to create producer and consumers, Kafka connectors
+  - We can use Kafka for serious of validations, data transformations, and build complex data pipelines.
+  - We can use Kafka to collect information for later consumption.
+  - We can use it log transactions and create applications to responding realtime.
+  - Exchanging data between microservices.
 
-- Kafka can also resolve bottleneck problems, Kafka can scale itself horizantaly using partition/brokers
+- **Server:** The server is a single computer and we can install a sample Kafka Broker on each server. In Kafka Cluster, every server works actively, there is no idle server. Each Kafka server has some episodes of the Subject and works as a copy for some episodes, but also acts as a leader for some episodes. This means there is no idle server. If you want to scale the load for some Topics, you can create partitions as many as your server number. Your Kafka client library contains Partitioner, and partitioner chooses a partition (round-robin) for the message.
 
 ## Quick Start
 
@@ -278,23 +263,31 @@ public class MyConsumer{
 
 
 - **bootstrap.servers:** broker list
-- **org.apache.kafka.common.serialization.StringSerializer:** We have to convert data to byte array before sending kafka. StringSerializer provides String to byte array. we can develop custom serializer.
-- **org.apache.kafka.common.serialization.IntegerSerializer:** it provides Integer to byte array.
-- producer.close(): you have to call after every message.
-- **Custom Serializer:** if you want to send custom object to Kafka, you can to implement custom serializer and deserializer. But you can also use generic serializer (Avro, protobuf)
-- **Custom Message Object:** we have to implements org.apache.kafka.common.serialization.Serializer<T> interface. and we need to override interface methods.
-- **partitioner:** it's choose a partition for current message. we can give "Key" value for same partition. "Key" 's value Indicate partition.
-if "key" is not specified, it'll use round-robin, 
-we can implement custom partitioner. if you want to make custom partitioner you have to implement partitioner interface.
-- producer is in the Client library, and it has buffer. it send message firstly "partition buffer" then batch process send buffer messages to kafka.
-- **Default Partitioner:** 
+
+   **org.apache.kafka.common.serialization.StringSerializer:** We have to convert data to a byte array before sending Kafka. StringSerializer provides String to a byte array. we can develop custom serializer.
+
+   **org.apache.kafka.common.serialization.IntegerSerializer:** it provides Integer to byte array.
+
+   producer.close(): you have to call after every message.
+
+   **Custom Serializer:** if you want to send a custom object to Kafka, you can to implement custom serializer and deserializer. But you can also use generic serializer (Avro, protobuf)
+
+   **Custom Message Object:** we have to implements org.apache.kafka.common.serialization.Serializer<T> interface. and we need to override interface methods.
+
+   **partitioner:** it's choosing a partition for the current message. we can give "Key" value for the same partition. "Key" 's value Indicate partition. if "key" is not specified, it'll use round-robin,  we can implement custom partitioner. if you want to make custom partitioner you have to implement partitioner interface.
+
+   the producer is in the Client library, and it has a buffer. it sends message firstly "partition buffer" then batch process send buffer messages to Kafka.
+
+   **Default Partitioner:** 
 
    - if a partition is specified in the record, use it
-   - if no partition is specified but a key is pressent choose a partition based on a hash of the Key
+   - if no partition is specified but a key is present choose a partition based on a hash of the Key
    - if no partition or key is present choose a partition in a round-robin fashion
-- **Sending Methods**
-   - **Fire and Forget:** send and don't expect response.
-   - **Synchronous Send:** wait until get a response. response will be success or exception. ".get()" means wait until response. `producer.send(record).get();`
+
+   **Sending Methods**
+
+   - **Fire and Forget:** send and don't expect a response.
+   - **Synchronous Send:** wait until get a response. response will be success or exception. ".get()" means wait until response. producer.send(record).get();
    - **Asynchronous Send:** it provides callback function for later responses. You can record exception for later analysis
    - We can specify "Retry" count with the configuration, default retry value is 100 ms
 
@@ -309,23 +302,71 @@ we can implement custom partitioner. if you want to make custom partitioner you 
 
 
 - Kafka provides communication between microservices, it is not used on RESTful communications for example between a client application and authorisation service. It working like a backbone network router
-- Kafka connectors are ready to use plugins,  
+
+- We will use Object to byte serializers to communicate between microservices.
+
+- Avro: (KafkaAvroSerializer) Typical serialization system offers the following
+
+- - Allows you to define a scheme for your data.
+   - Generates code for your schema (Optional in Avro)
+   - Provide APIs to serialize your data according to the schema and embed schema information in the data.
+   - Provide APIs to extract schema information and deserialize your data based on the schema.
+
+- we can define our schema as a JSON format
+
+    
+
+   Example Schema:
+
+   ```json
+   { "type": "record",
+     "name": "ClickRecord",
+     "fields": [
+        {"name": "session_id", "type": "string"},
+        {"name": "browser", "type": ["string", "null"]},
+        {"name": "campaign", "type": ["string", "null"]},
+        {"name": "channel", "type": "string"},
+        {"name": "referrer", "type": ["string", "null"], "default": "None"},
+        {"name": "ip", "type": ["string", "null"]}
+      ]
+   }
+   
+   
+   ```
+
+-    We will generate our DTO objects with Kafka Avro, and we will use its communication
+  
+- Schema Registry: 
+
+- Kafka connectors are ready to use plugins, 
+
 - That's what the Kafka connectors is designed for.
-- Source Connect: it's a kafka producer.
-- Sink Connector: it's a kafka consumer.
-- Kafka Connect Framework: provide implementing new kafka connector
+
+- Source Connect: it's a Kafka producer.
+
+- Sink Connector: it's a Kafka consumer.
+
+- Kafka Connect Framework: provide implementing new Kafka connector
+
 - Kafka Transformations: Kafka connect provide, Single Message Transformations (SMTs)
+
 - We can also put custom properties into the properties object.
-- Kafka Connecter can scale itself like consumer groups, all we need to do start all workers with the same group id. 
+
+- Kafka Connector can scale itself like consumer groups, all we need to do start all workers with the same group id. 
+
 - Kafka Connector groups (Connect Cluster) are
-    - Fault Tolerant
-    - Self Managed
+
+- - Fault-Tolerant
+   - Self Managed
+
 - Kafka connectors will give you
-   - Reliability
+
+- - Reliability
    - High Availability
    - Scalability
    - Load Balancing
-- We can configure the connectors using command line tool, it's also provide REST API methods.
+
+- We can configure the connectors using the command-line tool, it also provides REST API methods.
 
 
 ## Kafka Streams APIs
@@ -344,31 +385,29 @@ You can classify Kafka APIs into two parts, producer APIs and consumer APIs
 ### Consumer Group
 
 How do we read messages in parallel: We can do that creating consumer group, Kafka allows reading data once.
-
-Group Coordinator: manage list of group members, if new consmer added, coordinater reassign couple of consumer-partitions. rebalancing. rebalancing activity.
-
-Create a group: by adding KafkaConsumer properties "group.id" parameter. all other things (Group coordinator etc.) provided by api.
+Group Coordinator: manage the list of group members, if new consumer added, Coordinater reassign couple of consumer-partitions. rebalancing. rebalancing activity.
+Create a group: by adding KafkaConsumer properties "group.id" parameter. all other things (Group coordinator etc.) provided by API.
 
 ### Collecting Data from Devices
 
-- **Which one should I choose? :**Topic per sensor? Topic for device? Topic for sentorType? Topic for DeviceType?
+- **Which one should I choose? :** Topic per sensor? Topic for device? Topic for sentorType? Topic for DeviceType?
 
-- It depends on your semantics:
+  It depends on your semantics:
 
   - a topic is a logical abstraction and should contain "unify" data, ie, data with the same semantical meaning
   - a topic can easily be scaled out via its number of partitions
 
-  For example, if you have different type of sensors collecting different data, you should use a topic for each type.
+  For example, if you have a different type of sensors collecting different data, you should use a topic for each type.
 
   Topic per device or sensor is not sustainable: Since devices can be added or removed also sensors can be added or removed. You will try to find out a way to create these topics and partition on the fly.
 
   **The common wisdom seems to be:** put all events of the same type in the same topic, and use different topics for different event types.
 
-  If device meta data (to distinguish where date comes from) is embedded in each message, you should use a single topic with many partitions to scale out., best practice is to over partition your topic from the beginning on to avoid adding new partitions.
-  
-- [Confluent Schema Registry](https://www.confluent.io/confluent-schema-registry/) : It encourages you to use the same Avro schema for all messages in a topic.
+  If device metadata (to distinguish where the date comes from) is embedded in each message, you should use a single topic with many partitions to scale out., best practice is to over partition your topic from the beginning on to avoid adding new partitions.
 
-- Relational databases: order is important, if you have a transaction you have to put all transaction steps into same topic. We have to define Topic base on transactions
+  [Confluent Schema Registry](https://www.confluent.io/confluent-schema-registry/) : It encourages you to use the same Avro schema for all messages in a topic.
+
+  Relational databases: order is important if you have a transaction you have to put all transaction steps into the same topic. We have to define Topic base on transactions
 
   - The most important rule is that **any events that need to stay in a fixed order must go in the same topic** (and they must also use the same partitioning key). So, as a rule of thumb, we could say that all events about the same entity need to go in the same topic.
 
