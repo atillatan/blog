@@ -458,7 +458,7 @@ for sending rows from database, how many rows should I send per message.
 Best practices:
 
 - Each topic in Kafka has at least one partition, if you have *n* topics, you inevitably have at least *n* partitions
-- Topic=Collection of events of the same time
+- Topic=Collection of events of the same type
 
 ref:
 
