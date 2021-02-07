@@ -396,12 +396,12 @@ You can classify Kafka APIs into two parts, producer APIs and consumer APIs
 ### Consumer Group
 
 How do we read messages in parallel: We can do that creating consumer group, Kafka allows reading data once.
-Group Coordinator: manage the list of group members, if new consumer added, Coordinater reassign couple of consumer-partitions. rebalancing. rebalancing activity.
+Group Coordinator: manage the list of group members, if new consumer added, Coordinator reassign couple of consumer-partitions. rebalancing. rebalancing activity.
 Create a group: by adding KafkaConsumer properties "group.id" parameter. all other things (Group coordinator etc.) provided by API.
 
 ### Collecting Data from Devices
 
-- **Which one should I choose? :** Topic per sensor? Topic for device? Topic for sentorType? Topic for DeviceType?
+- **Which one should I choose? :** Topic per sensor? Topic for device? Topic for sensorType? Topic for DeviceType?
 
   It depends on your semantics:
 
@@ -429,7 +429,7 @@ Create a group: by adding KafkaConsumer properties "group.id" parameter. all oth
 - Between microservices
   - Alarm Service: consumes "Alarm" topic (other services can put data into "Alarm" topic in case of any emergency situations)
   - Email Service: consumes "E-mail" topic for sending emails
-  - Notification Sevice: consumes "Notification" topic, 
+  - Notification Service: consumes "Notification" topic, 
   - Configuration Service: consumes "Configuration" topic, produce to another topic
   - Performance service
   - CLI service
@@ -438,8 +438,12 @@ Create a group: by adding KafkaConsumer properties "group.id" parameter. all oth
   - License Service
   - Profile Service
   - Authentication Service
-  - Authorisation Service
-  - Log Sevice
+  - Authorization Service
+  - Log Service
+  - Correlation Service
+  - BigData Service
+  - Monitoring Service
+  - Analytics Service
 - Collect data from devices (IoT) with Kafka Connectors
 - Metrics
 - Website Activity Tracking (feeds some dashboard widgets)
@@ -449,7 +453,7 @@ Create a group: by adding KafkaConsumer properties "group.id" parameter. all oth
 
 ### Data Size of Messages
 
-for sending rows from databse, how many rows should I send per message.
+for sending rows from database, how many rows should I send per message.
 
 Best practices:
 
