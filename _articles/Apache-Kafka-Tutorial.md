@@ -332,11 +332,22 @@ public class MyConsumer{
    }
    
    
-   ```
+```
 
--    We will generate our DTO objects with Kafka Avro, and we will use its communication
+Define schema:
+
+```java
+// Producer:
+props.put("schema.registry.url", "http://localhost:8081");
+
+// Consumer
+props.put("schema.registry.url", "http://localhost:8081");
+props.put("specific.avro.reader", "true");
+```
+
+-  We will generate our DTO objects with Kafka Avro, and we will use its communication
   
-- Schema Registry: 
+- Schema Registry: a confluent service, we can download it run it our system. 
 
 - Kafka connectors are ready to use plugins, 
 
@@ -346,7 +357,7 @@ public class MyConsumer{
 
 - Sink Connector: it's a Kafka consumer.
 
-- Kafka Connect Framework: provide implementing new Kafka connector
+- Kafka Connect Framework: provide implementing new Kafka connector, (Source connector, Sink connector, SourceTask, SinkTask)
 
 - Kafka Transformations: Kafka connect provide, Single Message Transformations (SMTs)
 
