@@ -406,6 +406,9 @@ Group Coordinator: manage the list of group members, if new consumer added, Coor
 Consumer group: it is not about multiple application reading data same topic, it about single application multiple consumer reading about single topic.
 
 ![topic]({{site.img}}/apache-kafka-tutorial/2021-02-10 18.23.30.png)
+only one consumer have partition at the same time.
+- There is no way we can read a massage more then once
+- According concept we can create consumer per partition. if we have 4 partition, best practice is create 4 consumer.
 Create a group: by adding KafkaConsumer properties "group.id" parameter. all other things (Group coordinator etc.) provided by API.
 
 ### Collecting Data from Devices
