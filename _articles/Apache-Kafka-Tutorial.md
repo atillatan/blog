@@ -109,22 +109,25 @@ cd bin
 # run follewing commands with different terminal window
 
 # Start the ZooKeeper service
-$ ./zookeeper-server-start.sh config/zookeeper.properties
+$ ./zookeeper-server-start.sh ../config/zookeeper.properties
 
 # Start the Kafka broker service
-$ ./kafka-server-start.sh config/server.properties
+$ ./kafka-server-start.sh ../config/server.properties
 
 # create Topic
 $ ./kafka-topics.sh --create --topic quickstart-events --bootstrap-server localhost:9092
 
 # display usage information
-$ ./bin/kafka-topics.sh --describe --topic quickstart-events --bootstrap-server localhost:9092
+$ ./kafka-topics.sh --describe --topic quickstart-events --bootstrap-server localhost:9092
 
 # write some events into the Topic
 $ ./kafka-console-producer.sh --topic quickstart-events --bootstrap-server localhost:9092
 
 # read the events
 $ ./kafka-console-consumer.sh --topic quickstart-events --from-beginning --bootstrap-server localhost:9092
+
+# list topics
+$ ./kafka-topics.sh --list --zookeeper localhost:2181
 
 ```
 
@@ -372,7 +375,7 @@ props.put("specific.avro.reader", "true");
 
 - Kafka connectors will give you
 
-- - Reliability
+- Reliability
    - High Availability
    - Scalability
    - Load Balancing
@@ -391,12 +394,18 @@ You can classify Kafka APIs into two parts, producer APIs and consumer APIs
 
 
 
+### Producer Group?
+
+- It's as simple as executing another instance of producer, there is no coordination or sharing of information is needed among producers
 
 
 ### Consumer Group
 
 How do we read messages in parallel: We can do that creating consumer group, Kafka allows reading data once.
 Group Coordinator: manage the list of group members, if new consumer added, Coordinator reassign couple of consumer-partitions. rebalancing. rebalancing activity.
+Consumer group: it is not about multiple application reading data same topic, it about single application multiple consumer reading about single topic.
+
+![topic]({{site.img}}/apache-kafka-tutorial/2021-02-10 18.23.30.png)
 Create a group: by adding KafkaConsumer properties "group.id" parameter. all other things (Group coordinator etc.) provided by API.
 
 ### Collecting Data from Devices
