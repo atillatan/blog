@@ -57,7 +57,17 @@ toc: false
 - **Partitions:** Broker log can be huge, maybe larger than the storage capacity of a single computer. In that case, Kafka use partitions for spreading data. Kafka doesn't care how many partitions required for a Topic. We have to take that decision. When we create a Topic we have to create partitions for every single machine. 
 - **What is a stream:** Continuous flow of data, constantly steam of messages, time-series data. Kafka gives you a stream and you can use the stream in other stream processing frameworks.
 - **Connectors:** They are ready to use connectors, import data from DBs into Kafka, or export data from Kafka to DBs
-- **Offset:** a sequence id given to messages as they arrive in a partition. offset never change, there is no global offset across partitions.
+- **Offset:** a sequence id given to messages as they arrive in a partition. offset never change, there is no global offset across partitions. every partition has own offset order.
+  - We have two type of offset
+  1. Current offset: when we pool messages from kafka. we get more then one messages. current offset is last given message to the consumer.
+  
+  2. Committed offset: last processed message from last given message group.
+  
+![image-20210217221126995]({{site.img}}/image-20210217221126995.png)
+in this picture kafka gives 30 messages for every pool request.
+when the consumer processed one messages of 30 records, consumer send message to do kafka
+according this picture, Current offset is 31, committed offset is 20.
+
 - **Locating messages:** if you want to locate massage you need 
 
 1. 1. Topic Name 
@@ -335,11 +345,12 @@ public class MyConsumer{
    }
    
    
+   ```
 ```
 
 Define schema:
 
-```java
+​```java
 // Producer:
 props.put("schema.registry.url", "http://localhost:8081");
 
@@ -407,9 +418,11 @@ Consumer group: it is not about multiple application reading data same topic, it
 
 ![topic]({{site.img}}/apache-kafka-tutorial/2021-02-10 18.23.30.png)
 only one consumer have partition at the same time.
-- There is no way we can read a massage more then once
+- There is no way we can read a massage more then once 
+- If you want to read messages more then once, you have to create another consumer group. But in this case every consumer groups read same data. Each group will have a different offset.
 - According concept we can create consumer per partition. if we have 4 partition, best practice is create 4 consumer.
 Create a group: by adding KafkaConsumer properties "group.id" parameter. all other things (Group coordinator etc.) provided by API.
+
 
 ### Collecting Data from Devices
 
