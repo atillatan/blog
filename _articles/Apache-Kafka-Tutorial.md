@@ -63,7 +63,7 @@ toc: false
   
   2. Committed offset: last processed message from last given message group.
   
-![image-20210217221126995]({{site.img}}/image-20210217221126995.png)
+![image-20210217221126995]({{site.img}}/apache-kafka-tutorial/image-20210217221126995.png)
 in this picture kafka gives 30 messages for every pool request.
 when the consumer processed one messages of 30 records, consumer send message to do kafka
 according this picture, Current offset is 31, committed offset is 20.
