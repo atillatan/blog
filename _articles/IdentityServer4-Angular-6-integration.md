@@ -26,7 +26,7 @@ toc: false
 
 ### 1. Configure IdentityServer4
 
-In this example we are using RESTFull API, it's name is `core.api`
+In this example we are using RESTFul API, it's name is `core.api`
 
 ```csharp
 // File name = Startup.cs
@@ -323,7 +323,7 @@ export class AppModule {
 }
 ```
 
-Then provide API method on your RESTFull  service, it must return like below
+Then provide API method on your RESTFul  service, it must return like below
 
 ```json
 //  http://localhost:5001/api/js/json/config.js
