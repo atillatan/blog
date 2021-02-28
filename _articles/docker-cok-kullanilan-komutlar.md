@@ -365,7 +365,7 @@ services:
     #   - zookeeper
     environment: 
       - ZOOKEEPER_CONNECT=zookeeper:2181
-ss
+      
   producer:
     build: src/producer/
     container_name: producer
