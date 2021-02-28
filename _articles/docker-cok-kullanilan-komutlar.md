@@ -326,4 +326,60 @@ $ docker run -p 80:80 --name pgadmin1 --hostname pgadmin1  -e 'PGADMIN_DEFAULT_E
 ```
 
 
+#### Docker compose examples
+
+```yml
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres
+    container_name: postgres1
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=123
+      - POSTGRES_DB=Trade
+    ports:
+      - 5432:5432
  
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin1    
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=atilla@admin.com
+      - PGADMIN_DEFAULT_PASSWORD=123
+    ports:
+      - 80:80
+    links:
+      - postgres
+
+  kafka:
+    build: resources/kafka-with-zookeeper/
+    container_name: kafka
+    ports: 
+      - 2181:2181
+      - 9092:9092
+      - 9093:9093
+      - 9094:9094
+    # links:
+    #   - zookeeper
+    environment: 
+      - ZOOKEEPER_CONNECT=zookeeper:2181
+ss
+  producer:
+    build: src/producer/
+    container_name: producer
+    ports: 
+      - 8081:8081
+    links:
+      - kafka
+
+  consumer:
+    build: src/consumer/
+    container_name: consumer
+    ports: 
+      - 8082:8082
+    links:
+      - kafka
+      - postgres
+```
