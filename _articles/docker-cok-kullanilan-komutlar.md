@@ -3,9 +3,9 @@ layout: article
 permalink:
 name:
 file_type:
-title: Docker cok kullanilan komutlar
+title: Docker most used commands
 description: >-
-  Docker cok kullanilan komutlar
+  Docker most used commands
 tags:  
 category:  
 sort_order: 30
@@ -24,9 +24,9 @@ redirect_url:
 
 
 
-## Cok kullanilan komutlar
+## Docker most used commands
 
-- Docker bilesenleri versionlarini gondermek
+- Docker components versions
 
 ```bash
 $ docker --version
@@ -35,76 +35,196 @@ Docker version 1.12.3, build 6b644ec
 $ docker-compose --version
 docker-compose version 1.8.1, build 878cff1
 
-$ docker-machine --version
-docker-machine version 0.8.2, build e18a919
+```
+
+### What is image? What is container?
+
+Image is customized operating system images. There are a lot of images in docker hub: https://hub.docker.com
+you can not run an image on your computer. if you want to run image on your computer, you have to create runnable instance of image which is called "Container"
+so
+Container is a runnable instance of an image. 
+
+- There are few core operation system images in docker hub
+- All other images derived from core os images for example some created wordpress images using core os images.
+- If you want to create your own image you can create a "Dockerfile"
+
+
+### docker image
+
+- `docker image` shows help
+
+```shell
+docker image build       Build an image from a Dockerfile
+docker image history     Show the history of an image
+docker image import      Import the contents from a tarball to create a filesystem image
+docker image inspect     Display detailed information on one or more images
+docker image load        Load an image from a tar archive or STDIN
+docker image ls          List images
+docker image prune       Remove unused images
+docker image pull        Pull an image or a repository from a registry
+docker image push        Push an image or a repository to a registry
+docker image rm          Remove one or more images
+docker image save        Save one or more images to a tar archive (streamed to STDOUT by default)
+docker image tag         Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE
+```
+
+### docker container
+
+- `docker container` shows help
+
+```shell
+docker container attach      Attach local standard input, output, and error streams to a running container
+docker container commit      Create a new image from a container's changes
+docker container cp          Copy files/folders between a container and the local filesystem
+docker container create      Create a new container
+docker container diff        Inspect changes to files or directories on a container's filesystem
+docker container exec        Run a command in a running container
+docker container export      Export a container's filesystem as a tar archive
+docker container inspect     Display detailed information on one or more containers
+docker container kill        Kill one or more running containers
+docker container logs        Fetch the logs of a container
+docker container ls          List containers
+docker container pause       Pause all processes within one or more containers
+docker container port        List port mappings or a specific mapping for the container
+docker container prune       Remove all stopped containers
+docker container rename      Rename a container
+docker container restart     Restart one or more containers
+docker container rm          Remove one or more containers
+docker container run         Run a command in a new container
+docker container start       Start one or more stopped containers
+docker container stats       Display a live stream of container(s) resource usage statistics
+docker container stop        Stop one or more running containers
+docker container top         Display the running processes of a container
+docker container unpause     Unpause all processes within one or more containers
+docker container update      Update configuration of one or more containers
+docker container wait        Block until one or more containers stop, then print their exit codes
+```
+
+
+### Build an image from a Dockerfile
+
+
+- `docker build --help` shows help
+
+```shell
+Usage:  docker build [OPTIONS] PATH | URL | -
+
+docker build  --add-host list           Add a custom host-to-IP mapping (host:ip)
+docker build  --build-arg list          Set build-time variables
+docker build  --cache-from strings      Images to consider as cache sources
+docker build  --disable-content-trust   Skip image verification (default true)
+docker build  -f, --file string             Name of the Dockerfile (Default is 'PATH/Dockerfile')
+docker build  --iidfile string          Write the image ID to the file
+docker build  --isolation string        Container isolation technology
+docker build  --label list              Set metadata for an image
+docker build  --network string          Set the networking mode for the RUN instructions during build (default "default")
+docker build  --no-cache                Do not use cache when building the image
+docker build  -o, --output stringArray      Output destination (format: type=local,dest=path)
+docker build  --platform string         Set platform if server is multi-platform capable
+docker build  --progress string         Set type of progress output (auto, plain, tty). Use plain to show container output (default docker build"auto")
+docker build  --pull                    Always attempt to pull a newer version of the image
+docker build  -q, --quiet                   Suppress the build output and print image ID on success
+docker build  --secret stringArray      Secret file to expose to the build (only if BuildKit enabled): id=mysecret,src=/local/secret
+docker build  --ssh stringArray         SSH agent socket or keys to expose to the build (only if BuildKit enabled) (format: default|<id>docker build[=<socket>|<key>[,<key>]])
+docker build  -t, --tag list                Name and optionally a tag in the 'name:tag' format
+docker build  --target string           Set the target build stage to build.
 
 ```
 
-- `docker images` image listelemek, hub.docker.com dan indirilen images lardir.
-image i silmek baska bir sey, container i silmek baska birseydir.
-container lari local de biz olusturruz sileriz
-- `docker rmi <imageid>` image silmek
-- `docker ps` Calisan Container lari gosterir
-- `docker stop <containerid>` Calisan Cotainer lari durdurmak
-- `docker run -d -p 80:80 --name webserver nginx`  Start service, create container image
-- `docker stop webserver` stop container
-- `docker start webserver`  : starting service
-- `docker ps -a` :  stop olmus container lari da gosterir.
-- `docker stop $(docker ps -a -q)`  tum container lari stop eder
-- `docker rm $(docker ps -a -q) `  Delete all containers
-- `docker rmi $(docker images -q)` Delete all images
-- `docker-machine ls` calisan docker engine bilgisini gosterir.
-- `docker-machine start default` default olan docker machine start edilir
-- `docker-machine start default` default olan docker machine stop edilir
-- `docker-machine env` docker-machine ortam bilgilerini gosterir.
-- docker-machine i manuel baslatmak icin
-`docker-machine start`
-`docker-machine env`
-`eval $(docker-machine env)`
-komutlari calistiriliri.
-- docker-machine e baglanmanin 2 yolu vardir.
-   1. `docker-machine ssh default` seklinde docket-machine e ait olan cli komutu ile.
-   2. `ssh docket@192.168.99.100` pass:tcuser
+When you build your images add “–rm” this should help with removing any intermediate and none images.
 
-- `docker-machine config`
-- `docker-machine env`
-- `docker-machine inspect`
-- `docker-machine ip`
-- `docker-machine kill`
-- `docker-machine provision`
-- `docker-machine regenerate-certs`
-- `docker-machine restart`
-- `docker-machine ssh`
-- `docker-machine status`
-- `docker-machine upgrade`
-- `docker-machine url`
-- `docker run -it ubuntu bash` ubuntu bash calistirilir.
-- `docker run -d -p 80:80 --name webserver nginx`  nginx imaji kullanilarak webserver adinda bir container olusturur ve calistirir, `-d` deamon olarak yani servis olarak calismasini saglar `-p` ise portu belirten parametredir. `:` ile kullanildiginda ilk configurasyon host a ikincisi ise docker servisine aittir.
-- bir container a ssh ile baglamak, usiswiki adli containera baglaniyoruz
-
-```beanshell
-bash -c "clear && DOCKER_HOST=tcp://192.168.99.100:2376 DOCKER_CERT_PATH=/Users/atilla/.docker/machine/machines/default DOCKER_TLS_VERIFY=1 docker exec -it usiswiki sh"
+```shell
+docker build --rm
 ```
 
-- Kitematik programini kullanarak ta container lara baglanabilirsiniz.
-- ssh ile baglanmanin diger yolu OpenSSH kurmak olabilir
-- `docker run --name usiswiki -p 80:80 -v $(pwd):/usr/share/nginx/html -d nginx` usiswiki adinda bir container olusturur ve onu calistirir `-v` parametresi host taki bir directory yi tamemen container a yansitmaktadir. mapleme isi yapilmaktadir.
-- `:ro` readonly demektir. `-v` parametresinden sonra kullanilir, bir directory maplendiginde sanal makinanin bu directory ye readonly erismesini saglar.
-- Dockerfile : docker image olusturmak icin kullanilan dosyadir, bu dosyanin oldugu klasorde
-- `docker build -t imagename .` komutu verildiginde **imagename** adinda bir image olusturulur.
-sonundaki . nokta bulundugu klasoru ifade eder
-- `docker run --name containername -P -d imagename`  bir image dan container olusturup calistirmak.
-- `docker run -i -t --volumes-from containername --name imagename debian /bin/bash` dockerfile da VOLUME maping var ise volume lara ulasmak icin
+
+### Download an image
+
+
+```shell
+$ docker pull alpine
+```
+
+### Create a Container
+
+You can create container using `docker run` command
+
+```shell
+docker run --help
+
+Usage:  docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
+```
+
+Example:
+
+```shell
+docker run -ti --detach --name alpine1 --hostname alpine1 alpine /bin/sh
+```
+-d, --detach : Run container in background and print container ID
+--name : Assign a name to the container
+--hostname : Container host name
+-t, -tty : Allocate a pseudo-TTY
+-i, --interactive : Keep STDIN open even if not attached
+-p, --publish list : Publish a container's port(s) to the host
+
+/bin/sh : a command it'll execute in instance.
+
+### Networking 
 
 ```bash
-docker build -t nginximage1 .
-docket images
-docker run --name nginxcontainer1 -P -d nginximage1
-docker ps
-docker run -it --volumes-from nginxcontainer1 --name nginxvolumecontainer1 debian /bin/bash
+Usage:  docker network COMMAND
+
+Manage networks
+
+Commands:
+
+$ docker network connect    : Connect a container to a network
+$ docker network create     : Create a network
+$ docker network disconnect : Disconnect a container from a network
+$ docker network inspect    : Display detailed information on one or more networks
+$ docker network ls         : List networks
+$ docker network prune      : Remove all unused networks
+$ docker network rm         : Remove one or more networks
 ```
 
-- Mounting files
+`docker network inspect bridge` returns a JSON object describing the bridge network
+
+Example:
+
+`docker network custom1` create network
+`docker network ls` show list of networks
+`docker network connect <network name> <container name>` connect your container to the custom network
+
+
+
+- `docker run -d -p 80:80 --name webserver nginx`  creates a container using nginx Docker image.  
+ `-p 80:80` indicates published ports, `<host port>:<container port>` 
+ `--name <container name>` : container name
+#### How do I run a command in my container?
+  - Use `docker container ls` to get the name of the existing container
+  - `docker exec ...` execute command in docker container
+  - Use the command `docker exec -it <container name> /bin/bash`, `docker exec -it <container name> sh` to get a bash shell in the container
+  - Generically, use `docker exec -it <container name> <command>` to execute whatever command you specify in the container.
+
+
+#### Sharing volume between Docker containers
+  - Create a named data volume with name service-data:
+`docker volume create --name service-data`
+  - You can then create a container that mounts it in your /public folder by using the -v flag:
+`docker run -t -i -v service-data:/public debian:jessie /bin/bash`
+  - For testing purpose we create a small text file in our mapped folder:
+
+```shell
+cd public
+echo 'hello' > 'hello.txt'
+```
+You may then attach your named volume to a second container, but this time under the data folder:
+
+`docker run -t -i -v service-data:/data debian:jessie /bin/bash`
+`ls /data`       #-->shows "hello.txt"
+
+
+#### Mounting files directly
 
 ```bash
 docker run --name nginx-container \
@@ -113,7 +233,7 @@ docker run --name nginx-container \
   -P -d nginx
 ```
 
-yada
+or 
 
 ```bash
 docker run --name nginx-container \
@@ -122,7 +242,7 @@ docker run --name nginx-container \
   -P -d nginx
 ```
 
-- interaktif olarak loglari gondermek `-it`
+- show logs interactively `-it`
 
 ```bash
 docker run -it --name nginx-container \
@@ -131,79 +251,79 @@ docker run -it --name nginx-container \
   -P nginx bash
 ```
 
-### Ozet olarak 4 adimda nginx kurulumu yapilabilir
+#### create nginx docker service in for steps.
 
-1. Dockerfile olusturulur, icinde FROM ifadesinde docker hub taki hangi image kullanilacagi bildirlirlir.
+1. Create dockerfile
 
 ```bash
 FROM nginx
-RUN echo "runing command"
 VOLUME /usr/share/nginx/html
 VOLUME /etc/nginx
 ```
 
-2. `docker build -t nginximagename .` seklinde image olusturulur, olusan image `docker images` komutu ile gorulebilir.
-3. image kullanilarak container olusturulur ve run edilir.
-`docker run -it --name usiswikicontainer -v $(pwd)/src:/usr/share/nginx/html:ro -v $(pwd)/nginx/nginx.conf:/etc/nginx/nginx.conf:ro -P -d nginximagename`  
-veya
-`docker run -it --name wiki1 -p 8181:80 -v /Users/atilla/WP/usiswiki/src/:/usr/share/nginx/html/ -v /Users/atilla/WP/usiswiki/nginx/nginx.conf:/etc/nginx/nginx.conf:ro -P -d usiswikiimage`
-4. sonraki calistirma ve kapatma islemleri su sekulde yapilir.
+2. `docker build -t <nginx image name> .`  
+3. 
+```shell
+docker run -it --name <container name> \
+  -v $(pwd)/src:/usr/share/nginx/html:ro \
+  -v $(pwd)/nginx/nginx.conf:/etc/nginx/nginx.conf:ro \
+  -P -d <nginx image name>`  
+```
+:ro --> read only
+
+example 2
+
+```shell
+docker run -it --name wiki1 -p 8181:80 \
+  -v /Users/atilla/WP/usiswiki/src/:/usr/share/nginx/html/ \
+  -v /Users/atilla/WP/usiswiki/nginx/nginx.conf:/etc/nginx/nginx.conf:ro \
+  -P -d usiswikiimage
+```
+
+4. start your container
 
 ```bash
 docker start usiswikicontainer
 docker stop usiswikicontainer
 ```
+ 
+- create Mysql container
+`docker run --name mysqlc1 -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123 -d mysql`
 
-- `docker network ls`
+`-e or --env list` : Set environment variables
 
-- `docker run --name mysqlc1 -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123 -d mysql` mysql container olusturmak `-e` parametresi environment variable vermek oluyor.
+#### Docker attach
+attach provides connecting directly running process
 
-- `docker exec ...` container icinde komut calistiriyor.
-- `docker exec -it mysqlc1 bash`
+```shell
+$ docker attach alpine1
+```
 
-
-- Widows ta docker in networke acilmi var fakat mac te yok, -p parameteresine host ip adresi de eklenerek yapiliyor.
-`-p 192.168.2.3:80:8080` gibi
-
-- image olusturma dosyasi `Dockerfile` container olusturma dosyasi ise `.yml`
-
-### Ozet
-
-host: Docker machine in kurulu oldugu bilgisayardir.
-Dockre machine: bir sanal maikandir ve container lari calistirir. adresi: 192.168.99.100:2370
-image : sanal makina imajlaridir.
-container: image dan kopyalanmis sanal makinalardir.
-
-sonuc olarak docker-machine icinde containerler calisir.
-herbir container bir nNIC network kartina sahiptir ve bunlar
-docker machine uzerindeki vSwitch e baglidir. switch e disardan gelen trafik 192.168.99.100 uzerinden gelir.
-portuna gore icerdeki bir sanal makinaya yonlendirilir.
-bu durumda her port bir servis yada sanal makina olarak dusunulebilir
+### Some Examples
 
 
-### Hangi Driver
+- Create postgresql container from 'postgres' image and create table
 
-Docker asagidaki driverlari destekler
+```shell
 
-Amazon Web Services
-Microsoft Azure
-Digital Ocean
-Exoscale
-Google Compute Engine
-Generic
-Microsoft Hyper-V
-OpenStack
-Rackspace
-IBM Softlayer
-Oracle VirtualBox
-VMware vCloud Air
-VMware Fusion
-VMware vSphere
-parallels
+$ docker pull postgres 
+$ docker run --name postgres1 -p 5432:5432 -e POSTGRES_PASSWORD=123 -d postgres
+$ docker ps
+$ docker exec -it postgres1 bash $ su postgres
+$ psql
+$ DROP TABLE IF EXISTS trades;
+$ CREATE TABLE Trade(id serial PRIMARY KEY, tradeId VARCHAR(255), version
+integer, counterparty VARCHAR(255), bookid VARCHAR(255),maturityDate DATE,
+createddate DATE, expiredFlag VARCHAR(255));
 
-host isletim sistemine gore hangisinin kullanilacagina karar verilebilir.
-orgnegin windows hostlar uzerinde docker calistirilirken hyperv kullanmak daha mantiklidir.
+```
 
-- Docker machine bir driver eklemek icin
-- `docker-machine create --driver hyperv vm`
-- `eval $(docker-machine env machine-name)` yeni docker-machine active etmek icin
+- Create pgadmin container from 'dpage/pgadmin4' docker image
+
+```shell
+$ docker pull dpage/pgadmin4
+$ docker run -p 80:80 --name pgadmin1 --hostname pgadmin1  -e 'PGADMIN_DEFAULT_EMAIL=atilla@admin.com' -e 'PGADMIN_DEFAULT_PASSWORD=123' -d dpage/pgadmin4
+```
+
+
+ 
