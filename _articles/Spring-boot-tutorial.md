@@ -8,8 +8,8 @@ description: >-
   Spring Boot Tutorial
 tags:  java
 category:  
-sort_order: 20
-rating: 300
+sort_order: 200
+rating: 100
 changefreq: monthly
 priority: 0.5
 published: true
