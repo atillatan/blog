@@ -9,7 +9,7 @@ description: >-
 tags:  java
 category:  
 sort_order: 200
-rating: 100
+rating: 10
 changefreq: monthly
 priority: 0.5
 published: true
