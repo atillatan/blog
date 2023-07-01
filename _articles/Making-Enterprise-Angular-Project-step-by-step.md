@@ -3,9 +3,9 @@ layout: article
 permalink:
 name:
 file_type:
-title: Making an Enterprise Grade Angular Project Step by Step
+title: Making an Enterprise Scale Angular Project Step by Step
 description: >-
-  Making an Enterprise Grade Angular Project Step by Step
+  Making an Enterprise Scale Angular Project Step by Step
 tags:  
 category:  
 sort_order: 21
@@ -22,7 +22,7 @@ redirect_url:
 toc: false
 ---
 
-# Making an Enterprise grade Angular Project Step by Step
+# Making an Enterprise Scale Angular Project Step by Step
 
 This project demonstrates how to build an Enterprise Grade Angular Project.
 
