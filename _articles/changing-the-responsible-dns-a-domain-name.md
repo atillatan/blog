@@ -65,6 +65,7 @@ Let’s modify the current **NS** records of the three domain names as follows:
 | sirket2.com   :  |  ns1.sirket1.com, ns2.sirket1.com     |
 | sirket3.com   :  |  ns1.sirket1.com, ns2.sirket1.com     |
 
+
 After these updates, when someone on the internet tries to access **www.sirket2.com**, the DNS query for the domain will proceed as follows:
 
 1. The query is sent to the root DNS servers.
