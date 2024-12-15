@@ -12,8 +12,8 @@ rating: 100
 changefreq: monthly
 priority: 0.5
 published: true
-create_date: 2017-15-13T10:20:00Z
-modified_date: 2017-15-13
+create_date: 2024-12-15T10:20:00Z
+modified_date: 2024-12-15
 created_by: atilla
 modified_by: atilla
 comments: true
@@ -21,8 +21,6 @@ redirect_url: null
 ---
 
 # Changing the Responsible DNS for a Domain Name
-
-P# Purpose: Changing the Responsible DNS for a Domain Name
 
 **Purpose:** To change the responsible DNS record for a domain name purchased from any provider.
 
@@ -85,7 +83,7 @@ For example, if you set the **NS** record for **sirket2.com** to **ns1.sirket1.c
 
 ---
 
-**Date:** 2017-12-13T10:20:00Z
+**Date:** 2024-12-15
 
 ---
 
