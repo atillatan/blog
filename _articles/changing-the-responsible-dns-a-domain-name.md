@@ -50,8 +50,8 @@ Now, let’s define a new **Name Server** for one of these domains:
 
 | Name Server      | IP Address            |
 |------------------|------------------------|
-| ns1.sirket1.com : | 68.78.88.98 (Our static IP address) |
-| ns2.sirket1.com : | 68.78.88.98 (Our static IP address) |
+| ns1.sirket1.com : |  68.78.88.98 (Our static IP address) |
+| ns2.sirket1.com : |  68.78.88.98 (Our static IP address) |
 
 ---
 
@@ -61,9 +61,9 @@ Let’s modify the current **NS** records of the three domain names as follows:
 
 | Domain Name     | Name Server (NS)                     |
 |-----------------|--------------------------------------|
-| sirket1.com     | ns1.sirket1.com, ns2.sirket1.com     |
-| sirket2.com     | ns1.sirket1.com, ns2.sirket1.com     |
-| sirket3.com     | ns1.sirket1.com, ns2.sirket1.com     |
+| sirket1.com   :  |  ns1.sirket1.com, ns2.sirket1.com     |
+| sirket2.com   :  |  ns1.sirket1.com, ns2.sirket1.com     |
+| sirket3.com   :  |  ns1.sirket1.com, ns2.sirket1.com     |
 
 After these updates, when someone on the internet tries to access **www.sirket2.com**, the DNS query for the domain will proceed as follows:
 
