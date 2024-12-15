@@ -42,16 +42,16 @@ Let’s assume we own three domain names, all purchased from **www.netsol.com**:
 
 | Domain Name     | Name Server (NS)                     |
 |-----------------|--------------------------------------|
-| sirket1.com     | ns1.netsol.com, ns2.netsol.com      |
-| sirket2.com     | ns1.netsol.com, ns2.netsol.com      |
-| sirket3.com     | ns1.netsol.com, ns2.netsol.com      |
+| sirket1.com :   | ns1.netsol.com, ns2.netsol.com      |
+| sirket2.com :   | ns1.netsol.com, ns2.netsol.com      |
+| sirket3.com :   | ns1.netsol.com, ns2.netsol.com      |
 
 Now, let’s define a new **Name Server** for one of these domains:
 
 | Name Server      | IP Address            |
 |------------------|------------------------|
-| ns1.sirket1.com  | 68.78.88.98 (Our static IP address) |
-| ns2.sirket1.com  | 68.78.88.98 (Our static IP address) |
+| ns1.sirket1.com : | 68.78.88.98 (Our static IP address) |
+| ns2.sirket1.com : | 68.78.88.98 (Our static IP address) |
 
 ---
 
