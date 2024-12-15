@@ -3,8 +3,8 @@ layout: article
 permalink: null
 name: null
 file_type: null
-title: Changing the Responsible DNS for a Domain Name
-description: Changing the Responsible DNS for a Domain Name
+title: Changing the Responsible DNS (Name Server) for a Domain Name
+description: Changing the Responsible DNS (Name Server) for a Domain Name
 tags: System
 category: null
 sort_order: 120
@@ -20,7 +20,7 @@ comments: true
 redirect_url: null
 ---
 
-# Changing the Responsible DNS for a Domain Name
+# Changing the Responsible DNS (Name Server) for a Domain Name
 
 **Purpose:** To change the responsible DNS record for a domain name purchased from any provider.
 
