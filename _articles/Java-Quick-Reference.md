@@ -24,8 +24,10 @@ toc: false
 
 #  Java Quick Reference
 
+## This quick reference is designed for Java developers who want a concise overview of common language features and syntax, particularly focused on Java 8 and above.
 
 ![image-20201229160759174]({{site.img}}/java-quick-reference/image-20201229160759174.png)
+
 
 
 ## Features of Java
