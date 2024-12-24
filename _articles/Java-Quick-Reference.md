@@ -26,9 +26,11 @@ toc: false
 
 **This quick reference is designed for Java developers who want a concise overview of common language features and syntax, particularly focused on Java 8 and above.**
 
+Java is one of the most popular programming languages, known for its robustness, portability with its “Write Once, Run Anywhere” philosophy, and object-oriented features. This quick reference guide is intended for beginners and experienced developers alike, focusing primarily on Java 8 and newer releases. By following these concise notes, you will get an overview of common Java syntax, data types, and control structures that form the backbone of the language. Whether you want to refresh your knowledge or learn the fundamentals, this guide will help you navigate the core concepts of Java with ease.
+
 ![image-20201229160759174]({{site.img}}/java-quick-reference/image-20201229160759174.png)
 
-
+**Prerequisites:** You should have a Java Development Kit (JDK) installed and be familiar with a basic text editor or an Integrated Development Environment (IDE). If you’re not, refer to the official Java documentation for installation and setup instructions.
 
 ## Features of Java
 
@@ -137,6 +139,23 @@ you can view your all "TODO" list in the "eclipse/menu: window/Show view/Tasks" 
 ## 2. Data Types
 
 ![image-20201228121022354]({{site.img}}/java-quick-reference/image-20201228121022354.png)
+
+1. Primitive Types
+	- boolean – true or false
+	- byte – 8-bit signed integer (-128 to 127)
+	- short – 16-bit signed integer (-32,768 to 32,767)
+	- int – 32-bit signed integer (-2,147,483,648 to 2,147,483,647)
+	- long – 64-bit signed integer (-9,223,372,036,854,775,808 to 9,223,372,036,854,775,807)
+	- float – 32-bit floating-point number
+	- double – 64-bit floating-point number
+	- char – 16-bit Unicode character
+2. Reference Types
+	- Classes (e.g., String)
+	- Arrays (e.g., String[], int[])
+	- Interfaces
+	- Enums
+
+Tip: Use a capital L when creating a long literal (e.g., long bigNumber = 12345678901L;).
 
 ```java
 System.out.println("Byte Max: "+Byte.MAX_VALUE);
@@ -669,6 +688,20 @@ public static void main(String args[]) {
   System.out.println("The factorial of 0 is: " + fact(0));
 }
 ```
+
+### String Handling
+
+Strings in Java are **immutable**, meaning once created, they cannot be changed. Java stores string literals in a special String Pool to optimize memory usage.
+
+- Common Methods
+	•	length(), charAt(), toLowerCase(), toUpperCase(), trim(), substring()
+	•	equals() vs. ==
+	•	equals() compares content
+	•	== compares object references
+
+- StringBuilder and StringBuffer
+
+When you need to manipulate strings frequently (e.g., concatenating within a loop), use StringBuilder (or StringBuffer for thread safety) to avoid the overhead of creating multiple String objects.
 
 ### Exceptions
 
