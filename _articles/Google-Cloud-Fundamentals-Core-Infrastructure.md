@@ -19,9 +19,12 @@ created_by: atilla
 modified_by: atilla
 comments: true
 redirect_url: 
+toc: true
 ---
 
 # Google Cloud Fundamentals: Core Infrastructure
+
+
 
 https://markmap.js.org/repl
 
