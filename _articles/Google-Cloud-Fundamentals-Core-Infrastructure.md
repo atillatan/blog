@@ -3,10 +3,9 @@ layout: article
 permalink: 
 name: 
 file_type: 
-title: Google Cloud Fundamentals: Core Infrastructure
+title: Google Cloud Fundamentals Core Infrastructure
 description: >-
-    Core Infrastructure introduces important concepts and terminology for working with Google Cloud. Through videos and hands-on labs, this course presents and compares many of Google Cloud's computing and storage services, along with important resource and policy management tools.
-
+  Core Infrastructure introduces important concepts and terminology for working with Google Cloud. Through videos and hands-on labs, this course presents and compares many of Google Cloud's computing and storage services, along with important resource and policy management tools.
 tags: 
 category:  
 sort_order: 100
@@ -16,11 +15,10 @@ priority: 0.5
 published: true
 create_date: 2025-03-09
 modified_date: 2025-03-09
-created_by: atilla tanrikulu
-modified_by: atilla tanrikulu
+created_by: atilla
+modified_by: atilla
 comments: true
 redirect_url: 
-toc: false
 ---
 
 # Google Cloud Fundamentals: Core Infrastructure
