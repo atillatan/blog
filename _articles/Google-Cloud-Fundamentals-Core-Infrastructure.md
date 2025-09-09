@@ -8,8 +8,8 @@ description: >-
   Core Infrastructure introduces important concepts and terminology for working with Google Cloud. Through videos and hands-on labs, this course presents and compares many of Google Cloud's computing and storage services, along with important resource and policy management tools.
 tags: 
 category:  
-sort_order: 20
-rating: 301
+sort_order: 21
+rating: 302
 changefreq: monthly
 priority: 0.5
 published: true
