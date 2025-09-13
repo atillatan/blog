@@ -40,7 +40,7 @@ Core Infrastructure introduces important concepts and terminology for working wi
 
 https://www.cloudskillsboost.google/course_templates/60
 
-[cloud.google.com/training](http://cloud.google.com/training), Qwiklabs*
+[cloud.google.com/training](http://cloud.google.com/training), Qwiklabs
 
 YouTube: https://www.youtube.com/@qwiklabs-courses2043/
 
