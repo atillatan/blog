@@ -23,11 +23,7 @@ toc: true
 ---
 
 # Google Cloud Fundamentals: Core Infrastructure
-
-
-
-https://markmap.js.org/repl
-
+ 
 Resources:
 
 - Training: https://www.cloudskillsboost.google/paths/19/course_templates/60
