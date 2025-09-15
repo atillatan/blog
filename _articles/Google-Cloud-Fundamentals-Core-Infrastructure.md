@@ -1,28 +1,50 @@
 ---
 layout: article
-permalink: 
-name: 
-file_type: 
-title: Google Cloud Fundamentals Core Infrastructure
-description: >-
-  Core Infrastructure introduces important concepts and terminology for working with Google Cloud. Through videos and hands-on labs, this course presents and compares many of Google Cloud's computing and storage services, along with important resource and policy management tools.
-tags: 
-category:  
+permalink: /articles/google-cloud-fundamentals-core-infrastructure/
+name: google-cloud-fundamentals-core-infrastructure
+file_type: article
+title: Google Cloud Fundamentals: 17 Essential Core Infrastructure Concepts (2025 Guide)
+description: Learn the core infrastructure of Google Cloud—VPC, Compute Engine, Kubernetes, Cloud Run, Cloud Storage, IAM, networking, pricing, and more—with clear explanations, tables, and FAQs.
+tags:
+  - Google Cloud
+  - GCP
+  - Core Infrastructure
+  - Compute Engine
+  - Kubernetes
+  - GKE
+  - Cloud Run
+  - Cloud Functions
+  - Cloud Storage
+  - IAM
+  - VPC
+  - Load Balancing
+  - Cloud DNS
+  - Cloud CDN
+  - BigQuery
+  - Spanner
+  - Bigtable
+  - Firestore
+  - Pricing
+  - Security
+category: Cloud
 sort_order: 21
 rating: 302
 changefreq: monthly
-priority: 0.5
+priority: 0.6
 published: true
 create_date: 2025-03-09
-modified_date: 2025-03-09
+modified_date: 2025-09-15
 created_by: atilla
 modified_by: atilla
 comments: true
-redirect_url: 
+redirect_url:
 toc: true
 ---
 
 # Google Cloud Fundamentals: Core Infrastructure
+
+> **SEO Title:** *Google Cloud Fundamentals: 17 Essential Core Infrastructure Concepts (2025 Guide)*  
+> **Meta Description:** *Learn the core infrastructure of Google Cloud—VPC, Compute Engine, Kubernetes, Cloud Run, Cloud Storage, IAM, networking, pricing, and more—with clear explanations, tables, and FAQs.*
  
 Resources:
 
