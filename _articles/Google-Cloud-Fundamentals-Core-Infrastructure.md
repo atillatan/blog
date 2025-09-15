@@ -42,7 +42,10 @@ toc: true
 ---
 
 # Google Cloud Fundamentals: Core Infrastructure
- 
+
+> **SEO Title:** *Google Cloud Fundamentals: 17 Essential Core Infrastructure Concepts (2025 Guide)*  
+> **Meta Description:** *Learn the core infrastructure of Google Cloud—VPC, Compute Engine, Kubernetes, Cloud Run, Cloud Storage, IAM, networking, pricing, and more—with clear explanations, tables, and FAQs.*
+
 Resources:
 
 - Training: https://www.cloudskillsboost.google/paths/19/course_templates/60
